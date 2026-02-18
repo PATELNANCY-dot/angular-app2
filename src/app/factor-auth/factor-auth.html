@@ -1,0 +1,31 @@
+<div class="page">
+  <div class="container">
+    <!-- LEFT SIDE -->
+    <div class="box left">
+      <h2 class="left" style="text-align:center">Sign Up</h2>
+      <br /><br /><br /><br /><br /><br /><br /><br />
+      <button>Join Now</button>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="box right">
+      <form>
+        <h2 style="text-align:center">Two Factor Auhentication</h2>
+
+        <!-- Bind email and password to component -->
+        <input class="textf" type="date" placeholder="[YYYY--MM--DD]"  name="dob" [(ngModel)]="dob" />
+        <input class="textf" type="text" placeholder="PAN"  name="pan" [(ngModel)]="pan"/>
+
+
+ 
+
+
+        <!-- Login button -->
+        <div style="text-align:center; margin-bottom:15px;">
+          <button (click)="submit()" type="button">Submit</button>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

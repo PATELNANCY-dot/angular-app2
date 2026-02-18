@@ -1,0 +1,186 @@
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+<div class="dashboard d-flex">
+
+
+  <!-- Sidebar -->
+  <aside class="sidebar d-flex flex-column align-items-center py-4">
+
+    <ul class="nav flex-column text-center w-100" href="javascript:void(0)">
+      <li class="nav-item mb-3 sidebar-dropdown">
+        <a class="nav-link sidebar-icon" routerLink="/dashboard">
+          <i class="bi bi-grid-fill fs-4"></i>
+          <span class="sidebar-text">Dashboard</span>
+        </a>
+      </li>
+
+      <!-- Dropdown Menu -->
+      <li class="nav-item mb-3 sidebar-dropdown" href="javascript:void(0)">
+        <a class="nav-link sidebar-icon">
+          <i class="bi bi-person-fill fs-4"></i>
+          <span class="sidebar-text">My Account</span>
+        </a>
+
+        <ul class="dropdown-menu-custom">
+          <li>
+            <h6 class="dropdown-heading">My Account</h6>
+          </li>
+          <li><a routerLink="/changepassword"><i class="bi bi-caret-right-fill"></i> Change Password</a></li>
+          <li><a routerLink="/manage-account"><i class="bi bi-caret-right-fill"></i> Manage Account</a></li>
+          <li><a routerLink="/change-nominee"><i class="bi bi-caret-right-fill"></i> Change Nominee</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item mb-3 sidebar-dropdown">
+        <a class="nav-link sidebar-icon" href="javascript:void(0)" routerLink="/new-invester-page" title="Report">
+          <i class="bi bi-file-earmark-fill fs-4"></i>
+          <span class="sidebar-text">Report</span>
+        </a>
+
+        <ul class="dropdown-menu-custom">
+          <li>
+            <h6 class="dropdown-heading">My Account</h6>
+          </li>
+          <li><a routerLink="/new-invester-page"><i class="bi bi-caret-right-fill"></i> New Investor Page</a></li>
+          <li><a routerLink="/investor-details-page"><i class="bi bi-caret-right-fill"></i> Invistor Details Page </a></li>
+          <li><a routerLink="/investor-page"><i class="bi bi-caret-right-fill"></i> Investor Page</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item mb-3">
+        <a class="nav-link sidebar-icon" href="javascript:void(0)" routerLink="/login" title="Logout">
+          <i class="bi bi-box-arrow-right fs-4"></i>
+          <span class="sidebar-text">Logout</span>
+        </a>
+      </li>
+
+    </ul>
+  </aside>
+
+
+  <!-- Main Content -->
+  <div class="flex-grow-1">
+
+    <!-- Hero Section -->
+    <div class="classdiv hero-section" style="background-color:lightgray">
+      <h1>Invest in India's First Credit<br /> Assessed & Rated P2P Platform*</h1> <br />
+      <h2><i class="bi bi-droplet-fill text-info"></i> LIQUILOANS</h2>
+      <p><b>Earn better inflation adjusted returns than traditional debt <br />investments</b></p> <br />
+      <button id="btn" routerLink="/new-invester-page">Invest Now</button>
+    </div>
+
+
+    <!-- About Section -->
+    <div class="classdiv text-center" style="margin-block-start:40px;margin-block-end:40px">
+      <br /><br />
+      <h1 class="underline">About Liquiloans</h1>
+      <p class="mt-4">
+        Liquiloans is an Indian fintech company that operates a peer-to-peer (P2P) lending platform, connecting individual borrowers with investors through a fully digital process. Founded in 2018 and headquartered in Mumbai, the company is registered as an NBFC-P2P with the Reserve Bank of India (RBI). Liquiloans focuses on providing unsecured personal loans to salaried and self-employed individuals, using technology and data-driven credit assessment models to evaluate borrower profiles and manage risk. For investors, it offers opportunities to earn returns by funding diversified loan portfolios, typically with features like auto-invest and risk-based allocation. The platform emphasizes transparency, quick loan disbursal, paperless onboarding, and customer-friendly repayment options, positioning itself as a modern alternative to traditional banking channels in India.
+
+      </p>
+      <br /><br />
+    </div>
+
+
+    <!-- How It Works -->
+    <div class="classdiv text-center" style="background-color:lightgray">
+      <h1 class="underline">How Does it Work?</h1>
+
+      <div class="d-flex gap-4 justify-content-center flex-wrap mt-5">
+
+        <div class="small-card">
+          <div>
+            <i class="bi bi-person-check"></i>
+            <p>Create account & Invest</p>
+          </div>
+        </div>
+
+        <div class="small-card">
+          <div>
+            <i class="bi bi-currency-rupee"></i>
+            <p>Money divided across borrowers</p>
+          </div>
+        </div>
+
+        <div class="small-card">
+          <div>
+            <i class="bi bi-graph-up-arrow"></i>
+            <p>Earn High Returns</p>
+          </div>
+        </div>
+
+        <div class="small-card">
+          <div>
+            <i class="bi bi-bank"></i>
+            <p>Withdraw Anytime</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Why Liquilans -->
+    <div class="classdiv text-center" style="margin-block-start:40px;margin-block-end:40px">
+      <h1 class="underline">Why Liquilans</h1>
+      <br />
+      <p class="mt-2" style="text-align:left">
+        <b>
+          Liquiloans exists to bridge the gap between borrowers and investors in a faster, more efficient way than traditional banks.
+
+          Here’s why platforms like Liquiloans were created: <br /> <br />
+
+          1. Limited access to credit: Many salaried or self-employed individuals find it difficult to get quick loans from traditional banks due to strict requirements.<br /><br />
+
+          2. Slow banking process: Traditional loan approvals can take days or weeks. Fintech platforms use technology to approve and disburse loans much faster.<br /><br />
+
+          3. Better returns for investors: Instead of keeping money in low-interest savings accounts, investors can earn higher returns by lending directly to borrowers.<br /><br />
+
+          4. Digital convenience: Everything is online — from application to approval — making the process paperless and user-friendly.<br /><br />
+        </b>
+      </p>
+      <span style="margin-right:100px"><img src="https://static.vecteezy.com/system/resources/previews/023/833/863/non_2x/group-of-people-working-together-flat-illustration-free-vector.jpg" height="500" width="350" /> </span><span style="margin-left:100px"> <img src="https://img.freepik.com/free-vector/cartoon-man-robot-sitting-laptops-workplace-together_74855-20052.jpg?semt=ais_user_personalization&amp" height="500" width="450" /> </span>
+    </div>
+
+
+    <!-- How To Invest -->
+    <div class="classdiv text-center" style="background-color: lightgray; margin-block-start: 50px;">
+      <h1 class="underline">How to Invest?</h1>
+      <br />
+      <div class="container mt-5">
+        <div class="row g-4 justify-content-center">
+
+          <div class="col-md-4">
+            <div class="invest-card">
+              <i class="bi bi-person-plus-fill fs-1"></i>
+              <h5 class="mt-3">Sign Up</h5>
+              <p>Create your account and complete verification.</p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="invest-card">
+              <i class="bi bi-wallet2 fs-1"></i>
+              <h5 class="mt-3">Add Funds</h5>
+              <p>Add money securely and choose investment.</p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="invest-card">
+              <i class="bi bi-graph-up-arrow fs-1"></i>
+              <h5 class="mt-3">Earn Returns</h5>
+              <p>Funds diversified to generate stable returns.</p>
+            </div>
+          </div>
+        </div>
+        <br /><br />
+      </div>
+    </div>
+
+  </div>
+
+</div>

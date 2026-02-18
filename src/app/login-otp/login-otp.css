@@ -1,0 +1,110 @@
+.page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f4f6f8;
+}
+
+.container {
+  width: 900px;
+  height: 500px;
+  display: flex;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.box {
+  width: 50%;
+  padding: 40px;
+}
+
+.left {
+  background-color:lightgray;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+  .left h2 {
+    color: #000080;
+    margin-bottom: 40px;
+  }
+
+  .left button {
+    padding: 10px 30px;
+    background: #000080;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+/* RIGHT SIDE */
+.right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+}
+  .right h2 {
+    margin-bottom: 30px;
+    color: #ff7a18;
+  }
+
+.textf {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+/* login button */
+.right button {
+  width: 50%;
+  padding: 12px;
+  background: #ff7a18;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+}  /* space ONLY between the two links without layout changes */
+  .right a + b {
+  margin-left:60px; /* increase if needed */
+}
+#bt1 {
+  height: 40px;
+  width: 80px;
+  background-color: #000080; /* navy blue */
+  color: white; /* white text */
+  border: none; /* remove default border */
+  border-radius: 4px; /* slightly rounded corners */
+  font-size: 14px; /* small font */
+  cursor: pointer; /* pointer on hover */
+  transition: background 0.3s;
+}
+
+.otp-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.otp-input {
+  width: 45px;
+  height: 45px;
+  text-align: center;
+  font-size: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+

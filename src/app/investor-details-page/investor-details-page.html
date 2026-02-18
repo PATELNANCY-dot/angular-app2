@@ -1,0 +1,216 @@
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+<div class="dashboard d-flex">
+
+
+  <!-- Sidebar -->
+  <aside class="sidebar d-flex flex-column align-items-center py-4">
+
+    <ul class="nav flex-column text-center w-100" href="javascript:void(0)">
+      <li class="nav-item mb-3 sidebar-dropdown">
+        <a class="nav-link sidebar-icon" routerLink="/dashboard">
+          <i class="bi bi-grid-fill fs-4"></i>
+          <span class="sidebar-text">Dashboard</span>
+        </a>
+      </li>
+
+      <!-- Dropdown Menu -->
+      <li class="nav-item mb-3 sidebar-dropdown">
+        <a class="nav-link sidebar-icon" href="javascript:void(0)">
+          <i class="bi bi-person-fill fs-4"></i>
+          <span class="sidebar-text">My Account</span>
+        </a>
+
+        <ul class="dropdown-menu-custom">
+          <li>
+            <h6 class="dropdown-heading">My Account</h6>
+          </li>
+          <li><a routerLink="/changepassword"><i class="bi bi-caret-right-fill"></i> Change Password</a></li>
+          <li><a routerLink="/manage-account"><i class="bi bi-caret-right-fill"></i> Manage Account</a></li>
+          <li><a routerLink="/change-nominee"><i class="bi bi-caret-right-fill"></i> Change Nominee</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item mb-3 sidebar-dropdown">
+        <a class="nav-link sidebar-icon" href="javascript:void(0)" routerLink="/new-invester-page" title="Report">
+          <i class="bi bi-file-earmark-fill fs-4"></i>
+          <span class="sidebar-text">Report</span>
+        </a>
+
+        <ul class="dropdown-menu-custom">
+          <li>
+            <h6 class="dropdown-heading">My Account</h6>
+          </li>
+          <li><a routerLink="/new-invester-page"><i class="bi bi-caret-right-fill"></i> New Investor Page</a></li>
+          <li><a routerLink="/investor-details-page"><i class="bi bi-caret-right-fill"></i> Invistor Details Page </a></li>
+          <li><a routerLink="/investor-page"><i class="bi bi-caret-right-fill"></i> Investor Page</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item mb-3">
+        <a class="nav-link sidebar-icon" href="javascript:void(0)" routerLink="/login" title="Logout">
+          <i class="bi bi-box-arrow-right fs-4"></i>
+          <span class="sidebar-text">Logout</span>
+        </a>
+      </li>
+
+    </ul>
+  </aside>
+
+
+  <!-- Main Content -->
+  <div class="flex-grow-1">
+    <div class="flex-grow-1">
+      <div class="loan-heading-section">
+        <h1>
+          <span class="orange">LIQUILOAN CLIENT </span>
+          <span class="navy">DETAILS</span>
+        </h1>
+      </div>
+    </div>
+
+    <!--1c-->
+
+    <div class="classdiv text-left" style="margin-block-start:40px;margin-block-end:40px;">
+      <h6 >BASIC INFORMATION</h6>
+      <br />
+      <form>
+        <!--1-->
+        <div class="form-row">
+          <div class="form-col">
+            <label> Client Name:</label>
+
+          </div>
+
+          <div class="form-col">
+            <label>pan:</label>
+
+          </div>
+
+          <div class="form-col">
+            <label>Date Of Birth:</label>
+
+          </div>
+
+
+          <div class="form-col">
+            <label>Gender:</label>
+
+          </div>
+
+
+        </div>
+
+        <br />
+
+        <!--2-->
+        <div class="form-row">
+          <div class="form-col">
+            <label>Email:</label>
+
+          </div>
+
+
+
+          <div class="form-col">
+            <label>Mobile No.:</label>
+
+          </div>
+
+
+          <div class="form-col">
+            <label>Aadhaar Number:</label>
+
+          </div>
+
+          <div class="form-col">
+            <label>Ckyc No.:</label>
+
+          </div>
+        </div>
+        <br />
+        <br />
+      </form>
+    </div>
+
+    <!--2c-->
+
+    <div class="classdiv text-left" style="margin-block-start:40px;margin-block-end:40px;">
+      <h6>ADDRESS INFORMATION</h6>
+      <br />
+      <form>
+        <!--1-->
+        <div class="form-row">
+          <div class="form-col">
+            <label> Address Line1:</label>
+
+          </div>
+
+          <div class="form-col">
+            <label>State</label>
+
+          </div>
+
+          <div class="form-col">
+            <label>City</label>
+
+          </div>
+
+
+          <div class="form-col">
+            <label>Pincode</label>
+          </div>
+
+        </div>
+
+        <br />
+      </form>
+    </div>
+
+    <!--3c-->
+
+    <div class="classdiv text-left" style="margin-block-start:40px;margin-block-end:40px;">
+      <h6>BANK DETAILS</h6>
+      <br />
+      <form>
+        <!--1-->
+        <div class="form-row">
+          <div class="form-col">
+            <label> Account Name:</label>
+
+          </div>
+
+          <div class="form-col">
+            <label>Account Number</label>
+
+          </div>
+
+          <div class="form-col">
+            <label> Bank Name</label>
+
+          </div>
+
+
+          <div class="form-col">
+            <label> Branch</label>
+          </div>
+
+          <div class="form-col">
+            <label>IFSC</label>
+          </div>
+
+
+        </div>
+
+        <br />
+      </form>
+    </div>
+
+
+
+  </div>
+</div>

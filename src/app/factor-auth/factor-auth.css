@@ -1,0 +1,105 @@
+.page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f4f6f8;
+}
+
+/* main container */
+.container {
+  width: 900px;
+  height: 500px;
+  display: flex;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* both sides */
+.box {
+  width: 50%;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.left {
+  background-color: lightgray;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+  .left h2 {
+    color: #000080;
+    margin-bottom: 40px;
+  }
+
+  .left button {
+    padding: 10px 30px;
+    background: #000080;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+/* RIGHT SIDE */
+.right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+}
+
+  .right form {
+    width: 80%;
+  }
+
+  .right h2 {
+    margin-bottom: 25px;
+    color: #ff7a18;
+    text-align: center;
+  }
+
+/* input fields */
+.textf {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+/* links */
+.right a {
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+  .right a:hover {
+    text-decoration: underline;
+  }
+
+/* login button */
+.right button {
+  width: 50%;
+  padding: 12px;
+  background: #ff7a18;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+/* space ONLY between the two links without layout changes */
+.right a + b {
+  margin-left: 60px; /* increase if needed */
+}

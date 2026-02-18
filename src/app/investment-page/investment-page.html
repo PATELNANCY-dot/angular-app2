@@ -1,0 +1,390 @@
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+<div class="dashboard d-flex">
+
+
+  <!-- Sidebar -->
+  <aside class="sidebar d-flex flex-column align-items-center py-4">
+
+    <ul class="nav flex-column text-center w-100" href="javascript:void(0)">
+      <li class="nav-item mb-3 sidebar-dropdown">
+        <a class="nav-link sidebar-icon" routerLink="/dashboard">
+          <i class="bi bi-grid-fill fs-4"></i>
+          <span class="sidebar-text">Dashboard</span>
+        </a>
+      </li>
+
+      <!-- Dropdown Menu -->
+      <li class="nav-item mb-3 sidebar-dropdown">
+        <a class="nav-link sidebar-icon" href="javascript:void(0)">
+          <i class="bi bi-person-fill fs-4"></i>
+          <span class="sidebar-text">My Account</span>
+        </a>
+
+        <ul class="dropdown-menu-custom">
+          <li>
+            <h6 class="dropdown-heading">My Account</h6>
+          </li>
+          <li><a routerLink="/changepassword"><i class="bi bi-caret-right-fill"></i> Change Password</a></li>
+          <li><a routerLink="/manage-account"><i class="bi bi-caret-right-fill"></i> Manage Account</a></li>
+          <li><a routerLink="/change-nominee"><i class="bi bi-caret-right-fill"></i> Change Nominee</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item mb-3 sidebar-dropdown">
+        <a class="nav-link sidebar-icon" href="javascript:void(0)" routerLink="/new-invester-page" title="Report">
+          <i class="bi bi-file-earmark-fill fs-4"></i>
+          <span class="sidebar-text">Report</span>
+        </a>
+
+        <ul class="dropdown-menu-custom">
+          <li>
+            <h6 class="dropdown-heading">My Account</h6>
+          </li>
+          <li><a routerLink="/new-invester-page"><i class="bi bi-caret-right-fill"></i> New Investor Page</a></li>
+          <li><a routerLink="/investor-details-page"><i class="bi bi-caret-right-fill"></i> Invistor Details Page </a></li>
+          <li><a routerLink="/investor-page"><i class="bi bi-caret-right-fill"></i> Investor Page</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item mb-3">
+        <a class="nav-link sidebar-icon" href="javascript:void(0)" routerLink="/login" title="Logout">
+          <i class="bi bi-box-arrow-right fs-4"></i>
+          <span class="sidebar-text">Logout</span>
+        </a>
+      </li>
+
+    </ul>
+  </aside>
+
+
+  <!-- Main Content -->
+  <div class="flex-grow-1">
+    <div class="flex-grow-1">
+      <div class="loan-heading-section">
+        <h1>
+          <span class="orange">LIQUILOAN</span>
+          <span class="navy">DETAILS</span>
+        </h1>
+      </div>
+    </div>
+
+
+    <div class="classdiv text-left" style="margin-block-start:40px;margin-block-end:40px;background-color:lightgray">
+
+      <span style="margin-right:15%;margin-left:5%">Client Name</span> <span style="margin-left:15%">Investor ID</span>
+
+      <br />
+      <div class="custom-underline"></div>
+      <br /><br />
+      <form>
+
+        <span>Payment Type</span>
+
+        <div class="d-flex gap-5 align-items-center mt-3">
+
+          <div class="form-check">
+            <input class="form-check-input"
+                   type="radio"
+                   name="payment"
+                   value="gateway"
+                   [(ngModel)]="selectedPayment">
+            <label class="form-check-label">
+              Invest using payment Gateway (Net Banking/UPI)
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input"
+                   type="radio"
+                   name="payment"
+                   value="neft"
+                   [(ngModel)]="selectedPayment">
+            <label class="form-check-label">
+              Invest funds using NEFT/RTGS/IMPS
+            </label>
+          </div>
+
+        </div>
+      </form>
+      <!-- Gateway Container -->
+      <div *ngIf="selectedPayment === 'gateway'"
+           class="mt-4 p-4 border rounded bg-white shadow-sm">
+
+        <form>
+          <div class="form-row">
+            <div class="form-col">
+              <label>Payout Type:</label>
+              <select class="form-select"
+                      [(ngModel)]="payoutType"
+                      name="payoutType">
+
+                <option value="">-- cumulative --</option>
+                <option value="cumulative">Cumulative</option>
+                <option value="non-cumulative">Quarterly</option>
+              </select>
+            </div>
+
+            <div class="form-col">
+              <label>Option:</label>
+              <select class="form-select"
+                      [(ngModel)]="payoutType"
+                      name="payoutType">
+
+                <option value="">-- 12% --</option>
+                <option value="cumulative">12%</option>
+                <option value="non-cumulative">10% </option>
+              </select>
+            </div>
+
+            <div class="form-col">
+              <label>MHP(Minimum Holding Period):</label>
+              <select class="form-select"
+                      [(ngModel)]="payoutType"
+                      name="payoutType">
+
+                <option value="">--6 Months--</option>
+                <option value="cumulative">3 Months</option>
+                <option value="non-cumulative">12 Months</option>
+              </select>
+            </div>
+
+
+            <div class="form-col">
+              <label>Amount:</label>
+              <input type="text" inputmode="numeric">
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+
+
+      <!-- NEFT Container -->
+      <div *ngIf="selectedPayment === 'neft'"
+           class="mt-4 p-4 border rounded bg-white shadow-sm">
+
+        <form>
+          <div class="form-row">
+            <div class="form-col">
+              <label>IFSC Code:</label>
+            </div>
+
+            <div class="form-col">
+              <label>Option:</label>
+            </div>
+
+            <div class="form-col">
+              <label>Account Number:</label>
+            </div>
+
+
+            <div class="form-col">
+              <label>Beneficiary Name</label>
+            </div>
+          </div>
+
+        </form>
+
+        <form>
+          <div class="form-row">
+            <div class="form-col">
+              <label>Payout Type:</label>
+              <select class="form-select"
+                      [(ngModel)]="payoutType"
+                      name="payoutType">
+
+                <option value="">-- cumulative --</option>
+                <option value="cumulative">Cumulative</option>
+                <option value="non-cumulative">Quarterly</option>
+              </select>
+            </div>
+
+            <div class="form-col">
+              <label>Option:</label>
+              <select class="form-select"
+                      [(ngModel)]="payoutType"
+                      name="payoutType">
+
+                <option value="">-- 12% --</option>
+                <option value="cumulative">12%</option>
+                <option value="non-cumulative">10% </option>
+              </select>
+            </div>
+
+            <div class="form-col">
+              <label>MHP(Minimum Holding Period):</label>
+              <select class="form-select"
+                      [(ngModel)]="payoutType"
+                      name="payoutType">
+
+                <option value="">--6 Months--</option>
+                <option value="cumulative">3 Months</option>
+                <option value="non-cumulative">12 Months</option>
+              </select>
+            </div>
+
+
+            <div class="form-col">
+              <label>Amount:</label>
+              <input type="text" inputmode="numeric">
+            </div>
+          </div>
+
+        </form>
+
+        <form>
+          <div class="form-row">
+
+            <div class="form-col">
+              <label>Payment Mode:</label>
+              <select class="form-select"
+                      [(ngModel)]="payoutType"
+                      name="payoutType">
+
+                <option value="">--NEFT--</option>
+                <option value="cumulative">NEFT</option>
+                <option value="non-cumulative">RTGS</option>
+                <option value="non-cumulative">IMPS</option>
+              </select>
+            </div>
+
+
+            <div class="form-col">
+              <label>Upload Payment Receipt</label>
+              <input class="brows" type="text" placeholder="Choose file...">
+              <button type="button">Browse</button>
+            </div>
+
+            <div class="form-col">
+              <label>Transaction ID:</label>
+              <input type="text" inputmode="numeric">
+            </div>
+
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+
+    <div class="flex-grow-1">
+      <div class="flex-grow-1">
+        <div class="loan-heading-section2">
+          <div class="action-buttons">
+            <button (click)="goTo()" class="btn-back">Back</button>
+            <button (click)="goPay()" class="btn-invest">INVEST</button>
+          </div>
+        </div>
+      </div>
+
+
+      <div *ngIf="paymentStatus" class="status-full">
+        <div class="classdiv text-left">
+          <div>
+            <!-- Success -->
+            <div *ngIf="paymentStatus === 'success'" class="status-box success" routerLink="/dashboard
+                 ">
+              <div class="status-content">
+                <div class="status-icon">
+                  <i class="bi bi-check-lg"></i>
+                </div>
+                <div>
+                  <h3>Payment Successful</h3>
+                  <p>Your investment has been completed successfully.</p>
+                </div>
+                <button class="status-btn" routerLink="/dashboard">Go to Dashboard</button>
+              </div>
+            </div>
+
+            <!-- Failed -->
+            <div *ngIf="paymentStatus === 'failed'" class="status-box failed">
+              <div class="status-content">
+                <div class="status-icon">
+                  <i class="bi bi-x-lg"></i>
+                </div>
+                <div>
+                  <h3>Payment Cancelled</h3>
+                  <p>Sorry, your payment was cancelled.</p>
+                </div>
+                <button class="status-btn retry" routerLink="/payment-page">Try Again</button>
+              </div>
+            </div>
+            <form >
+              <div class="form-row ">
+
+                <div class="form-col">
+                  <label>Transaction Id</label>
+                </div>
+
+                <div class="form-col">
+                  <label>Amount</label>
+                </div>
+
+                <div class="form-col">
+                  <label>Status</label>
+                </div>
+
+                <div class="form-col">
+                  <label>Transaction Time</label>
+                </div>
+
+              </div>
+            </form>
+          </div>
+          </div>
+        </div>
+
+        <div class="classdiv text-left" style="margin-block-start:40px;margin-block-end:40px;background-color:lightgray">
+          <h5>How To Invest</h5>
+          <p>
+            The minimum amount for 1st time investment is Rs.10000 and in multiples of Rs.1000<br />
+            Minimum amount for additional investment is Rs.5000 and in multiples of Rs.1000<br /><br />
+            <i class="bi bi-check-circle-fill"></i> To start investing, Click on Invest Link against the invester in whose name you want to invest.<br />
+            <i class="bi bi-check-circle-fill"></i> Select the Payout Option.<br />
+            <i class="bi bi-check-circle-fill"></i> Choose the plan - locl-in or Without Lok-in.<br />
+            <i class="bi bi-check-circle-fill"></i> Choose the Minimum Holding period for which you want to make the investment.<br />
+            <i class="bi bi-check-circle-fill"></i> Enter the amount, Click Invest.<br />
+            <i class="bi bi-check-circle-fill"></i> On clicking Invest, you will be redirected to payment gateway page.<br />
+            <i class="bi bi-check-circle-fill"></i> You can then transfer funds using Net Banking / UPI .<br />
+            <i class="bi bi-check-circle-fill"></i> Once the transaction confirmation is successfull, the amount will start refecting in your portfolio within 24 Businees hours.<br />
+          </p>
+        </div>
+
+        <div class="classdiv text-left" style="margin-block-start:40px;margin-block-end:40px;background-color:lightgray">
+          <!-- Social Icons -->
+          <div class="social-icons d-flex gap-3">
+            <a href="https://www.facebook.com" target="_blank" class="facebook">
+              <i class="bi bi-facebook fs-3"></i>
+            </a>
+            <a href="https://www.twitter.com" target="_blank" class="twitter">
+              <i class="bi bi-twitter fs-3"></i>
+            </a>
+            <a href="https://www.linkedin.com" target="_blank" class="linkedin">
+              <i class="bi bi-linkedin fs-3"></i>
+            </a>
+            <a href="https://www.youtube.com" target="_blank" class="youtube">
+              <i class="bi bi-youtube fs-3"></i>
+            </a>
+            <a href="https://www.instagram.com" target="_blank" class="instagram">
+              <i class="bi bi-instagram fs-3"></i>
+            </a>
+            <a>
+              |
+            </a>
+
+          </div>
+
+
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>

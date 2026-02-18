@@ -1,0 +1,186 @@
+/* Sidebar */
+.sidebar {
+  flex: 0 0 100px; /* Prevent shrinking, set fixed width */
+  background-color: #001f5b;
+  color: lightgray;
+  min-height: 100vh;
+  padding-top: 20px;
+}
+
+.sidebar-logo {
+  font-size: 1.8rem;
+  color: #fff;
+}
+
+.sidebar-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  padding: 10px 0;
+  transition: all 0.3s;
+}
+/* Sidebar dropdown */
+.sidebar-dropdown {
+  position: relative;
+}
+
+/* Hidden dropdown */
+.dropdown-menu-custom {
+  position: absolute;
+  top: 0;
+  left: 70px;
+  background-color: lightgray;
+  border-radius: 6px;
+  padding: 10px 0;
+  min-width: 160px;
+  display: none;
+  z-index: 999;
+}
+
+  /* Dropdown items */
+  .dropdown-menu-custom li {
+    list-style: none;
+  }
+
+    .dropdown-menu-custom li a {
+      display: block;
+      padding: 8px 15px;
+      color: black;
+      text-decoration: none;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+      .dropdown-menu-custom li a:hover {
+        background-color: #2f2f4f;
+      }
+
+/* Show dropdown on hover */
+.sidebar-dropdown:hover .dropdown-menu-custom {
+  display: block;
+}
+
+
+.dropdown-heading {
+  margin: 0;
+  padding: 8px 16px;
+  font-size: 1.2rem;
+  color: black;
+}
+
+.dropdown-menu-custom li:not(.dropdown-heading) {
+  border-bottom: 1px solid black;
+}
+
+.dropdown-menu-custom li:last-child {
+  border-bottom: none;
+}
+
+/* Manage Account Cards */
+.manage-card {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border-top: 4px solid #001f5b;
+}
+
+  .manage-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.12);
+  }
+
+  .manage-card h5 {
+    color: #001f5b;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+
+  .manage-card i {
+    margin-right: 8px;
+    color: #001f5b;
+  }
+
+  .manage-card p {
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #444;
+  }
+
+/* Edit Button */
+.manage-btn {
+  margin-top: 12px;
+  padding: 6px 18px;
+  background: #001f5b;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 13px;
+  transition: 0.3s;
+}
+
+  .manage-btn:hover {
+    background: #002a7a;
+  }
+
+
+
+/* Small Navigation */
+.manage-nav {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.nav-btn {
+  padding: 8px 20px;
+  border: 1px solid #001f5b;
+  background: white;
+  color: #001f5b;
+  border-radius: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+  .nav-btn:hover {
+    background: #001f5b;
+    color: white;
+  }
+
+  .nav-btn.active {
+    background: #001f5b;
+    color: white;
+  }
+
+
+/* Make table fully bordered with lines between all rows and columns */
+.table-bordered {
+  border: 1px solid black; /* outer border color */
+  border-collapse: collapse;
+}
+
+  .table-bordered th {
+    border: 1px solid black; /* lines between cells */
+    padding: 10px 15px;
+    width:20%;
+  }
+  .table-bordered td {
+    border: 1px solid black; /* lines between cells */
+    padding: 15px 15px;
+    width:60%;
+  }
+
+/* Optional: header background */
+.table-bordered th {
+  background-color: white;
+  color: black;
+  text-align: left;
+}
+
+  /* Optional: striped rows for better readability */
+  .table-bordered tbody tr:nth-child(odd) {
+    background-color: #f8f9fa;
+  }

@@ -1,0 +1,160 @@
+body {
+  height: 100%;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center; /* horizontal center */
+  align-items: center; /* vertical center */
+  background-color: #f2f6ff
+}
+
+.container {
+  align-content: center;
+  width: 1500px;
+  height: auto;
+  margin: 40px auto;
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  margin: 30px auto;
+}
+
+h1 {
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+/* FORM ROWS */
+form {
+  
+}
+
+.form-row {
+  display: flex;
+  gap: 50px;
+  margin-bottom: 20px;
+}
+
+.form-col {
+  flex: 1;
+  margin-right: 20px;
+}
+
+/* LABELS */
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* INPUTS */
+input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+  input:focus {
+    border-color: orangered;
+    outline: none;
+  }
+
+/* NOTE */
+.note {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+/* OTP ROW */
+.otp-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+  .otp-row input {
+    width: 130px;
+  }
+
+/* BUTTONS */
+button {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  background-color: lightgray;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+  button.confirm {
+    background-color: lightgray;
+  }
+
+  button:disabled,
+  input:disabled {
+    background: #ddd;
+    cursor: not-allowed;
+  }
+
+/* RESPONSIVE */
+@media (max-width: 1000px) {
+  .container {
+    width: 1000%;
+  }
+
+  .form-row,
+  .otp-row {
+    flex-direction: column;
+  }
+}
+
+.note-row {
+  display: flex;
+  gap: 30%;
+  font-size: 12px;
+  color: #666;
+  margin: 12px 0;
+}
+
+.form-actions {
+  align-items: start;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Next button styling */
+.next-btn {
+  padding: 10px 22px;
+  background-color: navy;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+  .next-btn:hover {
+    opacity: 0.9;
+  }
+
+/*radiobutton*/
+.radio-box {
+  border: 1.5px solid #dddddd;
+  padding: 10px 15px;
+  display: flex;
+  gap: 30px;
+  border-radius: 4px;
+  height: 43px;
+}
+
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* space between circle and text */
+}
