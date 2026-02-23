@@ -27,7 +27,7 @@ export class FactorAuth {
       .subscribe({
         next: res => {
           alert('Verified Sucessfully');
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/login']);
         },
         error: err => {
           alert('Invalid DOB or PAN');

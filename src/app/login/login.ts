@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   standalone: true,
   templateUrl: './login.html',
   styleUrls: ['./login.css'],
-  imports: [RouterLink, FormsModule, CommonModule], 
+  imports: [RouterLink, FormsModule, CommonModule],
 })
 export class Login {
 

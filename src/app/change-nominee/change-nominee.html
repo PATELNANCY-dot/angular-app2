@@ -17,28 +17,28 @@
 
     <div class="form-box">
 
-      <form>
-       
+      <form [formGroup]="nomineeForm" (ngSubmit)="updateNominee()">
+
         <div class="form-row">
           <div class="form-col">
             <label>Nominee Name:</label>
-            <input type="text">
+            <input formControlName="nomineeName" placeholder="Nominee Name" />
           </div>
 
           <div class="form-col">
             <label>DOB(DD/MM/YYYY):</label>
-            <input type="date">
+            <input formControlName="nomineeDob" type="date" placeholder="DOB" />
           </div>
 
           <div class="form-col">
             <label>Relationship With Client:</label>
-            <input type="text">
+            <input formControlName="nomineeRelation" placeholder="Relation" />
           </div>
 
 
           <div class="form-col">
             <label>Nominee Pan(Optional):</label>
-            <input type="text">
+            <input formControlName="nomineePan" placeholder="Nominee PAN" />
           </div>
 
           <div class="form-col">
@@ -47,7 +47,7 @@
           </div>
         </div>
 
-      
+
         <div class="form-row">
           <div class="form-col">
             <label>Address 1:</label>
@@ -59,18 +59,19 @@
             <input type="text">
           </div>
         </div>
-        <br />
-        <span><b> If Nominee is Minor <br /></b> </span> 
 
+        <br />
+
+        <span><b> If Nominee is Minor <br /></b> </span>
         <div class="form-row">
           <div class="form-col">
             <label>Guardian Pan(Optional)</label>
-            <input type="text" placeholder="Guardian Pan(Optional)" style="background-color:lightgray">
+            <input type="text" placeholder="Guardian Pan(Optional)" style="background-color:lightgray" formControlName="guardianPan">
           </div>
 
           <div class="form-col">
             <label>Name of parent/Guardian</label>
-            <input type="text" placeholder="Name of parent/Guardian" style="background-color:lightgray">
+            <input type="text" placeholder="Name of parent/Guardian" style="background-color:lightgray" formControlName="guardianName">
           </div>
         </div>
 
@@ -78,22 +79,24 @@
 
         <div class="form-row">
           <div class="form-col">
-            <label>Guardian Addrress</label>
-            <input type="text" placeholder="Guardian Addrress" style="background-color:lightgray">
+            <label>Guardian Dob</label>
+            <input type="date" placeholder="DOB" formControlName="guardianDob" />
           </div>
           <div class="form-col">
             <label>Relationship of Guardian with minor</label>
-            <input type="text" placeholder="Relationship of Guardian with minor" style="background-color:lightgray">
+            <input type="text" placeholder="Relationship of Guardian with minor" style="background-color:lightgray" formControlName="guardianRelation">
           </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="next-btn"><span><i class="bi bi-plus-circle"></i>  ADD NOMINEE</span></button>
         </div>
 
       </form>
 
       <br />
 
-      <div class="form-actions">
-        <button type="button" (click)="goNext()" class="next-btn"><span><i class="bi bi-plus-circle"></i>  ADD NOMINEE</span></button>
-      </div>
+    
     </div>
    
   </div>

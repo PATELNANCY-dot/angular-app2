@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "D:\\angular\\angular-app2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\angular\\angular-app2\\src\\app\\app.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\app.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\angular\\angular-app2\\src\\app\\investor-details-page\\investor-details-page.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\investor-details-page\\investor-details-page.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\angular\\angular-app2\\src\\app\\manage-account\\manage-account.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\manage-account\\manage-account.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -21,20 +25,29 @@
               "Name": "ST:14:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "manage-account.html",
+              "DocumentMoniker": "D:\\angular\\angular-app2\\src\\app\\manage-account\\manage-account.html",
+              "RelativeDocumentMoniker": "src\\app\\manage-account\\manage-account.html",
+              "ToolTip": "D:\\angular\\angular-app2\\src\\app\\manage-account\\manage-account.html",
+              "RelativeToolTip": "src\\app\\manage-account\\manage-account.html",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAAAIIAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-02-23T09:49:33.69Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "app.html",
-              "DocumentMoniker": "D:\\angular\\angular-app2\\src\\app\\app.html",
-              "RelativeDocumentMoniker": "src\\app\\app.html",
-              "ToolTip": "D:\\angular\\angular-app2\\src\\app\\app.html",
-              "RelativeToolTip": "src\\app\\app.html",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Title": "investor-details-page.html",
+              "DocumentMoniker": "D:\\angular\\angular-app2\\src\\app\\investor-details-page\\investor-details-page.html",
+              "RelativeDocumentMoniker": "src\\app\\investor-details-page\\investor-details-page.html",
+              "ToolTip": "D:\\angular\\angular-app2\\src\\app\\investor-details-page\\investor-details-page.html",
+              "RelativeToolTip": "src\\app\\investor-details-page\\investor-details-page.html",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAAKgAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-02-18T07:51:20.375Z",
+              "WhenOpened": "2026-02-23T09:48:26.156Z",
               "EditorCaption": ""
             }
           ]

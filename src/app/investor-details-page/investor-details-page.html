@@ -78,27 +78,30 @@
     <div class="classdiv text-left" style="margin-block-start:40px;margin-block-end:40px;">
       <h6 >BASIC INFORMATION</h6>
       <br />
-      <form>
+      <form  *ngIf="account">
         <!--1-->
         <div class="form-row">
           <div class="form-col">
             <label> Client Name:</label>
+            <label><b>{{ account.name }}</b></label>
 
           </div>
 
           <div class="form-col">
             <label>pan:</label>
-
+            <label><b>{{ account.pan }}</b></label>
           </div>
 
           <div class="form-col">
             <label>Date Of Birth:</label>
+            <label><b>{{ account.dob | date:'dd/MM/yyyy'}}</b></label>
 
           </div>
 
 
           <div class="form-col">
             <label>Gender:</label>
+            <label><b>{{ account.gender }}</b></label>
 
           </div>
 
@@ -108,9 +111,10 @@
         <br />
 
         <!--2-->
-        <div class="form-row">
+        <div class="form-row" *ngIf="account">
           <div class="form-col">
             <label>Email:</label>
+            <label><b>{{ account.email }}</b></label>
 
           </div>
 
@@ -118,17 +122,20 @@
 
           <div class="form-col">
             <label>Mobile No.:</label>
+            <label><b>{{ account.mobile }}</b></label>
 
           </div>
 
 
           <div class="form-col">
             <label>Aadhaar Number:</label>
+            <label><b>{{ account.aadhar }}</b></label>
 
           </div>
 
           <div class="form-col">
             <label>Ckyc No.:</label>
+            <label><b></b></label>
 
           </div>
         </div>
@@ -144,25 +151,29 @@
       <br />
       <form>
         <!--1-->
-        <div class="form-row">
+        <div class="form-row" *ngIf="account">
           <div class="form-col">
             <label> Address Line1:</label>
+            <label><b>{{ account.permanentAddress }}</b></label>
 
           </div>
 
           <div class="form-col">
             <label>State</label>
+            <label><b> {{ account.stateName }}</b></label>
 
           </div>
 
           <div class="form-col">
             <label>City</label>
+            <label><b>{{ account.cityName }}</b></label>
 
           </div>
 
 
           <div class="form-col">
             <label>Pincode</label>
+            <label><b>{{ account.pincode }}</b></label>
           </div>
 
         </div>
@@ -178,29 +189,34 @@
       <br />
       <form>
         <!--1-->
-        <div class="form-row">
+        <div class="form-row" *ngIf="account">
           <div class="form-col">
             <label> Account Name:</label>
+            <label><b>{{ account.name }}</b></label>
 
           </div>
 
           <div class="form-col">
             <label>Account Number</label>
+            <label><b>{{ account.accountNumber }}</b></label>
 
           </div>
 
           <div class="form-col">
             <label> Bank Name</label>
+            <label><b>{{ account.bankName }}</b></label>
 
           </div>
 
 
           <div class="form-col">
             <label> Branch</label>
+            <label><b>{{ account.branchName }}</b></label>
           </div>
 
           <div class="form-col">
             <label>IFSC</label>
+            <label><b>{{ account.ifscCode }}</b></label>
           </div>
 
 

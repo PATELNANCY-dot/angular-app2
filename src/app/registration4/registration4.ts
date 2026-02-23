@@ -38,11 +38,15 @@ export class Registration4 {
       Email: existingData.email || null,
       Mobile: existingData.mobile || null,
       Pan: existingData.pan || null,
-      Aadhar: existingData.aadhar  || null,
+      Aadhar: existingData.aadhar || null,
       Dob: existingData.dob ? new Date(existingData.dob).toISOString() : null,
       Gender: existingData.gender || null,
       PlaceOfBirth: existingData.placeOfBirth || null,
       Nationality: existingData.nationality || null,
+      StateID: existingData.stateID || null,
+      CorrespondingState: existingData.correspondingState || null,
+      CorrespondingCity: existingData.correspondingCity || null,
+      CityID: existingData.cityID || null,
       PermanentAddress: existingData.permanentAddress || null,
       Pincode: existingData.pincode || null,
       CorrespondingAddress: existingData.correspondingAddress || null,
@@ -58,32 +62,45 @@ export class Registration4 {
         ? new Date(this.registrationForm.value.nomineeDob).toISOString()
         : null,
       NomineePan: this.registrationForm.value.nomineePan,
+
+      guardianName: null,
+      guardianRelation: null,
+      guardianDob: null,
+      guardianPan: null
     };
-    const finalData1 = {
-      Username: existingData.name,
-      Password_1: existingData.Password_1,
-    };
 
+    //  FIRST call registration
+    this.http.post<any>('http://localhost:5048/api/clientregistrations', finalData)
+      .subscribe({
+        next: (res) => {
 
-    console.log("Registration Data:", finalData);
-    console.log("Login Data:", finalData1);
+          const clientId = res.clientId;  // ✅ Now res exists
 
+          const finalData1 = {
+            Username: existingData.name,
+            Password_1: existingData.Password_1,
+            ClientId: clientId
+          };
 
-    forkJoin([
-      this.http.post('http://localhost:5048/api/clientregistrations', finalData),
-      this.http.post('http://localhost:5048/api/auth/store', finalData1)
-    ]).subscribe({
-      next: () => {
-        alert('Registration successful!');
-        localStorage.removeItem('clientRegistration');
-        this.router.navigate(['/factor-auth']);
-      },
-      error: err => {
-        console.error(err);
-        alert('Something failed.');
-      }
-    });
+          //  THEN call login store
+          this.http.post('http://localhost:5048/api/auth/store', finalData1)
+            .subscribe({
+              next: () => {
+                alert('Registration successful!');
+                localStorage.removeItem('clientRegistration');
+                this.router.navigate(['/factor-auth']);
+              },
+              error: err => {
+                console.error(err);
+                alert('Login store failed.');
+              }
+            });
 
-
+        },
+        error: err => {
+          console.error(err);
+          alert('Registration failed.');
+        }
+      });
   }
 }

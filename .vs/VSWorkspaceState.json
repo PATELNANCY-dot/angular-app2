@@ -3,13 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\changepassword2",
-    "\\src\\app\\factor-auth",
-    "\\src\\app\\login",
+    "\\src\\app\\investor-details-page",
+    "\\src\\app\\manage-account",
+    "\\src\\app\\models",
+    "\\src\\app\\registration1",
     "\\src\\app\\registration2",
-    "\\src\\app\\registration3",
     "\\src\\app\\registration4",
     "\\src\\app\\services"
   ],
+  "SelectedNode": "\\src\\app\\manage-account\\manage-account.html",
   "PreviewInSolutionExplorer": false
 }

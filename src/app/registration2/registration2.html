@@ -48,13 +48,13 @@
       <div class="form-row">
         <div class="form-col">
           <label>Nationality:</label>
-          <input type="text" list="Nationality" placeholder="Select Option" formControlName="nationality">
 
-          <datalist id="Nationality">
-            <option value="India"></option>
-            <option value="USA"></option>
-            <option value="South Korea"></option>
-          </datalist>
+          <select class="form-control" formControlName="nationality" (change)="onCountryChange()">
+            <option value="">Select Country</option>
+            <option *ngFor="let country of countries" [value]="country.countryID">
+              {{ country.countryName }}
+            </option>
+          </select>
         </div>
 
         <div class="form-col">
@@ -67,25 +67,23 @@
       <div class="form-row">
         <div class="form-col">
           <label>State:</label>
-          <input type="text" list="State" placeholder="Select Option"  >
 
-          <datalist id="State">
-            <option value="Gujarat"></option>
-            <option value="Mumbai"></option>
-            <option value="Rajasthan"></option>
-          </datalist>
+
+          <select class="form-control" formControlName="stateID" (change)="onStateChange()">
+            <option value="">Select State</option>
+            <option *ngFor="let s of states" [value]="s.stateID">{{ s.stateName }}</option>
+          </select>
         </div>
 
 
         <div class="form-col">
           <label>Corressponding State:</label>
-          <input type="text" list="CorresspondingState" inputmode="numeric" placeholder="Select Option" >
 
-          <datalist id="CorresspondingState">
-            <option value="Gujarat"></option>
-            <option value="Mumbai"></option>
-            <option value="Rajasthan"></option>
-          </datalist>
+
+          <select class="form-control" formControlName="correspondingState" (change)="onCorrespondingStateChange()">
+            <option value="">Select State</option>
+            <option *ngFor="let s of correspondingStates" [value]="s.stateID">{{ s.stateName }}</option>
+          </select>
         </div>
       </div>
 
@@ -93,25 +91,21 @@
       <div class="form-row">
         <div class="form-col">
           <label>City:</label>
-          <input type="text" list="City" placeholder="Select Option" >
 
-          <datalist id="City">
-            <option value="Ahmedabad"></option>
-            <option value="Surat"></option>
-            <option value="Rajkot"></option>
-          </datalist>
+          <select class="form-control" formControlName="cityID">
+            <option value="">Select City</option>
+            <option *ngFor="let c of cities" [value]="c.cityID">{{ c.cityName }}</option>
+          </select>
         </div>
 
 
         <div class="form-col">
           <label>Corressponding City:</label>
-          <input type="text" list="CorresspondingCity" inputmode="numeric" placeholder="Select Option" >
 
-          <datalist id="CorresspondingCity">
-            <option value="Ahmedabad"></option>
-            <option value="Surat"></option>
-            <option value="Rajkot"></option>
-          </datalist>
+          <select class="form-control" formControlName="correspondingCity">
+            <option value="">Select City</option>
+            <option *ngFor="let c of correspondingCities" [value]="c.cityID">{{ c.cityName }}</option>
+          </select>
         </div>
       </div>
 

@@ -93,133 +93,94 @@
     </div>
 
 
+    <div *ngIf="isLoading" class="text-center my-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p>Loading account details...</p>
+    </div>
+
     <!-- BASIC INFO TABLE -->
-    <div *ngIf="activeTab === 'basic'" class="table-container">
+    <div *ngIf="activeTab === 'basic'  && !isLoading  && account" class="table-container">
       <table class="table table-bordered">
-        <tr>
-          <th>Full Name</th>
-          <td></td>
-        </tr>
-        <tr>
-          <th>Email</th>
-          <td></td>
-        </tr>
-        <tr>
-          <th>Mobile</th>
-          <td></td>
-        </tr>
-        <tr>
-          <th>Pan</th>
-          <td></td>
-        </tr>
-        <tr>
-          <th>Aadhar Number</th>
-          <td></td>
-        </tr>
-        <tr>
-          <th>Date Of Birth</th>
-          <td></td>
-        </tr>
-        <tr>
-          <th>Place Of Birth</th>
-          <td></td>
-        </tr>
-        <tr>
-          <th>Nationality</th>
-          <td></td>
-        </tr>
-        <tr>
-          <th>Gender</th>
-          <td></td>
-        </tr>
+        <tr><th>Full Name</th><td>{{ account.name }}</td></tr>
+        <tr><th>Email</th><td>{{ account.email }}</td></tr>
+        <tr><th>Mobile</th><td>{{ account.mobile }}</td></tr>
+        <tr><th>PAN</th><td>{{ account.pan }}</td></tr>
+        <tr><th>Aadhar Number</th><td>{{ account.aadhar }}</td></tr>
+        <tr><th>Date Of Birth</th><td>{{ account.dob | date:'dd/MM/yyyy' }}</td></tr>
+        <tr><th>Place Of Birth</th><td>{{ account.placeOfBirth }}</td></tr>
+        <tr><th>Nationality</th><td>{{ account.nationality }}</td></tr>
+        <tr><th>Gender</th><td>{{ account.gender }}</td></tr>
       </table>
     </div>
 
-
     <!-- ADDRESS TABLE -->
-    <div *ngIf="activeTab === 'address'" class="table-container">
+    <div *ngIf="activeTab === 'address'  && !isLoading   && account" class="table-container">
       <table class="table table-bordered">
         <tr>
           <th>State</th>
-          <td></td>
+          <td> {{ account.stateName }}</td>
         </tr>
         <tr>
           <th>Corressponding State</th>
-          <td></td>
+          <td> {{ account.correspondingStateName }}</td>
         </tr>
         <tr>
           <th>City</th>
-          <td></td>
+          <td>{{ account.cityName }}</td>
         </tr>
         <tr>
           <th>Corressponding City</th>
-          <td></td>
+          <td>{{ account.correspondingCityName }}</td>
         </tr>
         <tr>
           <th>Permenent Address</th>
-          <td></td>
+          <td>{{ account.permanentAddress }}</td>
         </tr>
         <tr>
           <th>Corressponding Address</th>
-          <td></td>
+          <td>{{ account.correspondingAddress }}</td>
         </tr>
         <tr>
           <th>Pincode</th>
-          <td></td>
+          <td>{{ account.pincode }}</td>
         </tr>
       </table>
     </div>
 
 
     <!-- BANK TABLE -->
-    <div *ngIf="activeTab === 'bank'" class="table-container">
+    <div *ngIf="activeTab === 'bank'  && !isLoading  && account" class="table-container">
       <table class="table table-bordered">
-        <tr>
-          <th>Bank Name</th>
-          <td></td>
-        </tr>
-        <tr>
-          <th>Branch Name</th>
-          <td></td>
-        </tr>
-        <tr>
-          <th>Branch Address</th>
-          <td></td>
-        </tr>
-        <tr>
-          <th>Account Number</th>
-          <td></td>
-        </tr>
-        <tr>
-          <th>IFSC Code</th>
-          <td></td>
-        </tr>
-        <tr>
-          <th>MICR Code</th>
-          <td></td>
-        </tr>
+        <tr><th>Bank Name</th><td>{{ account.bankName }}</td></tr>
+        <tr><th>Account Number</th><td>{{ account.accountNumber }}</td></tr>
+        <tr><th>Branch Name</th><td>{{ account.branchName }}</td></tr>
+        <tr><th>Branch Address</th><td>{{ account.branchAddress }}</td></tr>
+        <tr><th>IFSC Code</th><td>{{ account.ifscCode }}</td></tr>
+        <tr><th>MICR Code</th><td>{{ account.micrCode }}</td></tr>
       </table>
     </div>
 
 
     <!-- NOMINEE TABLE -->
-    <div *ngIf="activeTab === 'nominee'" class="table-container">
+    <div *ngIf="activeTab === 'nominee'  && !isLoading   && account" class="table-container">
       <table class="table table-bordered">
         <tr>
           <th>Nominee Name</th>
-          <td></td>
+          <td>{{ account.nomineeName }}</td>
         </tr>
         <tr>
           <th>Nominee Relation</th>
-          <td></td>
+          <td>{{ account.nomineeRelation }}</td>
         </tr>
         <tr>
           <th>Date Of Birth(Nominee)</th>
-          <td></td>
+          <td>{{ account.nomineeDob | date:'dd/MM/yyyy' }}</td>
         </tr>
         <tr>
           <th>Pan NumberNominee(Nominee)</th>
-          <td></td>
+          <td>{{ account.nomineePan }}</td>
         </tr>
         <tr>
           <th>Guardian Name</th>
