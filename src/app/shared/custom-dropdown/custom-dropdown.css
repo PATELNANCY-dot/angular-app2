@@ -1,0 +1,61 @@
+
+/* ========================================
+   FORCE FIX BOOTSTRAP SELECT
+======================================== */
+
+.custom-dropdown {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+}
+
+.dropdown-selected {
+  padding: 12px 16px;
+  border: 1.5px solid #dbe2ea;
+  border-radius: 12px;
+  background: #ffffff;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+  .dropdown-selected:hover {
+    border-color: #0b2c5f;
+  }
+
+.dropdown-list {
+  position: absolute;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 12px;
+  margin-top: 6px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  overflow: hidden;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.dropdown-item {
+  padding: 12px 16px;
+  transition: 0.2s;
+  font-size: 14px;
+}
+
+  .dropdown-item:hover {
+    background: #fff7f0;
+    color: #ff7a00;
+  }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

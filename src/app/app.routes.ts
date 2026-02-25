@@ -18,28 +18,48 @@ import { InvestorPage } from './investor-page/investor-page'
 import { InvestmentPage } from './investment-page/investment-page'
 import { PaymentPage } from './payment-page/payment-page'
 import { FactorAuth } from './factor-auth/factor-auth'
+import { TransactionStatus } from './transaction-status/transaction-status'
+import { MainLayoutComponent } from './main-layout-component/main-layout-component'
+
+
 
 
 export const routes: Routes = [
+
   { path: '', component: Login },
   { path: 'login', component: Login },
   { path: 'login-otp', component: LoginOtp },
-  { path: 'dashboard', component: Dashboard },
+ 
   { path: 'registration1', component: Registration1 },
   { path: 'registration2', component: Registration2 },
   { path: 'registration3', component: Registration3 },
   { path: 'registration4', component: Registration4 },
-  { path: 'changepassword', component: Changepassword },
+
   { path: 'forgot-password', component: ForgotPassword },
   { path: 'forgot-password2', component: ForgotPassword2 },
   { path: 'changepassword2', component: Changepassword2 },
-  { path: 'manage-account', component: ManageAccount },
-  { path: 'change-nominee', component: ChangeNominee },
-  { path: 'new-invester-page', component: NewInvesterPage },
-  { path: 'investor-details-page', component: InvestorDetailsPage },
-  { path: 'investor-page', component: InvestorPage },
-  { path: 'investment-page', component: InvestmentPage },
+
   { path: 'payment-page', component: PaymentPage },
   { path: 'factor-auth', component: FactorAuth },
+  { path: 'transaction-status', component: TransactionStatus },
+
+  {
+    path: '',
+    component: MainLayoutComponent, // Root layout with navbar
+    children: [
+      { path: 'dashboard', component: Dashboard },
+      { path: 'changepassword', component: Changepassword },
+      { path: 'manage-account', component: ManageAccount },
+      { path: 'change-nominee', component: ChangeNominee },
+      { path: 'new-invester-page', component: NewInvesterPage },
+      { path: 'investor-details-page', component: InvestorDetailsPage },
+      { path: 'investor-page', component: InvestorPage },
+      { path: 'investment-page', component: InvestmentPage },
+
+      // add all other pages that should show navbar
+    ]
+  },
+
+
   { path: '**', redirectTo: '' }
 ];

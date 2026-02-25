@@ -4,62 +4,9 @@
 <!-- Bootstrap Icons -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
-<div class="dashboard d-flex">
+<div class="dashboard">
 
 
-  <!-- Sidebar -->
-  <aside class="sidebar d-flex flex-column align-items-center py-4">
-
-    <ul class="nav flex-column text-center w-100" href="javascript:void(0)">
-      <li class="nav-item mb-3 sidebar-dropdown">
-        <a class="nav-link sidebar-icon" routerLink="/dashboard">
-          <i class="bi bi-grid-fill fs-4"></i>
-          <span class="sidebar-text">Dashboard</span>
-        </a>
-      </li>
-
-      <!-- Dropdown Menu -->
-      <li class="nav-item mb-3 sidebar-dropdown">
-        <a class="nav-link sidebar-icon" href="javascript:void(0)">
-          <i class="bi bi-person-fill fs-4"></i>
-          <span class="sidebar-text">My Account</span>
-        </a>
-
-        <ul class="dropdown-menu-custom">
-          <li>
-            <h6 class="dropdown-heading">My Account</h6>
-          </li>
-          <li><a routerLink="/changepassword"><i class="bi bi-caret-right-fill"></i> Change Password</a></li>
-          <li><a routerLink="/manage-account"><i class="bi bi-caret-right-fill"></i> Manage Account</a></li>
-          <li><a routerLink="/change-nominee"><i class="bi bi-caret-right-fill"></i> Change Nominee</a></li>
-        </ul>
-      </li>
-
-      <li class="nav-item mb-3 sidebar-dropdown">
-        <a class="nav-link sidebar-icon" href="javascript:void(0)" routerLink="/new-invester-page" title="Report">
-          <i class="bi bi-file-earmark-fill fs-4"></i>
-          <span class="sidebar-text">Report</span>
-        </a>
-
-        <ul class="dropdown-menu-custom">
-          <li>
-            <h6 class="dropdown-heading">My Account</h6>
-          </li>
-          <li><a routerLink="/new-invester-page"><i class="bi bi-caret-right-fill"></i> New Investor Page</a></li>
-          <li><a routerLink="/investor-details-page"><i class="bi bi-caret-right-fill"></i> Invistor Details Page </a></li>
-          <li><a routerLink="/investor-page"><i class="bi bi-caret-right-fill"></i> Investor Page</a></li>
-        </ul>
-      </li>
-
-      <li class="nav-item mb-3">
-        <a class="nav-link sidebar-icon" href="javascript:void(0)" routerLink="/login" title="Logout">
-          <i class="bi bi-box-arrow-right fs-4"></i>
-          <span class="sidebar-text">Logout</span>
-        </a>
-      </li>
-
-    </ul>
-  </aside>
 
 
   <!-- Main Content -->
@@ -75,33 +22,50 @@
 
     <!--1c-->
 
-    <div class="classdiv text-left" style="margin-block-start:40px;margin-block-end:40px;">
-      <h6 >BASIC INFORMATION</h6>
+    <div class="modern-section container" style="margin-block-start:40px;margin-block-end:40px;">
+      <h6>BASIC INFORMATION</h6>
       <br />
-      <form  *ngIf="account">
+      <form *ngIf="account">
         <!--1-->
-        <div class="form-row">
-          <div class="form-col">
-            <label> Client Name:</label>
-            <label><b>{{ account.name }}</b></label>
+        <div class="row g-5" *ngIf="account">
+          <div class="col-md-3">
+
+            <div class="info-item">
+              <span class="info-label">Client Name:</span>
+              <span class="info-value">{{ account.name }}</span>
+            </div>
 
           </div>
 
           <div class="form-col">
-            <label>pan:</label>
-            <label><b>{{ account.pan }}</b></label>
-          </div>
 
-          <div class="form-col">
-            <label>Date Of Birth:</label>
-            <label><b>{{ account.dob | date:'dd/MM/yyyy'}}</b></label>
+            <div class="info-item">
+              <span class="info-label">pan:</span>
+              <span class="info-value">{{ account.pan }}</span>
+            </div>
 
           </div>
 
+          <div class="form-col">
+
+
+            <div class="info-item">
+              <span class="info-label">Date Of Birth:</span>
+              <span class="info-value">{{ account.dob | date:'dd/MM/yyyy'}}</span>
+            </div>
+
+
+          </div>
+
 
           <div class="form-col">
-            <label>Gender:</label>
-            <label><b>{{ account.gender }}</b></label>
+
+
+            <div class="info-item">
+              <span class="info-label">Gender:</span>
+              <span class="info-value">{{ account.gender }}</span>
+            </div>
+
 
           </div>
 
@@ -111,25 +75,34 @@
         <br />
 
         <!--2-->
-        <div class="form-row" *ngIf="account">
-          <div class="form-col">
-            <label>Email:</label>
-            <label><b>{{ account.email }}</b></label>
+        <div class="row g-4" *ngIf="account">
+          <div class="col-md-3">
+
+            <div class="info-item">
+              <span class="info-label">Email:</span>
+              <span class="info-value">{{ account.email }}</span>
+            </div>
 
           </div>
 
 
 
           <div class="form-col">
-            <label>Mobile No.:</label>
-            <label><b>{{ account.mobile }}</b></label>
+
+            <div class="info-item">
+              <span class="info-label">Mobile No.:</span>
+              <span class="info-value">{{ account.mobile }}</span>
+            </div>
 
           </div>
 
 
           <div class="form-col">
-            <label>Aadhaar Number:</label>
-            <label><b>{{ account.aadhar }}</b></label>
+
+            <div class="info-item">
+              <span class="info-label">Aadhaar Number:</span>
+              <span class="info-value">{{ account.aadhar }}</span>
+            </div>
 
           </div>
 
@@ -146,35 +119,47 @@
 
     <!--2c-->
 
-    <div class="classdiv text-left" style="margin-block-start:40px;margin-block-end:40px;">
+    <div class="modern-section container" style="margin-block-start:40px;margin-block-end:40px;">
       <h6>ADDRESS INFORMATION</h6>
       <br />
       <form>
         <!--1-->
-        <div class="form-row" *ngIf="account">
+        <div class="row g-4" *ngIf="account">
+          <div class="col-md-3">
+            <div class="info-item">
+              <span class="info-label">Address Line1:</span>
+              <span class="info-value">{{ account.permanentAddress }}</span>
+            </div>
+          </div>
+
           <div class="form-col">
-            <label> Address Line1:</label>
-            <label><b>{{ account.permanentAddress }}</b></label>
+
+            <div class="info-item">
+              <span class="info-label">State:</span>
+              <span class="info-value">{{ account.stateName }}</span>
+            </div>
 
           </div>
 
           <div class="form-col">
-            <label>State</label>
-            <label><b> {{ account.stateName }}</b></label>
 
-          </div>
-
-          <div class="form-col">
-            <label>City</label>
-            <label><b>{{ account.cityName }}</b></label>
+            <div class="info-item">
+              <span class="info-label">City:</span>
+              <span class="info-value">{{ account.cityName }}</span>
+            </div>
 
           </div>
 
 
           <div class="form-col">
-            <label>Pincode</label>
-            <label><b>{{ account.pincode }}</b></label>
+
+            <div class="info-item">
+              <span class="info-label">Pincode:</span>
+              <span class="info-value">{{ account.pincode }}</span>
+            </div>
+
           </div>
+
 
         </div>
 
@@ -184,39 +169,56 @@
 
     <!--3c-->
 
-    <div class="classdiv text-left" style="margin-block-start:40px;margin-block-end:40px;">
+    <div class="modern-section container" style="margin-block-start:40px;margin-block-end:40px;">
       <h6>BANK DETAILS</h6>
       <br />
       <form>
         <!--1-->
-        <div class="form-row" *ngIf="account">
-          <div class="form-col">
-            <label> Account Name:</label>
-            <label><b>{{ account.name }}</b></label>
+        <div class="row g-4" *ngIf="account">
+          <div class="col-md-3">
+
+            <div class="info-item">
+              <span class="info-label"> Account Name:</span>
+              <span class="info-value">{{ account.name }}</span>
+            </div>
 
           </div>
 
           <div class="form-col">
-            <label>Account Number</label>
-            <label><b>{{ account.accountNumber }}</b></label>
+
+            <div class="info-item">
+              <span class="info-label">Account Number:</span>
+              <span class="info-value">{{ account.accountNumber }}</span>
+            </div>
 
           </div>
 
           <div class="form-col">
-            <label> Bank Name</label>
-            <label><b>{{ account.bankName }}</b></label>
+
+            <div class="info-item">
+              <span class="info-label">Bank Name:</span>
+              <span class="info-value">{{ account.bankName }}</span>
+            </div>
 
           </div>
 
 
           <div class="form-col">
-            <label> Branch</label>
-            <label><b>{{ account.branchName }}</b></label>
+
+            <div class="info-item">
+              <span class="info-label">Branch:</span>
+              <span class="info-value">{{ account.branchName }}</span>
+            </div>
+
           </div>
 
           <div class="form-col">
-            <label>IFSC</label>
-            <label><b>{{ account.ifscCode }}</b></label>
+
+            <div class="info-item">
+              <span class="info-label">IFSC:</span>
+              <span class="info-value">{{ account.ifscCode }}</span>
+            </div>
+
           </div>
 
 

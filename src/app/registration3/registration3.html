@@ -19,13 +19,12 @@
       <div class="form-row">
         <div class="form-col">
           <label>Bank Name:</label>
-          <input type="text" list="BankName" placeholder="Select Option" formControlName="bankName">
-
-          <datalist id="BankName">
-            <option value="Bank of Baroda"></option>
-            <option value="HDFC Bank"></option>
-            <option value="Axis Bank"></option>
-          </datalist>
+          <select formControlName="bankName" class="form-control">
+            <option value="">Select Bank</option>
+            <option *ngFor="let bank of banks" [value]="bank.bankId">
+              {{ bank.bankName }}
+            </option>
+          </select>
         </div>
 
         <div class="form-col">
@@ -38,18 +37,18 @@
       <div class="form-row">
         <div class="form-col">
           <label>Branch Name:</label>
-          <input type="text" list="BranchName" placeholder="Select Option" formControlName="branchName">
-
-          <datalist id="BranchName">
-            <option value="Vastrapur"></option>
-            <option value="Odhav"></option>
-            <option value="Naroda"></option>
-          </datalist>
+        
+          <select formControlName="branchName" class="form-control">
+            <option value="">Select Branch</option>
+            <option *ngFor="let branch of bankBranches" [value]="branch.id">
+              {{ branch.bankBranch }}
+            </option>
+          </select>
         </div>
 
         <div class="form-col">
           <label>IFSC Code:</label>
-          <input type="text" inputmode="numeric" formControlName="ifscCode">
+          <input formControlName="ifscCode" readonly  >
         </div>
       </div>
 
@@ -57,12 +56,12 @@
       <div class="form-row">
         <div class="form-col">
           <label>Branch Address:</label>
-          <input type="text" formControlName="branchAddress">
+          <input  formControlName="branchAddress" readonly >
         </div>
 
         <div class="form-col">
           <label>MICR Code:</label>
-          <input type="text" inputmode="numeric" formControlName="micrCode">
+          <input  formControlName="micrCode" readonly >
         </div>
       </div>
 

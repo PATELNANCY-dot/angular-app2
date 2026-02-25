@@ -33,13 +33,14 @@ export class Login {
     }).subscribe({
       next: (res: any) => {
         console.log('API Response:', res);
-        alert('Login Successful');
+       
 
         // Save userId in local storage
         localStorage.setItem('userId', res.userId);
 
-        // Navigate to dashboard
-        this.router.navigate(['/dashboard']);
+        setTimeout(() => {
+          this.router.navigate(['/dashboard']);
+        }, 50);
       },
       error: (err) => {
         console.error('API Error:', err);

@@ -1,15 +1,19 @@
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NomineeService } from '../services/nominee';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
+
+
+
 
 @Component({
   selector: 'app-change-nominee',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './change-nominee.html',
-  styleUrls: ['./change-nominee.css'], // <-- corrected from 'styleUrl' to 'styleUrls'
+  styleUrls: ['./change-nominee.css'], 
 })
 export class ChangeNominee implements OnInit {
   nomineeForm!: FormGroup;
@@ -97,4 +101,5 @@ checkMinor(dob: string) {
     });
   }
 
+  
 }

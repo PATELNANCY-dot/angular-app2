@@ -1,0 +1,27 @@
+.bg-light-success {
+  background-color: #d4edda !important;
+}
+
+.bg-light-danger {
+  background-color: #f8d7da !important;
+}
+
+.bg-light-warning {
+  background-color: #fff3cd !important;
+}
+
+.text-success {
+  color: #155724 !important;
+}
+
+.text-danger {
+  color: #721c24 !important;
+}
+
+.text-warning {
+  color: #856404 !important;
+}
+
+.text-secondary {
+  color: #6c757d !important;
+}

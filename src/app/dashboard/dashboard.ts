@@ -1,27 +1,30 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, } from '@angular/router';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
 
 
 
 @Component({
   selector: 'app-dashboard',
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
 export class Dashboard {
-  activeMenu: string = 'dashboard';
-  dropdownOpen: { [key: string]: boolean } = {};
 
-  setActive(menu: string) {
-    this.activeMenu = menu;
-  }
+  constructor(private router: Router) { } 
 
-  toggleDropdown(menu: string) {
-    this.dropdownOpen[menu] = !this.dropdownOpen[menu];
-  }
+ 
 
-  logout() {
-    console.log('Logging out...');
+  invest() {
+    const userId = localStorage.getItem('userId');
+    if (userId === null) {
+      this.router.navigate(['/login']);
+    } else {
+      this.router.navigate(['/investor-page']);
+    }
+  
   }
 }

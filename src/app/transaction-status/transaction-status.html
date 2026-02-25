@@ -1,0 +1,26 @@
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm p-3 mb-5 rounded {{ getStatusClass() }}">
+        <div class="card-body text-center">
+          <i *ngIf="status === 'success'" class="bi bi-check-circle display-1"></i>
+          <i *ngIf="status === 'failed'" class="bi bi-x-circle display-1"></i>
+          <i *ngIf="status === 'pending'" class="bi bi-clock display-1"></i>
+          <h3 class="card-title mt-3">{{ status | titlecase }}</h3>
+          <p class="card-text">
+            Your transaction is <strong>{{ status }}</strong>.
+          </p>
+          <a routerLink="/" class="btn btn-primary mt-3">Back to Home</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

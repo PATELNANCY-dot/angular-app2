@@ -1,450 +1,514 @@
-/* Sidebar */
-.sidebar {
-  flex: 0 0 100px; /* Prevent shrinking, set fixed width */
-  background-color: #001f5b;
-  color: lightgray;
-  min-height: 100vh;
-  padding-top: 20px;
-}
+/* ========================================
+   GLOBAL
+======================================== */
 
-
-
-.sidebar-logo {
-  font-size: 1.8rem;
-  color: #fff;
-}
-
-.sidebar-icon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #fff;
-  padding: 10px 0;
-  transition: all 0.3s;
-}
-/* Sidebar dropdown */
-.sidebar-dropdown {
-  position: relative;
-}
-
-/* Hidden dropdown */
-.dropdown-menu-custom {
-  position: absolute;
-  top: 0;
-  left: 70px;
-  background-color: lightgray;
-  border-radius: 6px;
-  padding: 10px 0;
-  min-width: 160px;
-  display: none;
-  z-index: 999;
-}
-
-  /* Dropdown items */
-  .dropdown-menu-custom li {
-    list-style: none;
-  }
-
-    .dropdown-menu-custom li a {
-      display: block;
-      padding: 8px 15px;
-      color: black;
-      text-decoration: none;
-      font-size: 14px;
-      white-space: nowrap;
-    }
-
-      .dropdown-menu-custom li a:hover {
-        background-color: #2f2f4f;
-      }
-
-/* Show dropdown on hover */
-.sidebar-dropdown:hover .dropdown-menu-custom {
-  display: block;
-}
-
-
-.dropdown-heading {
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f4f7fb;
+  color: #1e293b;
   margin: 0;
-  padding: 8px 16px;
-  font-size: 1.2rem;
-  color: black;
 }
 
-.dropdown-menu-custom li:not(.dropdown-heading) {
-  border-bottom: 1px solid black;
+.dashboard {
+  min-height: 100vh;
+  background: #f4f7fb;
 }
 
-.dropdown-menu-custom li:last-child {
-  border-bottom: none;
-}
-/* Main Content */
-.classdiv {
-  padding: 50px;
-  border-radius: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
-}
 
-/* first container Section */
+
+/* ========================================
+   PAGE HEADING
+======================================== */
 
 .loan-heading-section {
-  background-color: lightgray;
-  padding: 15px 30px; /* thin height */
-  border-radius: 40px; /* round like navbar */
-  margin: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  padding: 30px 0 10px 0;
 }
 
   .loan-heading-section h1 {
-    font-size: 22px; /* smaller, thin heading */
-    margin: 0;
-    font-weight: 600;
+    font-size: 26px;
+    font-weight: 700;
     letter-spacing: 1px;
   }
 
 .orange {
-  color: orangered;
+  color: #ff7a00;
 }
 
 .navy {
-  color: navy;
+  color: #0b2c5f;
 }
 
-/* Underline Style */
-.underline {
-  text-decoration: underline orange solid;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 6px;
+/* ========================================
+   MAIN CARD DESIGN
+======================================== */
+
+.classdiv {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 30px;
+  margin: 30px auto;
+  max-width: 1200px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.06);
 }
 
+/* ========================================
+   UNDERLINE
+======================================== */
 
-
-.small-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.12);
+.custom-underline {
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(to right, #ff7a00, #0b2c5f);
 }
 
-.small-card i {
-  font-size: 2rem;
-  color: navy;
-  margin-bottom: 10px;
-}
-
-/*2 container*/
-form {
-  position: relative;
-  border: 2px solid #d0d7e2; /* nice soft border */
-  border-radius: 12px;
-  padding: 20px;
-  background-color: white;
-}
+/* ========================================
+   FORM LAYOUT
+======================================== */
 
 .form-row {
   display: flex;
   gap: 20px;
-  margin-bottom: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
 }
 
 .form-col {
   flex: 1;
-  margin-right: 8px;
+  min-width: 220px;
 }
 
-/* LABELS */
 label {
-  display: block;
+  font-weight: 600;
+  font-size: 14px;
   margin-bottom: 6px;
-  font-weight: 600;
-  color: #333;
+  display: block;
+  color: #334155;
 }
 
-
-
-  input:focus {
-    border-color: orangered;
-    outline: none;
-  }
-
-.btn {
-  padding: 8px 14px;
-  border-radius: 6px;
-  border: none;
-  background-color: navy;
-  color: #fff;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-
-.custom-underline {
+input,
+select {
   width: 100%;
-  height: 2px;
-  background-color: #6c757d; /* darker grey so visible */
-  margin-top: 20px;
-}
-
-.payment-radio .form-check {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.payment-radio .form-check-input {
-  width: 14px; /* smaller size */
-  height: 14px;
-  margin-top: 0; /* fix alignment */
-  cursor: pointer;
-}
-
-.payment-radio .form-check-label {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #dbe2ea;
+  background: #f9fbfd;
   font-size: 14px;
-  cursor: pointer;
-}
-
-
-.form-check-input {
-  transform: scale(0.8);
-  cursor: pointer;
-}
-
-.form-check-label {
-  cursor: pointer;
-}
-/* Dark outer circle */
-.form-check-input[type="radio"] {
-  border: 2px solid #000; /* darker border */
-}
-
-  /* When selected */
-  .form-check-input[type="radio"]:checked {
-    background-color: #000; /* inner dot color */
-    border-color: #000; /* outer border stays dark */
-  }
-
-.loan-heading-section2 {
-  height: 100px; /* adjust height if needed */
-  margin: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end; /* 👈 pushes buttons to right */
-  padding: 0 40px; /* space from right edge */
-  background-color: #d3d3d3; /* your grey background */
-  border-radius: 25px; /* rounded corners */
-}
-
-/* Button spacing */
-.action-buttons {
-  display: flex;
-  gap: 15px;
-}
-
-  /* Common button style */
-  .action-buttons button {
-    padding: 8px 22px;
-    border-radius: 10px;
-    border: none;
-    font-weight: 600;
-    cursor: pointer;
-    width:90px;
-  }
-
-/* Navy */
-.btn-back {
-  background-color: #0d3b66;
-  color: white;
-}
-
-/* Orange */
-.btn-invest {
-  background-color: #f57c00;
-  color: white;
-}
-
-
-
-.brows { /* vertical padding controls height */
-  border: 1px solid #ccc;
-  border-right: none; /* remove border between input & button */
-  border-radius: 4px 0 0 4px;
-  width: 250px;
-  font-size: 14px;
-  box-sizing: border-box;
-  height: 40px; /* fix height */
-}
-
-/* Button */
-button[type="button"] {
-  border: 1px solid lightgray;
-  border-radius: 0 4px 4px 0;
-  background-color: lightgray;
-  color: darkgrey;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 14px;
-  height: 40px; /* same as input */
-  line-height: 40px; /* center text vertically */
-  transition: background-color 0.3s;
-}
-
-
-/* Align input and button inline */
-.brows, button[type="button"] {
-  vertical-align: top;
-  display: inline-block;
-}
-
-
-.facebook i {
-  color: #1877F2;
-}
-
-.instagram i {
-  color: #E1306C;
-}
-
-.linkedin i {
-  color: #0A66C2;
-}
-
-.youtube i {
-  color: #FF0000;
-}
-
-.twitter i {
-  color: #1DA1F2;
-}
-
-
-/*status*/
-/* Full width section */
-.status-full {
-  margin: 20px;
-}
-
-/* Full width box */
-.status-box {
-  width: 100%;
-  padding: 30px 40px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-  animation: fadeIn 0.4s ease;
-}
-
-  /* Success background */
-  .status-box.success {
-    background: linear-gradient(90deg, #e8f9f0, #ffffff);
-    border-left: 8px solid #28a745;
-  }
-
-  /* Failed background */
-  .status-box.failed {
-    background: linear-gradient(90deg, #fdecec, #ffffff);
-    border-left: 8px solid #dc3545;
-  }
-
-/* Inner layout */
-.status-content {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-  width: 100%;
-}
-
-/* Icon */
-.status-icon {
-  font-size: 40px;
-}
-
-.status-box.success .status-icon {
-  color: #28a745;
-}
-
-.status-box.failed .status-icon {
-  color: #dc3545;
-}
-
-/* Text */
-.status-box h3 {
-  margin: 0;
-  font-weight: 600;
-}
-
-.status-box p {
-  margin: 0;
-  font-size: 14px;
-  color: #555;
-}
-
-/* Push button right */
-.status-btn {
-  margin-left: auto;
-  padding: 8px 22px;
-  border: none;
-  border-radius: 25px;
-  background: #0d3b66;
-  color: white;
-  font-weight: 500;
   transition: 0.3s;
 }
 
-  .status-btn:hover {
-    background: #08263f;
+  input:focus,
+  select:focus {
+    border-color: #ff7a00;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(255,122,0,0.15);
+    outline: none;
   }
 
-  .status-btn.retry {
-    background: #f57c00;
+/* ========================================
+   RADIO BUTTON
+======================================== */
+
+.form-check-input {
+  accent-color: #ff7a00;
+  transform: scale(1.1);
+}
+
+/* ========================================
+   BUTTONS
+======================================== */
+
+.loan-heading-section2 {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.btn-back {
+  background: #0b2c5f;
+  color: white;
+  border-radius: 10px;
+  padding: 10px 25px;
+  border: none;
+  transition: 0.3s;
+}
+
+  .btn-back:hover {
+    background: #061c3a;
   }
 
-    .status-btn.retry:hover {
-      background: #d96b00;
+.btn-invest {
+  background: linear-gradient(135deg, #ff7a00, #ff9d3c);
+  color: white;
+  border-radius: 10px;
+  padding: 10px 25px;
+  border: none;
+  transition: 0.3s;
+  box-shadow: 0 6px 20px rgba(255,122,0,0.3);
+}
+
+  .btn-invest:hover {
+    transform: translateY(-2px);
+  }
+
+/* ========================================
+   STATUS BOX
+======================================== */
+
+.status-box {
+  border-radius: 12px;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+  .status-box.success {
+    background: #e6f9f0;
+    border-left: 5px solid #28a745;
+  }
+
+  .status-box.failed {
+    background: #fdecec;
+    border-left: 5px solid #dc3545;
+  }
+
+.status-icon {
+  font-size: 30px;
+}
+
+.status-btn {
+  margin-left: auto;
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: none;
+  background: #0b2c5f;
+  color: white;
+}
+
+/* ========================================
+   HOW TO INVEST
+======================================== */
+
+.classdiv h5 {
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #0b2c5f;
+}
+
+.classdiv p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #475569;
+}
+
+.classdiv i {
+  color: #ff7a00;
+}
+
+/* ========================================
+   SOCIAL ICONS
+======================================== */
+
+.social-icons a {
+  background: #eef2f7;
+  padding: 10px 14px;
+  border-radius: 8px;
+  transition: 0.3s;
+  color: #0b2c5f;
+}
+
+  .social-icons a:hover {
+    background: #ff7a00;
+    color: white;
+  }
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 992px) {
+  .form-row {
+    flex-direction: column;
+  }
+}
+
+
+/* =========================
+   PAYMENT CARD RADIO STYLE
+========================= */
+
+.payment-options {
+  display: flex;
+  gap: 20px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.payment-card {
+  position: relative;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+  .payment-card input {
+    display: none;
+  }
+
+  .payment-card .card-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-radius: 12px;
+    border: 2px solid #e2e8f0;
+    background: #ffffff;
+    transition: 0.3s ease;
+    min-width: 240px;
+  }
+
+    .payment-card .card-content i {
+      font-size: 22px;
+      color: #0b2c5f;
     }
 
-/* Animation */
+    .payment-card .card-content span {
+      font-weight: 600;
+      font-size: 14px;
+      color: #1e293b;
+    }
+
+    .payment-card .card-content small {
+      font-weight: 400;
+      color: #64748b;
+      font-size: 12px;
+    }
+
+  /* Selected State */
+  .payment-card input:checked + .card-content {
+    border-color: #ff7a00;
+    background: #fff7f0;
+    box-shadow: 0 5px 15px rgba(255,122,0,0.15);
+  }
+
+    .payment-card input:checked + .card-content i {
+      color: #ff7a00;
+    }
+
+  /* Hover */
+  .payment-card .card-content:hover {
+    transform: translateY(-2px);
+  }
+
+
+/* =========================
+   MODERN FILE UPLOAD
+========================= */
+
+.file-upload {
+  position: relative;
+  width: 100%;
+}
+
+  .file-upload input[type="file"] {
+    display: none;
+  }
+
+.file-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 10px;
+  background: #f9fbfd;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
+  transition: 0.3s ease;
+}
+
+  .file-label i {
+    font-size: 18px;
+    color: #0b2c5f;
+  }
+
+  /* Hover */
+  .file-label:hover {
+    border-color: #ff7a00;
+    background: #fff7f0;
+  }
+
+/* When File Selected (Optional JS needed later) */
+.file-upload input[type="file"]:focus + .file-label {
+  border-color: #ff7a00;
+}
+
+/* ===== Modern Rounded Select ===== */
+
+.input-group-custom {
+  width: 100%;
+}
+
+.custom-select {
+  width: 100%;
+  padding: 12px 45px 12px 16px;
+  border-radius: 12px; /* Rounded look */
+  border: 1px solid #d0d7e2;
+  background-color: #ffffff;
+  font-size: 14px;
+  color: #1a1a1a;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: all 0.3s ease;
+  /* Custom Arrow */
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%230b2c5f' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+}
+
+  /* Focus Effect */
+  .custom-select:focus {
+    border-color: #ff7a00;
+    box-shadow: 0 0 0 4px rgba(255,122,0,0.15);
+    outline: none;
+  }
+
+  /* Hover */
+  .custom-select:hover {
+    border-color: #0b2c5f;
+  }
+
+
+/* ========================================
+   FORCE FIX BOOTSTRAP SELECT
+======================================== */
+
+.custom-dropdown {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+}
+
+.dropdown-selected {
+  padding: 12px 16px;
+  border: 1.5px solid #dbe2ea;
+  border-radius: 12px;
+  background: #ffffff;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+  .dropdown-selected:hover {
+    border-color: #0b2c5f;
+  }
+
+.dropdown-list {
+  position: absolute;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 12px;
+  margin-top: 6px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  overflow: hidden;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.dropdown-item {
+  padding: 12px 16px;
+  transition: 0.2s;
+  font-size: 14px;
+}
+
+  .dropdown-item:hover {
+    background: #fff7f0;
+    color: #ff7a00;
+  }
+
 @keyframes fadeIn {
   from {
     opacity: 0;
+    transform: translateY(-5px);
   }
 
   to {
     opacity: 1;
+    transform: translateY(0);
+  }
+}
+ /*alert*/
+/* Overlay to cover entire screen */
+.custom-alert-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4); /* dim background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Alert box */
+.custom-alert-box {
+  background: white;
+  padding: 25px 35px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  text-align: center;
+  min-width: 300px;
+  max-width: 400px;
+  animation: popup 0.3s ease;
+}
+
+/* Button inside alert */
+.btn-close-alert {
+  margin-top: 15px;
+  padding: 5px 15px;
+  border: none;
+  background: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Optional: different colors for alert types */
+.custom-alert-box.success {
+  border-left: 5px solid #28a745;
+}
+
+.custom-alert-box.error {
+  border-left: 5px solid #dc3545;
+}
+
+.custom-alert-box.info {
+  border-left: 5px solid #17a2b8;
+}
+
+/* Simple popup animation */
+@keyframes popup {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
-/* Remove bottom radius from status box */
-.status-box {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  margin-bottom: 0; /* remove gap */
-}
-
-/* Remove top radius from table container */
-.status-full .classdiv {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  margin-top: 0 !important; /* remove spacing */
-}
-
-/* Make status + table look like one card */
-.status-full {
-  margin: 20px;
-}
-
-  .status-full .status-box {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
-.status-table {
-  background-color: lightgray;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  margin-top: 0;
-  padding-top: 30px;
-}
 

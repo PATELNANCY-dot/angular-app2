@@ -1,0 +1,25 @@
+/* ========================================
+   NAVBAR
+======================================== */
+.navbar {
+  background: linear-gradient(90deg, #0b2c5f, #002c8c) !important;
+  padding: 14px 30px;
+}
+
+  .navbar .nav-link {
+    font-weight: 500;
+    margin-right: 18px;
+    transition: 0.3s;
+  }
+
+    .navbar .nav-link:hover {
+      color: #ff7a00 !important;
+    }
+/* Optional: add smooth dropdown transition */
+.dropdown-menu {
+  transition: all 0.2s ease-in-out;
+}
+
+.navbar-nav .dropdown:hover > .dropdown-menu {
+  display: block;
+}

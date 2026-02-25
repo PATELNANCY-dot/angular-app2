@@ -14,6 +14,8 @@ declare var bootstrap: any;
   styleUrls: ['./investor-page.css']
 })
 export class InvestorPage {
+
+
   showWithdrawPopup: boolean = false;
   withdrawAmount: number | null = null;
   selectedBank: string = '';

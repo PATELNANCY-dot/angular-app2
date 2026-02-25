@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';   // ✅ ADD THIS
-import { RouterModule, Router } from '@angular/router'; // ✅ ADD RouterModule
+import { FormsModule } from '@angular/forms';   //  ADD THIS
+import { RouterModule, Router } from '@angular/router'; //  ADD RouterModule
 
 @Component({
   selector: 'app-payment-page',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule,        // ✅ VERY IMPORTANT
-    RouterModule        // ✅ Needed for routerLink
+    FormsModule,        //  VERY IMPORTANT
+    RouterModule        //  Needed for routerLink
   ],
   templateUrl: './payment-page.html',
   styleUrls: ['./payment-page.css']
@@ -24,13 +24,13 @@ export class PaymentPage {
   constructor(private router: Router) { }
 
   continuePayment() {
-    this.router.navigate(['/investment-page'], {
+    this.router.navigate(['/transaction-status'], {
       queryParams: { status: 'success' }
     });
   }
 
   cancelPayment() {
-    this.router.navigate(['/investment-page'], {
+    this.router.navigate(['/transaction-status'], {
       queryParams: { status: 'failed' }
     });
   }

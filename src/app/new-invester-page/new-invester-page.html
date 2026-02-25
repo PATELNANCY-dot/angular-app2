@@ -1,187 +1,68 @@
 <!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Bootstrap Icons -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
-<div class="dashboard d-flex">
+<div class="dashboard">
 
 
-  <!-- Sidebar -->
-  <aside class="sidebar d-flex flex-column align-items-center py-4">
-
-    <ul class="nav flex-column text-center w-100" href="javascript:void(0)">
-      <li class="nav-item mb-3 sidebar-dropdown">
-        <a class="nav-link sidebar-icon" routerLink="/dashboard">
-          <i class="bi bi-grid-fill fs-4"></i>
-          <span class="sidebar-text">Dashboard</span>
-        </a>
-      </li>
-
-      <!-- Dropdown Menu -->
-      <li class="nav-item mb-3 sidebar-dropdown" >
-        <a class="nav-link sidebar-icon" href="javascript:void(0)">
-          <i class="bi bi-person-fill fs-4"></i>
-          <span class="sidebar-text">My Account</span>
-        </a>
-
-        <ul class="dropdown-menu-custom">
-          <li>
-            <h6 class="dropdown-heading">My Account</h6>
-          </li>
-          <li><a routerLink="/changepassword"><i class="bi bi-caret-right-fill"></i> Change Password</a></li>
-          <li><a routerLink="/manage-account"><i class="bi bi-caret-right-fill"></i> Manage Account</a></li>
-          <li><a routerLink="/change-nominee"><i class="bi bi-caret-right-fill"></i> Change Nominee</a></li>
-        </ul>
-      </li>
-
-      <li class="nav-item mb-3 sidebar-dropdown">
-        <a class="nav-link sidebar-icon" href="javascript:void(0)" routerLink="/new-invester-page" title="Report">
-          <i class="bi bi-file-earmark-fill fs-4"></i>
-          <span class="sidebar-text">Report</span>
-        </a>
-
-        <ul class="dropdown-menu-custom">
-          <li>
-            <h6 class="dropdown-heading">My Account</h6>
-          </li>
-          <li><a routerLink="/new-invester-page"><i class="bi bi-caret-right-fill"></i> New Investor Page</a></li>
-          <li><a routerLink="/investor-details-page"><i class="bi bi-caret-right-fill"></i> Invistor Details Page </a></li>
-          <li><a routerLink="/investor-page"><i class="bi bi-caret-right-fill"></i> Investor Page</a></li>
-        </ul>
-      </li>
-
-      <li class="nav-item mb-3">
-        <a class="nav-link sidebar-icon" href="javascript:void(0)" routerLink="/login" title="Logout">
-          <i class="bi bi-box-arrow-right fs-4"></i>
-          <span class="sidebar-text">Logout</span>
-        </a>
-      </li>
-
-    </ul>
-  </aside>
-
+  
 
   <!-- Main Content -->
-  <div class="flex-grow-1">
-    <div class="flex-grow-1">
-      <div class="loan-heading-section">
-        <h1>
-          <span class="orange">LIQUILOAN</span>
-          <span class="navy">DETAILS</span>
-        </h1>
-      </div>
+  <div class="container mt-5">
+
+    <!-- Heading -->
+    <div class="loan-heading-section text-center mb-4">
+      <h1>
+        <span class="orange">LIQUILOAN</span>
+        <span class="navy">DETAILS</span>
+      </h1>
     </div>
 
-
-    <div class="classdiv text-center" style="margin-block-start:40px;margin-block-end:40px;background-color:lightgray">
+    <!-- Loan Form -->
+    <div class="classdiv bg-light shadow-sm p-4 rounded">
       <form>
-        <!--1-->
-        <div class="form-row">
-          <div class="form-col">
-            <label> Client Name:</label>
 
+        <div class="row mb-3">
+          <div class="col-md-3">
+            <label>Client Name:</label>
           </div>
-
-          <div class="form-col">
+          <div class="col-md-3">
             <label>Investor ID:</label>
-
           </div>
-
-          <div class="form-col">
+          <div class="col-md-3">
             <label>Agreement Status:</label>
-
           </div>
-
-
-          <div class="form-col">
+          <div class="col-md-3">
             <label>Status:</label>
-
-          </div>
-
-          <div class="form-col">
-            <label>-</label>
-
           </div>
         </div>
 
-
-        <!--2-->
-        <div class="form-row">
-          <div class="form-col">
-            <label></label>
-
-          </div>
-
-          <div class="form-col">
-            <button (click)="goTo()" class="btn">Create Account</button>
-
-          </div>
-
-          <div class="form-col">
-            <label>-</label>
-
-          </div>
-
-
-          <div class="form-col">
-            <label>-</label>
-
-          </div>
-
-          <div class="form-col">
-            <label>-</label>
-
-          </div>
+        <div class="row mb-3">
+          <div class="col-md-3"><label></label></div>
+          <div class="col-md-3"><button (click)="goTo()" class="btn btn-navy w-100">Create Account</button></div>
+          <div class="col-md-6"></div>
         </div>
 
-        <!--3-->
-        <div class="form-row">
-          <div class="form-col">
-            <label>Date Of Birth | PAN:</label>
-
-          </div>
-
-          <div class="form-col">
-            <label>-</label>
-
-          </div>
-
-          <div class="form-col">
-            <label>-</label>
-
-          </div>
-
-
-          <div class="form-col">
-            <label>-</label>
-
-          </div>
-
-          <div class="form-col">
-            <label>-</label>
-
-          </div>
+        <div class="row mb-3">
+          <div class="col-md-3"><label>Date Of Birth | PAN:</label></div>
+          <div class="col-md-9"><label>-</label></div>
         </div>
+
       </form>
     </div>
 
-    <div class="classdiv text-left" style="margin-block-start:40px;margin-block-end:40px;background-color:lightgray">
-     <h5>How To Register</h5>
-     <p>
-       Investment facilites available for resident individual investors only <br />
-       Investment in Liquiloans cannot be made in join holding<br />
-       <i class="bi bi-check-circle-fill"></i> To register in liquilonans, Click on "Create Account"<br />
-       <i class="bi bi-check-circle-fill"></i> Investrors details will get prefilled form the KYC documents<br />
-       <i class="bi bi-check-circle-fill"></i> If yoou are CKYC non-complilant, you will be required to upload the following documents:<br />
-       <i class="bi bi-dot"></i> Bank Account Proof<br />
-       <i class="bi bi-dot"></i> Address Proof <br />
-       <i class="bi bi-dot"></i> Identity Proof <br />
-       <i class="bi bi-check-circle-fill"></i> Prefiled agreement from will get displayed and simultaneously on OTP will be sent to ypur registered mobile number with FundDazzar to validate the agreement <br />
-       <i class="bi bi-check-circle-fill"></i> Varify the agteement, tick mark to accept the declaration and enter the OTP to complete the liquiloan process <br />
-        <i class="bi bi-check-circle-fill"></i> Once your account get activated you can start investing
-     </p>
+    <!-- How to Register -->
+    <div class="classdiv bg-light shadow-sm p-4 rounded mt-4">
+      <h5>How To Register</h5>
+      <ul class="list-unstyled mt-2">
+        <li><i class="bi bi-check-circle-fill text-success me-2"></i> Click on "Create Account"</li>
+        <li><i class="bi bi-check-circle-fill text-success me-2"></i> Investor details prefilled from KYC documents</li>
+        <li><i class="bi bi-check-circle-fill text-success me-2"></i> CKYC non-compliant users must upload Bank, Address & Identity Proof</li>
+        <li><i class="bi bi-check-circle-fill text-success me-2"></i> Prefilled agreement displayed & OTP sent to registered mobile</li>
+        <li><i class="bi bi-check-circle-fill text-success me-2"></i> Verify agreement, tick declaration & enter OTP</li>
+        <li><i class="bi bi-check-circle-fill text-success me-2"></i> Once account is activated, you can start investing</li>
+      </ul>
     </div>
 
   </div>
-  </div>
+</div>

@@ -75,4 +75,8 @@ export class ManageAccount implements OnInit {
     localStorage.removeItem('userId');
     this.router.navigate(['/login']);
   }
+
+
+  
+
 }

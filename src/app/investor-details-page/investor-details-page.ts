@@ -16,6 +16,8 @@ import { ChangeDetectorRef } from '@angular/core';
   styleUrl: './investor-details-page.css',
 })
 export class InvestorDetailsPage {
+
+
   account?: AccountDetails;
   errorMessage: string = '';
   isLoading: boolean = true;
