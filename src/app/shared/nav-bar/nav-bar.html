@@ -19,7 +19,7 @@
             [ngClass]="{'show': accountDropdownOpen}"
             (mouseleave)="accountDropdownOpen=false">
           <a class="nav-link dropdown-toggle"
-             href=""
+             href="javascript:void(0)"
              (click)="accountDropdownOpen = !accountDropdownOpen">
             <i class="bi bi-person-fill me-1"></i> My Account
           </a>
@@ -28,7 +28,7 @@
               [ngClass]="{'show': accountDropdownOpen}">
             <li><a class="dropdown-item" routerLink="/changepassword">Change Password</a></li>
             <li><a class="dropdown-item" routerLink="/manage-account">Manage Account</a></li>
-            <li><a class="dropdown-item" routerLink="/change-nominee">Change Nominee</a></li>
+            <li><a class="dropdown-item" routerLink="/change-nominee">View & Change Nominee</a></li>
           </ul>
         </li>
 
@@ -37,7 +37,7 @@
             [ngClass]="{'show': reportDropdownOpen}"
             (mouseleave)="reportDropdownOpen=false">
           <a class="nav-link dropdown-toggle"
-             href=""
+             href="javascript:void(0)"
              (click)="reportDropdownOpen = !reportDropdownOpen">
             <i class="bi bi-file-earmark-text-fill me-1"></i> Reports
           </a>

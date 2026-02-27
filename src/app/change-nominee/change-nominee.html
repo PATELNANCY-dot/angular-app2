@@ -30,7 +30,18 @@
 
           <div class="form-col">
             <label>DOB(DD/MM/YYYY):</label>
-            <input formControlName="nomineeDob" type="date" placeholder="DOB" />
+            <div class="date-wrapper">
+              <input type="text"
+                     formControlName="nomineeDob"
+                     #nomineeDobInput
+                     class="custom-date"
+                     placeholder="Select Date"
+                     (click)="toggleNomineeCalendar()" />
+
+              <span class="calendar-icon" (click)="toggleNomineeCalendar()">
+                <i class="bi bi-calendar3"></i>
+              </span>
+            </div>
           </div>
 
           <div class="form-col">
@@ -83,7 +94,18 @@
         <div class="form-row">
           <div class="form-col">
             <label>Guardian Dob</label>
-            <input type="date" placeholder="DOB" formControlName="guardianDob" />
+            <div class="date-wrapper">
+              <input type="text"
+                     formControlName="guardianDob"
+                     #guardianDobInput
+                     class="custom-date"
+                     placeholder="Select Date"
+                     (click)="toggleGuardianCalendar()" />
+
+              <span class="calendar-icon" (click)="toggleGuardianCalendar()">
+                <i class="bi bi-calendar3"></i>
+              </span>
+            </div>
           </div>
           <div class="form-col">
             <label>Relationship of Guardian with minor</label>

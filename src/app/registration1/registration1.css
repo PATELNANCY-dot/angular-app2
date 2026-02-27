@@ -1,142 +1,230 @@
-body {
-  height: 100%;
-  margin: 0;
-  min-height: 100vh;
+/* =================================
+   HOST (CENTERED + NO SCROLL)
+================================= */
+
+:host {
   display: flex;
-  justify-content: center; /* horizontal center */
-  align-items: center; /* vertical center */
-  background-color: #f2f6ff
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #eef2ff, #f8fbff);
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
 }
+
+/* =================================
+   CONTAINER CARD
+================================= */
+
 .container {
-  align-content: center;
-  width: 1500px;
-  height: 600px;
-  margin: 40px auto;
-  background: #fff;
-  padding: 30px 40px;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  margin: 40px auto;
+  width: 100%;
+  max-width: 1000px;
+  background: #ffffff;
+  padding: 35px 40px;
+  border-radius: 18px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.4s ease-in-out;
 }
+
+
+/* ================================
+   HEADING
+================================ */
 
 h1 {
-  text-align: left;
-  margin-bottom: 30px;
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 35px;
 }
 
-/* FORM ROWS */
-form {
-  position: relative;
-}
+  h1 span:first-child {
+    color: #ff7a00;
+  }
+
+  h1 span:last-child {
+    color: #0b2c5f;
+  }
+
+/* ================================
+   FORM LAYOUT
+================================ */
+
 .form-row {
   display: flex;
-  gap: 20px;
-  margin-bottom: 18px;
+  gap: 25px;
+  margin-bottom: 22px;
 }
 
 .form-col {
   flex: 1;
-  margin-right: 10px;
 }
 
-/* LABELS */
 label {
-  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
   margin-bottom: 6px;
-  font-weight: 600;
-  color: #333;
+  display: block;
 }
 
-/* INPUTS */
+/* ================================
+   INPUT STYLE
+================================ */
+
 input {
   width: 100%;
-  padding: 10px 12px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  padding: 11px 14px;
+  border-radius: 12px;
+  border: 1.5px solid #e2e8f0;
   font-size: 14px;
+  background: #f9fbff;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
 }
 
-  input:focus {
-    border-color: orangered;
-    outline: none;
+  input:hover {
+    border-color: #cbd5e1;
   }
 
-/* NOTE */
-.note {
+  input:focus {
+    border-color: #ff7a00;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.15);
+    outline: none;
+  }
+/* ================================
+   NOTE TEXT
+================================ */
+
+.note-row {
+  display: flex;
+  gap: 20px;
   font-size: 12px;
-  color: #666;
-  margin-bottom: 10px;
+  margin: 12px 0;
+  color: #dc3545;
 }
 
-/* OTP ROW */
-.otp-row {
+  .note-row span {
+    flex: 1;
+  }
+
+  /*===============================
+      otp box
+===================================*/
+.otp-clean {
+  background: #f4f4f5;
+  border: 1.5px dashed #d4d4d8;
+  border-radius: 12px;
+  padding: 6px 12px;
   display: flex;
-  gap: 12px;
+  align-items: center;
+  gap: 10px;
+}
+
+  /* Input */
+  .otp-clean input {
+    border: none;
+    background: transparent;
+    flex: 1;
+    font-size: 13px;
+    outline: none;
+    color: #3f3f46;
+  }
+
+/* Link-style actions */
+.otp-link {
+  font-size: 12px;
+  cursor: pointer;
+  color: #52525b;
+  transition: 0.2s ease;
+}
+
+  .otp-link:hover {
+    color: #111;
+  }
+
+/* Divider */
+.divider {
+  font-size: 12px;
+  color: #a1a1aa;
+}
+
+/* Confirm slightly bold */
+.otp-link.strong {
+  font-weight: 600;
+}
+/* ===============================
+   NEXT BUTTON
+================================= */
+
+/* Button container */
+.form-actions {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between; /* pushes buttons to edges */
   align-items: center;
 }
 
-  .otp-row input {
-    width: 130px;
-  }
-
-/* BUTTONS */
-button {
-  padding: 8px 14px;
-  border-radius: 6px;
-  border: none;
-  background-color:lightgray;
-  color: #fff;
+/* Shared button style */
+.next-btn,
+.back-btn {
+  min-width: 90px;
+  padding: 8px 18px;
+  border-radius: 20px;
   font-size: 13px;
+  font-weight: 500;
   cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
-  button.confirm {
-    background-color: #e6a15c;
-  }
-
-  button:disabled,
-  input:disabled {
-    background: #ddd;
-    cursor: not-allowed;
-  }
-
-/* RESPONSIVE */
-@media (max-width: 1000px) {
-  .container {
-    width: 1000%;
-  }
-
-  .form-row,
-  .otp-row {
-    flex-direction: column;
-  }
-}
-.note-row {
-  display: flex;
-  gap: 30%;
-  font-size: 12px;
-  color: #666;
-  margin: 12px 0;
-}
-
-.form-actions {
-  display: flex;
-  justify-content: flex-end; /* 👈 right corner */
-  margin-top: 25px;
-}
-
-/* Next button styling */
-.next-btn {
-  padding: 10px 22px;
-  background-color:navy ;
+/* Next button style */
+.back-btn {
+  background: linear-gradient(135deg, #0b2c5f, #1e40af);
   color: white;
   border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(11, 44, 95, 0.25);
+}
+
+  .back-btn:hover {
+    background-color: #d1d5db;
+  }
+
+/* Back button style */
+.next-btn {
+  background: linear-gradient(135deg, #ff7a00, #ff9500);
+  color: white;
+  border: none;
+  box-shadow: 0 6px 15px rgba(11, 44, 95, 0.25);
 }
 
   .next-btn:hover {
-    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(11, 44, 95, 0.35);
   }
 
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+    padding: 25px;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .otp-row {
+    flex-direction: column;
+  }
+
+    .otp-row input {
+      width: 100%;
+    }
+}

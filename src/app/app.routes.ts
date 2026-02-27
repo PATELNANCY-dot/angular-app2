@@ -41,8 +41,7 @@ export const routes: Routes = [
 
   { path: 'payment-page', component: PaymentPage },
   { path: 'factor-auth', component: FactorAuth },
-  { path: 'transaction-status', component: TransactionStatus },
-
+ 
   {
     path: '',
     component: MainLayoutComponent, // Root layout with navbar
@@ -55,6 +54,7 @@ export const routes: Routes = [
       { path: 'investor-details-page', component: InvestorDetailsPage },
       { path: 'investor-page', component: InvestorPage },
       { path: 'investment-page', component: InvestmentPage },
+      { path: 'transaction-status', component: TransactionStatus },
 
       // add all other pages that should show navbar
     ]

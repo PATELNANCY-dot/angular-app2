@@ -35,4 +35,7 @@ export class Registration1 {
 
     this.router.navigate(['/registration2']);
   }
+  goBack() {
+    this.router.navigate(['/new-invester-page']);
+  }
 }

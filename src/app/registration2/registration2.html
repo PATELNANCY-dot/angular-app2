@@ -1,5 +1,4 @@
-<html>
-<body>
+
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -21,21 +20,45 @@
           <label>Pan Number:</label>
           <input type="text" inputmode="numeric" formControlName="pan">
         </div>
+
         <div class="form-col">
-          <label>Pan Card Proof:</label>
-          <div class="form-col otp-row">
-            <button>Choose File</button>
-            <input type="text" placeholder="no file chosen" disabled>
-            <button class="confirm">Preview</button>
+          <label>Upload PAN CARD PROOF</label>
+          <div class="file-upload" style="position: relative;">
+            <input type="file" id="panUpload" class="form-control" (change)="onPanFileSelected($event)">
+            <label for="panUpload" class="file-label">
+              <div *ngIf="!selectedPanFile" style="pointer-events:none; color:#6c757d; font-size:14px;">
+                <i class="bi bi-cloud-upload"></i> Choose file
+              </div>
+
+              <div *ngIf="selectedPanFile" class="selected-file mt-2 p-2 border rounded d-flex justify-content-between align-items-center" style="background:#f8f9fa; cursor:pointer;">
+                <span (click)="openPanFile()" style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:80%;">
+                  {{ selectedPanFile.name }}
+                </span>
+                <button type="button" class="btn btn-sm btn-outline-danger ms-2" (click)="removePanFile()">×</button>
+              </div>
+            </label>
           </div>
         </div>
       </div>
 
+
+
       <!-- Date of Birth + Aadhar Number -->
       <div class="form-row">
         <div class="form-col">
-          <label>Date of Birth:</label>
-          <input type="date" formControlName="dob">
+          <label> Date of Birth:</label>
+          <div class="date-wrapper">
+            <input type="text"
+                   formControlName="dob"
+                   class="custom-date"
+                   #dobInput
+                   placeholder="Select Date of Birth"
+                   (click)="toggleCalendar()" />
+
+            <span class="calendar-icon" (click)="toggleCalendar()">
+              <i class="bi bi-calendar3"></i>
+            </span>
+          </div>
         </div>
 
         <div class="form-col">
@@ -49,17 +72,28 @@
         <div class="form-col">
           <label>Nationality:</label>
 
-          <select class="form-control" formControlName="nationality" (change)="onCountryChange()">
-            <option value="">Select Country</option>
-            <option *ngFor="let country of countries" [value]="country.countryID">
-              {{ country.countryName }}
-            </option>
-          </select>
+          <div class="custom-dropdown">
+
+            <div class="dropdown-selected"
+                 (click)="toggleCountry()">
+              {{ getSelectedCountryName() }}
+              <i class="bi bi-chevron-down"></i>
+            </div>
+
+            <div class="dropdown-list" *ngIf="countryDropdownOpen">
+              <div class="dropdown-item"
+                   *ngFor="let country of countries"
+                   (click)="selectCountry(country)">
+                {{ country.countryName }}
+              </div>
+            </div>
+
+          </div>
         </div>
 
         <div class="form-col">
           <label>Place of Birth:</label>
-          <input type="text"  formControlName="placeOfBirth">
+          <input type="text" formControlName="placeOfBirth">
         </div>
       </div>
 
@@ -69,10 +103,23 @@
           <label>State:</label>
 
 
-          <select class="form-control" formControlName="stateID" (change)="onStateChange()">
-            <option value="">Select State</option>
-            <option *ngFor="let s of states" [value]="s.stateID">{{ s.stateName }}</option>
-          </select>
+          <div class="custom-dropdown">
+
+            <div class="dropdown-selected"
+                 (click)="toggleState()">
+              {{ getSelectedStateName() }}
+              <i class="bi bi-chevron-down"></i>
+            </div>
+
+            <div class="dropdown-list" *ngIf="stateDropdownOpen">
+              <div class="dropdown-item"
+                   *ngFor="let s of states"
+                   (click)="selectState(s)">
+                {{ s.stateName }}
+              </div>
+            </div>
+
+          </div>
         </div>
 
 
@@ -80,10 +127,23 @@
           <label>Corressponding State:</label>
 
 
-          <select class="form-control" formControlName="correspondingState" (change)="onCorrespondingStateChange()">
-            <option value="">Select State</option>
-            <option *ngFor="let s of correspondingStates" [value]="s.stateID">{{ s.stateName }}</option>
-          </select>
+          <div class="custom-dropdown">
+
+            <div class="dropdown-selected"
+                 (click)="toggleCorrespondingState()">
+              {{ getSelectedCorrespondingStateName() }}
+              <i class="bi bi-chevron-down"></i>
+            </div>
+
+            <div class="dropdown-list" *ngIf="correspondingStateDropdownOpen">
+              <div class="dropdown-item"
+                   *ngFor="let s of correspondingStates"
+                   (click)="selectCorrespondingState(s)">
+                {{ s.stateName }}
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
 
@@ -92,20 +152,46 @@
         <div class="form-col">
           <label>City:</label>
 
-          <select class="form-control" formControlName="cityID">
-            <option value="">Select City</option>
-            <option *ngFor="let c of cities" [value]="c.cityID">{{ c.cityName }}</option>
-          </select>
+          <div class="custom-dropdown">
+
+            <div class="dropdown-selected"
+                 (click)="toggleCity()">
+              {{ getSelectedCityName() }}
+              <i class="bi bi-chevron-down"></i>
+            </div>
+
+            <div class="dropdown-list" *ngIf="cityDropdownOpen">
+              <div class="dropdown-item"
+                   *ngFor="let c of cities"
+                   (click)="selectCity(c)">
+                {{ c.cityName }}
+              </div>
+            </div>
+
+          </div>
         </div>
 
 
         <div class="form-col">
           <label>Corressponding City:</label>
 
-          <select class="form-control" formControlName="correspondingCity">
-            <option value="">Select City</option>
-            <option *ngFor="let c of correspondingCities" [value]="c.cityID">{{ c.cityName }}</option>
-          </select>
+          <div class="custom-dropdown">
+
+            <div class="dropdown-selected"
+                 (click)="toggleCorrespondingCity()">
+              {{ getSelectedCorrespondingCityName() }}
+              <i class="bi bi-chevron-down"></i>
+            </div>
+
+            <div class="dropdown-list" *ngIf="correspondingCityDropdownOpen">
+              <div class="dropdown-item"
+                   *ngFor="let c of correspondingCities"
+                   (click)="selectCorrespondingCity(c)">
+                {{ c.cityName }}
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
 
@@ -114,30 +200,51 @@
       <div class="form-row">
         <div class="form-col">
           <label>Permanent Address:</label>
-          <textarea style="width:600px;height:90px" formControlName="permanentAddress"></textarea>
+          <textarea formControlName="permanentAddress"></textarea>
         </div>
         <div class="form-col">
           <label> Corressponding Address:</label>
-          <textarea style="width:600px;height:90px" formControlName="correspondingAddress"></textarea>
+          <textarea formControlName="correspondingAddress"></textarea>
         </div>
       </div>
 
       <!-- Permanent Address Proof + Corressponding Address Proof -->
       <div class="form-row">
         <div class="form-col">
-          <label>Permanent Address Proof:</label>
-          <div class="form-col otp-row">
-            <button>Choose File</button>
-            <input type="text"  placeholder="No file Chosen">
-            <button class="confirm">Preview</button>
+          <label>Upload Address Proof</label>
+          <div class="file-upload" style="position: relative;">
+            <input type="file" id="addressUpload" class="form-control" (change)="onAddressFileSelected($event)">
+            <label for="addressUpload" class="file-label">
+              <div *ngIf="!selectedAddressFile" style="pointer-events:none; color:#6c757d; font-size:14px;">
+                <i class="bi bi-cloud-upload"></i> Choose file
+              </div>
+
+              <div *ngIf="selectedAddressFile" class="selected-file mt-2 p-2 border rounded d-flex justify-content-between align-items-center" style="background:#f8f9fa; cursor:pointer;">
+                <span (click)="openAddressFile()" style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:80%;">
+                  {{ selectedAddressFile.name }}
+                </span>
+                <button type="button" class="btn btn-sm btn-outline-danger ms-2" (click)="removeAddressFile()">×</button>
+              </div>
+            </label>
           </div>
         </div>
+
         <div class="form-col">
-          <label> Corressponding Address Proof:</label>
-          <div class="form-col otp-row">
-            <button>Choose File</button>
-            <input type="text" placeholder="No file Chosen">
-            <button class="confirm">Preview</button>
+          <label>Upload Corresponding Address Proof</label>
+          <div class="file-upload" style="position: relative;">
+            <input type="file" id="correspondingAddressUpload" class="form-control" (change)="onCorrespondingAddressFileSelected($event)">
+            <label for="correspondingAddressUpload" class="file-label">
+              <div *ngIf="!selectedCorrespondingAddressFile" style="pointer-events:none; color:#6c757d; font-size:14px;">
+                <i class="bi bi-cloud-upload"></i> Choose file
+              </div>
+
+              <div *ngIf="selectedCorrespondingAddressFile" class="selected-file mt-2 p-2 border rounded d-flex justify-content-between align-items-center" style="background:#f8f9fa; cursor:pointer;">
+                <span (click)="openCorrespondingAddressFile()" style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:80%;">
+                  {{ selectedCorrespondingAddressFile.name }}
+                </span>
+                <button type="button" class="btn btn-sm btn-outline-danger ms-2" (click)="removeCorrespondingAddressFile()">×</button>
+              </div>
+            </label>
           </div>
         </div>
       </div>
@@ -150,20 +257,23 @@
           <input type="text" formControlName="pincode">
         </div>
 
-        <div class="form-row">
-          <div class="form-col">
-            <label>Gender:</label>
-            <input type="text" formControlName="gender">
-          </div>
 
+        <div class="form-col">
+          <label>Gender:</label>
+          <input type="text" formControlName="gender">
         </div>
+
+
       </div>
       <!--next button-->
       <div class="form-actions">
-        <button type="button" (click)="goNext()" class="next-btn">Next<span><i class="bi bi-caret-right-fill"></i></span></button>
+        <button type="button" (click)="goBack()" class="next-btn"><span><i class="bi bi-arrow-left"></i></span>Back</button>
+
+        <button type="button" (click)="goNext()" class="back-btn">Next<span><i class="bi bi-arrow-right"></i></span></button>
       </div>
+
+
+
 
     </form>
   </div>
-</body>
-</html>

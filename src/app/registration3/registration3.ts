@@ -121,4 +121,117 @@ export class Registration3 {
   goBack() {
     this.router.navigate(['/registration2']);
   }
+
+
+  // -------------------- File Uploads --------------------
+
+  // Bank Statement
+  selectedBankStatementFile: File | null = null;
+  filePreviewBankStatement: string | ArrayBuffer | null = null;
+
+  onBankStatementSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files?.length) {
+      this.selectedBankStatementFile = input.files[0];
+      const reader = new FileReader();
+      reader.onload = () => this.filePreviewBankStatement = reader.result;
+      reader.readAsDataURL(this.selectedBankStatementFile);
+    }
+  }
+
+  removeBankStatementFile() {
+    this.selectedBankStatementFile = null;
+    this.filePreviewBankStatement = null;
+    const input = document.getElementById('bankStatementUpload') as HTMLInputElement;
+    if (input) input.value = '';
+  }
+
+  openBankStatementFile() {
+    if (this.filePreviewBankStatement) {
+      const win = window.open();
+      if (win) {
+        win.document.write(`<iframe src="${this.filePreviewBankStatement}" frameborder="0" style="width:100%;height:100%;"></iframe>`);
+      }
+    }
+  }
+
+  // Cancel Cheque
+  selectedCancelChequeFile: File | null = null;
+  filePreviewCancelCheque: string | ArrayBuffer | null = null;
+
+  onCancelChequeSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files?.length) {
+      this.selectedCancelChequeFile = input.files[0];
+      const reader = new FileReader();
+      reader.onload = () => this.filePreviewCancelCheque = reader.result;
+      reader.readAsDataURL(this.selectedCancelChequeFile);
+    }
+  }
+
+  removeCancelChequeFile() {
+    this.selectedCancelChequeFile = null;
+    this.filePreviewCancelCheque = null;
+    const input = document.getElementById('cancelChequeUpload') as HTMLInputElement;
+    if (input) input.value = '';
+  }
+
+  openCancelChequeFile() {
+    if (this.filePreviewCancelCheque) {
+      const win = window.open();
+      if (win) {
+        win.document.write(`<iframe src="${this.filePreviewCancelCheque}" frameborder="0" style="width:100%;height:100%;"></iframe>`);
+      }
+    }
+  }
+
+
+  
+
+  // ================= CUSTOM DROPDOWN =================
+
+  bankNameDropdown = false;
+  branchNameDropdown = false;
+
+  toggleBank() {
+    this.bankNameDropdown = !this.bankNameDropdown;
+  }
+
+  toggleBranch() {
+    this.branchNameDropdown = !this.branchNameDropdown;
+  }
+
+  selectBank(bank: any) {
+    this.registrationForm.patchValue({
+      bankName: bank.bankId
+    });
+
+    this.bankNameDropdown = false;
+  }
+
+  selectBranch(branch: any) {
+    this.registrationForm.patchValue({
+      branchName: branch.id   // use correct property from API
+    });
+
+    this.branchNameDropdown = false;
+  }
+
+
+  
+
+  getSelectedBankName(): string {
+    const id = this.registrationForm.get('bankName')?.value;
+    const bank = this.banks.find(b => b.bankId == id);
+    return bank ? bank.bankName : 'Select Bank';
+  }
+
+  getSelectedBranchName(): string {
+    const id = this.registrationForm.get('branchName')?.value;
+    const branch = this.bankBranches.find(b => b.id == id);
+    return branch ? branch.bankBranch : 'Select Branch';
+  }
+
 }
+
+

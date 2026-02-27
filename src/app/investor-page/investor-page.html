@@ -9,7 +9,7 @@
 
 
 
-  
+
 
   <!-- Main Content -->
   <div class="flex-grow-1">
@@ -140,18 +140,33 @@
 
 <!-- ================= WITHDRAW POPUP ================= -->
 <div class="withdraw-overlay" *ngIf="showWithdrawPopup">
-  <div class="withdraw-modal  position-relative">
+  <div class="withdraw-modal position-relative">
 
-    <h4 class="mb-4 text-center">Withdraw Amount</h4>
     <!-- ❌ CLOSE BUTTON -->
-    <button class="close-btn"
-            (click)="showWithdrawPopup = false">
-      <i class="bi bi-x-circle-fill"></i>
+    <button class="close-btn" (click)="showWithdrawPopup = false">
+      <i class="bi bi-x-lg"></i>
     </button>
+
+    <h4 class="mb-3 text-center">Withdraw Amount</h4>
+
     <!-- Total Withdrawable -->
     <div class="mb-3">
       <label class="form-label fw-bold">Total Withdrawable Amount</label>
       <div class="total-box">₹0</div>
+
+      <!-- Progress Bar -->
+      <div class="progress mt-2">
+        <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+          0%
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Select Amount -->
+    <div class="mb-3 d-flex gap-2">
+      <button class="quick-btn">25%</button>
+      <button class="quick-btn">50%</button>
+      <button class="quick-btn">100%</button>
     </div>
 
     <!-- Payout Bank -->
@@ -169,24 +184,23 @@
     <div class="mb-4">
       <label class="form-label">Withdraw Amount</label>
       <input type="number"
-             class="form-control"
+             class="form-control withdraw-input"
              placeholder="Enter amount"
              [(ngModel)]="withdrawAmount">
+      <small class="text-danger" *ngIf="withdrawAmount > totalWithdrawable">Amount exceeds available balance!</small>
     </div>
+
     <div class="text-center">
       <!-- Withdraw Button -->
-      <button class="btn withdraw-btn  btn-sm mb-3" (click)="WithDraw()">
+      <button class="btn withdraw-btn btn-lg mb-3" (click)="WithDraw()">
         Withdraw
       </button>
     </div>
 
-
     <!-- Note -->
-    <div class="note-box">
-      <strong>Note:</strong> To Withdraw from the plan which doesn't have the lock-in period, you place the withdrawal request anytime you want. the withdrawal request will be processed on T+2 Basis 
+    <div class="note-box mt-3">
+      <strong>Note:</strong> To withdraw from a plan without lock-in, you can place a withdrawal request anytime. Requests are processed on T+2 basis.
     </div>
-
 
   </div>
 </div>
-

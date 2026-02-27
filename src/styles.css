@@ -1,0 +1,103 @@
+/* PREMIUM CALENDAR */
+
+.flatpickr-calendar {
+  border-radius: 18px !important;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12) !important;
+  border: none !important;
+  font-family: inherit;
+}
+
+.flatpickr-months {
+  background: #0b2c5f;
+  color:black;
+  border-radius: 18px 18px 0 0;
+}
+
+.flatpickr-current-month {
+  color: white !important;
+}
+
+.flatpickr-weekdays {
+  background: #f4f7fb;
+}
+
+.flatpickr-day.selected {
+  background: #ff7a00 !important;
+  border-color: #ff7a00 !important;
+}
+
+.flatpickr-day:hover {
+  background: #0b2c5f;
+  color: white;
+}
+
+/* Change month navigation arrows color */
+.flatpickr-prev-month svg,
+.flatpickr-next-month svg {
+  fill: white !important; /* arrow color */
+  width: 14px;
+  height: 14px;
+}
+
+/* Optional: Make hover brighter */
+.flatpickr-prev-month:hover svg,
+.flatpickr-next-month:hover svg {
+  fill: #ff7a00 !important;
+}
+
+/* Improve dropdown look */
+.flatpickr-current-month select {
+  border-radius: 8px;
+  padding: 4px 8px;
+  border: 1px solid #dbe2ea;
+ 
+  color: white !important;
+}
+
+.flatpickr-monthDropdown-month {
+  color: #0b2c5f !important;
+}
+
+  /* Selected option highlight */
+  .flatpickr-monthDropdown-month:hover {
+    background: #f4f7fb !important;
+  }
+
+
+
+  /* Make the YEAR (2026) small up/down arrows WHITE */
+
+  /* Chrome, Edge, Safari */
+  .flatpickr-current-month input.cur-year::-webkit-inner-spin-button,
+  .flatpickr-current-month input.cur-year::-webkit-outer-spin-button {
+    filter: invert(1);
+    opacity: 1;
+  }
+
+/* Firefox */
+.flatpickr-current-month input.cur-year {
+  -moz-appearance: textfield;
+  color: white !important;
+}
+
+
+/* ===== REMOVE YEAR SPINNER ARROWS COMPLETELY ===== */
+
+/* Chrome, Edge, Safari */
+.flatpickr-calendar .numInput::-webkit-outer-spin-button,
+.flatpickr-calendar .numInput::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+  display: none !important;
+}
+
+/* Firefox */
+.flatpickr-calendar .numInput {
+  -moz-appearance: textfield !important;
+}
+
+/* Keep year text white */
+.flatpickr-calendar .cur-year {
+  color: white !important;
+  background: transparent !important;
+}

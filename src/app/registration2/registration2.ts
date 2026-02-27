@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import flatpickr from 'flatpickr';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class Registration2 {
   correspondingCities: any[] = [];
 
   apiUrl = 'http://localhost:5048/api/ClientRegistrations';
+    fpInstance: any;
 
   constructor(
     private fb: FormBuilder,
@@ -103,16 +105,31 @@ export class Registration2 {
   // ===============================
   goNext() {
     const existingData = JSON.parse(localStorage.getItem('clientRegistration') || '{}');
-
     const formValue = this.registrationForm.value;
 
-    // Find selected country name
-    const selectedCountry = this.countries.find(c => c.countryID == formValue.nationality);
+    const selectedCountry = this.countries.find(
+      c => c.countryID == formValue.nationality
+    );
 
     const updatedData = {
       ...existingData,
-      ...formValue,
-      nationality: selectedCountry ? selectedCountry.countryName : null // send name instead of ID
+
+      pan: formValue.pan,
+      dob: formValue.dob,
+      aadhar: formValue.aadhar,
+      nationality: selectedCountry ? selectedCountry.countryName : null,
+      placeOfBirth: formValue.placeOfBirth,
+      gender: formValue.gender,
+
+      //  FORCE NUMBERS HERE
+      stateID: formValue.stateID ? Number(formValue.stateID) : null,
+      cityID: formValue.cityID ? Number(formValue.cityID) : null,
+      correspondingState: formValue.correspondingState ? Number(formValue.correspondingState) : null,
+      correspondingCity: formValue.correspondingCity ? Number(formValue.correspondingCity) : null,
+
+      permanentAddress: formValue.permanentAddress,
+      correspondingAddress: formValue.correspondingAddress,
+      pincode: formValue.pincode
     };
 
     localStorage.setItem('clientRegistration', JSON.stringify(updatedData));
@@ -122,4 +139,245 @@ export class Registration2 {
   goBack() {
     this.router.navigate(['/registration1']);
   }
+
+  //file upload
+  // Separate variables for each upload
+  selectedPanFile: File | null = null;
+  selectedAddressFile: File | null = null;
+  selectedCorrespondingAddressFile: File | null = null;
+
+  filePreviewPan: string | ArrayBuffer | null = null;
+  filePreviewAddress: string | ArrayBuffer | null = null;
+  filePreviewCorresponding: string | ArrayBuffer | null = null;
+
+  // PAN
+  onPanFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files?.length) {
+      this.selectedPanFile = input.files[0];
+      const reader = new FileReader();
+      reader.onload = () => this.filePreviewPan = reader.result;
+      reader.readAsDataURL(this.selectedPanFile);
+    }
+  }
+  removePanFile() {
+    this.selectedPanFile = null;
+    this.filePreviewPan = null;
+    const input = document.getElementById('panUpload') as HTMLInputElement;
+    if (input) input.value = '';
+  }
+  openPanFile() {
+    if (this.filePreviewPan) {
+      const win = window.open();
+      if (win) {
+        win.document.write(`<iframe src="${this.filePreviewPan}" frameborder="0" style="width:100%;height:100%;"></iframe>`);
+      }
+    }
+  }
+
+  // Address Proof
+  onAddressFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files?.length) {
+      this.selectedAddressFile = input.files[0];
+      const reader = new FileReader();
+      reader.onload = () => this.filePreviewAddress = reader.result;
+      reader.readAsDataURL(this.selectedAddressFile);
+    }
+  }
+  removeAddressFile() {
+    this.selectedAddressFile = null;
+    this.filePreviewAddress = null;
+    const input = document.getElementById('addressUpload') as HTMLInputElement;
+    if (input) input.value = '';
+  }
+  openAddressFile() {
+    if (this.filePreviewAddress) {
+      const win = window.open();
+      if (win) {
+        win.document.write(`<iframe src="${this.filePreviewAddress}" frameborder="0" style="width:100%;height:100%;"></iframe>`);
+      }
+    }
+  }
+
+  // Corresponding Address Proof
+  onCorrespondingAddressFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files?.length) {
+      this.selectedCorrespondingAddressFile = input.files[0];
+      const reader = new FileReader();
+      reader.onload = () => this.filePreviewCorresponding = reader.result;
+      reader.readAsDataURL(this.selectedCorrespondingAddressFile);
+    }
+  }
+  removeCorrespondingAddressFile() {
+    this.selectedCorrespondingAddressFile = null;
+    this.filePreviewCorresponding = null;
+    const input = document.getElementById('correspondingAddressUpload') as HTMLInputElement;
+    if (input) input.value = '';
+  }
+  openCorrespondingAddressFile() {
+    if (this.filePreviewCorresponding) {
+      const win = window.open();
+      if (win) {
+        win.document.write(`<iframe src="${this.filePreviewCorresponding}" frameborder="0" style="width:100%;height:100%;"></iframe>`);
+      }
+    }
+  }
+  //
+
+
+
+  ///custome dropdown code
+  // Dropdown open states
+  countryDropdownOpen = false;
+  stateDropdownOpen = false;
+  cityDropdownOpen = false;
+  correspondingStateDropdownOpen = false;
+  correspondingCityDropdownOpen = false;
+
+  toggleCountry() {
+    this.countryDropdownOpen = !this.countryDropdownOpen;
+  }
+
+  toggleState() {
+    this.stateDropdownOpen = !this.stateDropdownOpen;
+  }
+
+  toggleCity() {
+    this.cityDropdownOpen = !this.cityDropdownOpen;
+  }
+
+  toggleCorrespondingState() {
+    this.correspondingStateDropdownOpen = !this.correspondingStateDropdownOpen;
+  }
+
+  toggleCorrespondingCity() {
+    this.correspondingCityDropdownOpen = !this.correspondingCityDropdownOpen;
+  }
+
+  selectCountry(country: any) {
+    this.registrationForm.patchValue({ nationality: country.countryID });
+    this.countryDropdownOpen = false;
+    this.onCountryChange();
+  }
+
+  selectState(state: any) {
+    this.registrationForm.patchValue({ stateID: state.stateID });
+    this.stateDropdownOpen = false;
+    this.onStateChange();
+  }
+
+  selectCity(city: any) {
+    this.registrationForm.patchValue({ cityID: city.cityID });
+    this.cityDropdownOpen = false;
+  }
+
+  selectCorrespondingState(state: any) {
+    this.registrationForm.patchValue({ correspondingState: state.stateID });
+    this.correspondingStateDropdownOpen = false;
+    this.onCorrespondingStateChange();
+  }
+
+  selectCorrespondingCity(city: any) {
+    this.registrationForm.patchValue({ correspondingCity: city.cityID });
+    this.correspondingCityDropdownOpen = false;
+  }
+
+
+
+
+  // ================= DISPLAY HELPERS =================
+
+  getSelectedCountryName(): string {
+    const id = this.registrationForm.get('nationality')?.value;
+    const country = this.countries.find(c => c.countryID == id);
+    return country ? country.countryName : 'Select Country';
+  }
+
+  getSelectedStateName(): string {
+    const id = this.registrationForm.get('stateID')?.value;
+    const state = this.states.find(s => s.stateID == id);
+    return state ? state.stateName : 'Select State';
+  }
+
+  getSelectedCorrespondingStateName(): string {
+    const id = this.registrationForm.get('correspondingState')?.value;
+    const state = this.correspondingStates.find(s => s.stateID == id);
+    return state ? state.stateName : 'Select State';
+  }
+
+  getSelectedCityName(): string {
+    const id = this.registrationForm.get('cityID')?.value;
+    const city = this.cities.find(c => c.cityID == id);
+    return city ? city.cityName : 'Select City';
+  }
+
+  getSelectedCorrespondingCityName(): string {
+    const id = this.registrationForm.get('correspondingCity')?.value;
+    const city = this.correspondingCities.find(c => c.cityID == id);
+    return city ? city.cityName : 'Select City';
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+
+    if (!target.closest('.custom-dropdown')) {
+      this.countryDropdownOpen = false;
+      this.stateDropdownOpen = false;
+      this.cityDropdownOpen = false;
+      this.correspondingStateDropdownOpen = false;
+      this.correspondingCityDropdownOpen = false;
+    }
+  }
+
+  //custome datebox
+  @ViewChild('dobInput') dobInput!: ElementRef;
+
+  
+
+  ngAfterViewInit() {
+    this.fpInstance = flatpickr(this.dobInput.nativeElement, {
+      dateFormat: "d-m-Y",
+      maxDate: "today",
+      disableMobile: true,
+      allowInput: false,
+      monthSelectorType: "dropdown",
+      clickOpens: false,
+
+      onReady: (_, __, instance) => {
+        this.removeYearSpinner(instance);
+      },
+
+      onMonthChange: (_, __, instance) => {
+        this.removeYearSpinner(instance);
+      },
+
+      onYearChange: (_, __, instance) => {
+        this.removeYearSpinner(instance);
+      }
+    });
+  }
+
+  removeYearSpinner(instance: any) {
+    setTimeout(() => {
+      const yearInput = instance.calendarContainer.querySelector(".cur-year");
+      if (yearInput) {
+        yearInput.setAttribute("type", "text");
+        yearInput.style.width = "60px";
+      }
+    });
+  }
+  toggleCalendar() {
+    if (this.fpInstance.isOpen) {
+      this.fpInstance.close();
+    } else {
+      this.fpInstance.open();
+    }
+  }
 }
+
+
+
+

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -11,7 +11,7 @@ import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-manage-account',
   standalone: true,
-  imports: [RouterLink, CommonModule, FormsModule, ],
+  imports: [ CommonModule, FormsModule, ],
   templateUrl: './manage-account.html',
   styleUrls: ['./manage-account.css'],
 })

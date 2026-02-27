@@ -1,162 +1,373 @@
-body {
-  height: 100%;
-  margin: 0;
-  min-height: 100vh;
+/* =================================
+   HOST (CENTERED + NO SCROLL)
+================================= */
+
+:host {
   display: flex;
-  justify-content: center; /* horizontal center */
-  align-items: center; /* vertical center */
-  background-color: #f2f6ff
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #eef2ff, #f8fbff);
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
 }
+
+/* =================================
+   CONTAINER CARD
+================================= */
 
 .container {
-  align-content: center;
-  width: 1500px;
-  height: auto;
-  margin: 40px auto;
-  background: #fff;
-  padding: 30px 40px;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  margin: 30px auto;
+  width: 100%;
+  max-width: 1000px;
+  background: #ffffff;
+  padding: 35px 40px;
+  border-radius: 18px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.4s ease-in-out;
 }
+/* ===============================
+   HEADING
+================================= */
 
 h1 {
-  text-align: left;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  font-size: 20px;
 }
 
-/* FORM ROWS */
+/* ===============================
+   FORM STRUCTURE
+================================= */
+
 form {
-  position: relative;
+  width: 100%;
 }
 
 .form-row {
   display: flex;
-  gap: 20px;
-  margin-bottom: 18px;
+  gap: 15px;
+  margin-bottom: 15px;
 }
 
 .form-col {
   flex: 1;
-  margin-right: 10px;
 }
 
-/* LABELS */
+/* ===============================
+   LABELS
+================================= */
+
 label {
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
   font-weight: 600;
+  font-size: 13px;
   color: #333;
 }
 
-/* INPUTS */
-input {
+/* ===============================
+   INPUTS + SELECT + TEXTAREA
+================================= */
+
+input,
+select,
+textarea {
   width: 100%;
-  padding: 10px 12px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 14px;
+  height: 50px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: #f9fbff;
+  border: 1px solid #d6dbe3;
+  font-size: 13px;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
 }
 
-  input:focus {
+  input:focus,
+  select:focus,
+  textarea:focus {
     border-color: orangered;
     outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 69, 0, 0.1);
   }
 
-/* NOTE */
-.note {
-  font-size: 12px;
-  color: #666;
-  margin-bottom: 10px;
+textarea {
+  height: 80px;
+  resize: none;
 }
 
-/* OTP ROW */
+/* ===============================
+   FILE UPLOAD ROW
+================================= */
+
 .otp-row {
   display: flex;
-  gap: 12px;
+  align-items: center;
+  border: 1px solid #d6dbe3;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+}
+
+  .otp-row button {
+    border: none;
+    padding: 7px 12px;
+    background: #f1f3f6;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+    .otp-row button:hover {
+      background: #e2e6ea;
+    }
+
+  .otp-row input {
+    border: none;
+    padding: 7px;
+    font-size: 12px;
+    background: #fff;
+  }
+
+  .otp-row button.confirm {
+    background: navy;
+    color: white;
+  }
+
+    .otp-row button.confirm:hover {
+      opacity: 0.9;
+    }
+
+  .otp-row button:first-child {
+    border-right: 1px solid #d6dbe3;
+  }
+
+  .otp-row button:last-child {
+    border-left: 1px solid #d6dbe3;
+  }
+
+/* ===============================
+   NEXT BUTTON
+================================= */
+
+/* Button container */
+.form-actions {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between; /* pushes buttons to edges */
   align-items: center;
 }
 
-  .otp-row input {
-    width: 130px;
-  }
-
-/* BUTTONS */
-button {
-  padding: 8px 14px;
-  border-radius: 6px;
-  border: none;
-  background-color:lightgray ;
-  color: #fff;
+/* Shared button style */
+.next-btn,
+.back-btn {
+  min-width: 90px;
+  padding: 8px 18px;
+  border-radius: 20px;
   font-size: 13px;
+  font-weight: 500;
   cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
-  button.confirm {
-    background-color:lightgray;
-  }
-
-  button:disabled,
-  input:disabled {
-    background: #ddd;
-    cursor: not-allowed;
-  }
-
-/* RESPONSIVE */
-@media (max-width: 1000px) {
-  .container {
-    width: 1000%;
-  }
-
-  .form-row,
-  .otp-row {
-    flex-direction: column;
-  }
-}
-
-.note-row {
-  display: flex;
-  gap: 30%;
-  font-size: 12px;
-  color: #666;
-  margin: 12px 0;
-}
-
-.form-actions {
-  display: flex;
-  justify-content: flex-end; /* 👈 right corner */
-  margin-top: 25px;
-}
-
-/* Next button styling */
-.next-btn {
-  padding: 10px 22px;
-  background-color: navy;
+/* Next button style */
+.back-btn {
+  background: linear-gradient(135deg, #0b2c5f, #1e40af);
   color: white;
   border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(11, 44, 95, 0.25);
+}
+
+  .back-btn:hover {
+    background-color: #d1d5db;
+  }
+
+/* Back button style */
+.next-btn {
+  background: linear-gradient(135deg, #ff7a00, #ff9500);
+  color: white;
+  border: none;
+  box-shadow: 0 6px 15px rgba(11, 44, 95, 0.25);
 }
 
   .next-btn:hover {
-    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(11, 44, 95, 0.35);
   }
 
-  /*radiobutton*/
-.radio-box {
-  border: 1.5px solid #dddddd;
-  padding: 10px 15px;
-  display: flex;
-  gap: 30px;
-  border-radius: 4px;
-  height: 43px;
+
+/* ===============================
+   RESPONSIVE
+================================= */
+
+@media (max-width: 900px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .container {
+    padding: 15px;
+  }
 }
 
-.radio-item {
-  display: flex; 
+
+/* =========================
+   MODERN FILE UPLOAD
+========================= */
+
+.file-upload {
+  position: relative;
+  width: 100%;
+}
+
+  .file-upload input[type="file"] {
+    display: none;
+  }
+
+.file-label {
+  display: block;
   align-items: center;
-  gap: 6px; /* space between circle and text */
+  gap: 5px;
+  padding: 12px 16px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 10px;
+  background: #f9fbfd;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
+  transition: 0.3s ease;
+}
+
+  .file-label i {
+    font-size: 18px;
+    color: #0b2c5f;
+  }
+
+  /* Hover */
+  .file-label:hover {
+    border-color: #ff7a00;
+    background: #fff7f0;
+  }
+
+/* When File Selected (Optional JS needed later) */
+.file-upload input[type="file"]:focus + .file-label {
+  border-color: #ff7a00;
 }
 
 
+
+/*custom dropdown*/
+
+.custom-dropdown {
+  position: relative;
+  height:50px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.dropdown-selected {
+  padding: 12px 16px;
+  border: 1.5px solid #dbe2ea;
+  border-radius: 12px;
+  background: #f9fbff;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+  .dropdown-selected:hover {
+    border-color: #0b2c5f;
+  }
+
+.dropdown-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #f9fbff;
+  border-radius: 12px;
+  margin-top: 6px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  max-height: 220px; /* scroll inside dropdown */
+  overflow-y: auto;
+  z-index: 9999; /* prevent clipping */
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.dropdown-item {
+  padding: 12px 16px;
+  transition: 0.2s;
+  font-size: 14px;
+}
+
+  .dropdown-item:hover {
+    background: #fff7f0;
+    color: #ff7a00;
+  }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/*date */
+.date-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.custom-date {
+  width: 100%;
+  padding: 12px 45px 12px 16px;
+  border: 1.5px solid #dbe2ea;
+  border-radius: 12px;
+  background: #f9fbff;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+  .custom-date:hover {
+    border-color: #0b2c5f;
+  }
+
+  .custom-date:focus {
+    outline: none;
+    border-color: #ff7a00;
+    box-shadow: 0 0 0 3px rgba(255,122,0,0.1);
+  }
+
+.calendar-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #0b2c5f;
+  font-size: 16px;
+}
+
+
+.file-upload .file-label > div:first-child {
+  display: flex;
+  align-items: center;
+  color: #6c757d;
+  font-size: 14px;
+  gap: 8px;
+}
+
+.file-upload input[type="file"] {
+  display: none;
+}

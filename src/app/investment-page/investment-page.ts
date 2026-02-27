@@ -21,6 +21,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class InvestmentPage implements OnInit {
 
+
+  investmentAmount: number = 0;
+
   // Alert
   showAlert = false;
   alertMessage = '';
@@ -80,25 +83,51 @@ export class InvestmentPage implements OnInit {
   }
   goPay() {
     if (this.selectedPayment === 'gateway') {
-      this.router.navigate(['/payment-page']);
-    }
-    else {
+      this.router.navigate(['/payment-page'], {
+        queryParams: {
+          amount: this.investmentAmount
+        }
+      });
+    } else {
       this.showCustomAlert('Invest Request send Successful!', 'success');
       setTimeout(() => {
         this.router.navigate(['/dashboard']);
       }, 2000);
-
     }
   }
 
 
- 
+  selectedFile: File | null = null;
+  filePreview: string | ArrayBuffer | null = null;
 
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
 
+      const reader = new FileReader();
+      reader.onload = () => this.filePreview = reader.result;
+      reader.readAsDataURL(this.selectedFile);
+    }
+  }
 
+  removeFile() {
+    this.selectedFile = null;
+    this.filePreview = null;
 
+    const input = document.getElementById('receiptUpload') as HTMLInputElement;
+    if (input) input.value = '';
+  }
 
-  //navbarcode end
+  openFile() {
+    if (this.filePreview) {
+      const win = window.open();
+      if (win) {
+        win.document.write(`<iframe src="${this.filePreview}" frameborder="0" style="width:100%;height:100%;"></iframe>`);
+      }
+    }
+  }
+  
 
   // Click anywhere on the document
   @HostListener('document:click', ['$event'])

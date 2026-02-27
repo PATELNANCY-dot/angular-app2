@@ -1,27 +1,216 @@
-.bg-light-success {
-  background-color: #d4edda !important;
+/* PAGE BACKGROUND */
+.status-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #eef2f7, #f8fbff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
-.bg-light-danger {
-  background-color: #f8d7da !important;
+/* MAIN CARD */
+.status-card {
+  width: 420px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.08);
+  animation: fadeInUp 0.3s ease;
 }
 
-.bg-light-warning {
-  background-color: #fff3cd !important;
+/* ICON */
+.icon-wrapper i {
+  font-size: 80px;
 }
 
-.text-success {
-  color: #155724 !important;
+/* SUCCESS */
+.success-card .icon-wrapper i {
+  color: #16a34a;
 }
 
-.text-danger {
-  color: #721c24 !important;
+/* FAILED */
+.failed-card .icon-wrapper i {
+  color: #dc2626;
 }
 
-.text-warning {
-  color: #856404 !important;
+/* PENDING */
+.pending-card .icon-wrapper i {
+  color: #f59e0b;
 }
 
-.text-secondary {
-  color: #6c757d !important;
+/* TITLE */
+.status-title {
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+.status-subtitle {
+  color: #6b7280;
+}
+
+/* DETAILS BOX */
+.details-box {
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+  .detail-row span {
+    color: #6b7280;
+  }
+
+/* BUTTON */
+.modern-btn {
+  background: linear-gradient(90deg, #2563eb, #3b82f6);
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 12px;
+  width: 100%;
+  font-weight: 600;
+  transition: 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+  .modern-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(37,99,235,0.3);
+    color: white;
+  }
+
+/* ANIMATION */
+@keyframes fadeInUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+
+
+
+
+/* BUTTON GROUP */
+.button-group {
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+}
+
+/* MODERN BUTTON BASE */
+.modern-btn {
+  background: linear-gradient(90deg, #2563eb, #3b82f6);
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  width: 100%;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+  /* HOVER EFFECT */
+  .modern-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+    color: #ffffff;
+  }
+
+/* DASHBOARD BUTTON */
+.dashboard-btn {
+  background: linear-gradient(90deg, #10b981, #34d399);
+}
+
+/* DOWNLOAD BUTTON */
+.download-btn {
+  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+}
+
+/* CARD STYLING */
+.status-card {
+  width: 420px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.08);
+  animation: fadeInUp 0.3s ease;
+}
+
+/* ICON */
+.icon-wrapper i {
+  font-size: 80px;
+}
+
+/* STATUS COLORS */
+.success-card .icon-wrapper i {
+  color: #16a34a;
+}
+
+.failed-card .icon-wrapper i {
+  color: #dc2626;
+}
+
+.pending-card .icon-wrapper i {
+  color: #f59e0b;
+}
+
+/* TITLE */
+.status-title {
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+.status-subtitle {
+  color: #6b7280;
+}
+
+/* DETAILS BOX */
+.details-box {
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+  .detail-row span {
+    color: #6b7280;
+  }
+
+/* ANIMATION */
+@keyframes fadeInUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

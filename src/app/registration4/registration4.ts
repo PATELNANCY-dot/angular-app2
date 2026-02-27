@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin } from 'rxjs';
+import flatpickr from 'flatpickr';
 
 @Component({
   selector: 'app-registration4',
@@ -14,7 +15,7 @@ import { forkJoin } from 'rxjs';
 })
 export class Registration4 {
   registrationForm: FormGroup;
-
+ 
   constructor(private fb: FormBuilder, private router: Router, private http: HttpClient) {
     this.registrationForm = this.fb.group({
       nomineeName: ['', Validators.required],
@@ -43,10 +44,10 @@ export class Registration4 {
       Gender: existingData.gender || null,
       PlaceOfBirth: existingData.placeOfBirth || null,
       Nationality: existingData.nationality || null,
-      StateID: existingData.stateID || null,
-      CorrespondingState: existingData.correspondingState || null,
-      CorrespondingCity: existingData.correspondingCity || null,
-      CityID: existingData.cityID || null,
+      StateID: existingData.stateID ? +existingData.stateID : null,
+      CorrespondingState: existingData.correspondingState ? +existingData.correspondingState : null,
+      CorrespondingCity: existingData.correspondingCity ? +existingData.correspondingCity : null,
+      CityID: existingData.cityID ? +existingData.cityID : null,
       PermanentAddress: existingData.permanentAddress || null,
       Pincode: existingData.pincode || null,
       CorrespondingAddress: existingData.correspondingAddress || null,
@@ -56,17 +57,16 @@ export class Registration4 {
       IfscCode: existingData.ifscCode || null,
       BranchAddress: existingData.branchAddress || null,
       MicrCode: existingData.micrCode || null,
-      NomineeName: this.registrationForm.value.nomineeName,
-      NomineeRelation: this.registrationForm.value.nomineeRelation,
+      NomineeName: this.registrationForm.value.nomineeName || null,
+      NomineeRelation: this.registrationForm.value.nomineeRelation || null,
       NomineeDob: this.registrationForm.value.nomineeDob
         ? new Date(this.registrationForm.value.nomineeDob).toISOString()
         : null,
-      NomineePan: this.registrationForm.value.nomineePan,
-
-      guardianName: null,
-      guardianRelation: null,
-      guardianDob: null,
-      guardianPan: null
+      NomineePan: this.registrationForm.value.nomineePan || null,
+      GuardianName: null,
+      GuardianRelation: null,
+      GuardianDob: null,
+      GuardianPan: null
     };
 
     //  FIRST call registration
@@ -102,5 +102,57 @@ export class Registration4 {
           alert('Registration failed.');
         }
       });
+  }
+
+  goBack() {
+    this.router.navigate(['/registration3']);
+  }
+
+
+  //CUSTOME DATECOX
+  @ViewChild('dobInput') dobInput!: ElementRef;
+  fpInstance: any;
+
+
+
+
+  ngAfterViewInit(): void {
+    this.fpInstance = flatpickr(this.dobInput.nativeElement, {
+      dateFormat: "d-m-Y",
+      maxDate: "today",
+      disableMobile: true,
+      allowInput: false,
+      monthSelectorType: "dropdown",
+      clickOpens: false,
+
+      onReady: (_, __, instance) => {
+        this.removeYearSpinner(instance);
+      },
+
+      onMonthChange: (_, __, instance) => {
+        this.removeYearSpinner(instance);
+      },
+
+      onYearChange: (_, __, instance) => {
+        this.removeYearSpinner(instance);
+      }
+    });
+  }
+
+  removeYearSpinner(instance: any) {
+    setTimeout(() => {
+      const yearInput = instance.calendarContainer.querySelector(".cur-year");
+      if (yearInput) {
+        yearInput.setAttribute("type", "text");
+        yearInput.style.width = "60px";
+      }
+    });
+  }
+  toggleCalendar() {
+    if (this.fpInstance.isOpen) {
+      this.fpInstance.close();
+    } else {
+      this.fpInstance.open();
+    }
   }
 }

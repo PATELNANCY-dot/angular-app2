@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import {  ElementRef, HostListener, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NomineeService } from '../services/nominee';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
+import flatpickr from 'flatpickr';
 
 
 
@@ -11,7 +13,7 @@ import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-change-nominee',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './change-nominee.html',
   styleUrls: ['./change-nominee.css'], 
 })
@@ -101,5 +103,57 @@ checkMinor(dob: string) {
     });
   }
 
-  
+
+
+
+  //CUSTOME DATECOX
+  @ViewChild('nomineeDobInput') nomineeDobInput!: ElementRef;
+  @ViewChild('guardianDobInput') guardianDobInput!: ElementRef;
+
+  nomineeFp: any;
+  guardianFp: any;
+  ngAfterViewInit(): void {
+    this.nomineeFp = flatpickr(this.nomineeDobInput.nativeElement, {
+      dateFormat: "d-m-Y",
+      maxDate: "today",
+      disableMobile: true,
+      allowInput: false,
+      monthSelectorType: "dropdown",
+      clickOpens: false,
+      onReady: (_, __, instance) => this.removeYearSpinner(instance),
+      onMonthChange: (_, __, instance) => this.removeYearSpinner(instance),
+      onYearChange: (_, __, instance) => this.removeYearSpinner(instance)
+    });
+
+    this.guardianFp = flatpickr(this.guardianDobInput.nativeElement, {
+      dateFormat: "d-m-Y",
+      maxDate: "today",
+      disableMobile: true,
+      allowInput: false,
+      monthSelectorType: "dropdown",
+      clickOpens: false,
+      onReady: (_, __, instance) => this.removeYearSpinner(instance),
+      onMonthChange: (_, __, instance) => this.removeYearSpinner(instance),
+      onYearChange: (_, __, instance) => this.removeYearSpinner(instance)
+    });
+  }
+  toggleNomineeCalendar() {
+    this.nomineeFp.isOpen ? this.nomineeFp.close() : this.nomineeFp.open();
+  }
+
+  toggleGuardianCalendar() {
+    this.guardianFp.isOpen ? this.guardianFp.close() : this.guardianFp.open();
+  }
+
+  removeYearSpinner(instance: any) {
+    setTimeout(() => {
+      const yearInput = instance.calendarContainer.querySelector(".cur-year");
+      if (yearInput) {
+        yearInput.setAttribute("type", "text");
+        yearInput.style.width = "60px";
+      }
+    });
+  }
+
+
 }
