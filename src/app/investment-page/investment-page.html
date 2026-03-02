@@ -67,72 +67,68 @@
         </div>
 
       </form>
+
+
       <!-- Gateway Container -->
+      <!-- ================= PAYMENT GATEWAY SECTION ================= -->
+
       <div *ngIf="selectedPayment === 'gateway'"
            class="mt-4 p-4 border rounded bg-white shadow-sm">
 
         <form>
           <div class="form-row">
+
+            <!-- Payout Type -->
             <div class="form-col">
               <label>Payout Type:</label>
-              <select class="form-select"
-                      [(ngModel)]="payoutType"
-                      name="payoutType">
-
-                <option value="">-- cumulative --</option>
-                <option value="cumulative">Cumulative</option>
-                <option value="non-cumulative">Quarterly</option>
-              </select>
-            </div>
-
-            <div class="form-col">
-              <label>Option:</label>
-              <div class="custom-dropdown">
-
-                <!-- Selected Box -->
-                <div class="dropdown-selected"
-                     (click)="investmentDropdownOpen = !investmentDropdownOpen;$event.stopPropagation()">
-
-                  <span>
-                    {{ getSelectedText() || 'Select Payment Mode' }}
-                  </span>
-
-                  <span class="arrow"
-                        [class.rotate]="investmentDropdownOpen">
-                    ⌄
-                  </span>
+              <div class="custom-dropdown" (click)="toggleDropdown('payout', $event)">
+                <div class="dropdown-selected">
+                  {{ payoutType || 'Select Payout Mode' }}
+                  <i class="bi bi-chevron-down"></i>
                 </div>
-
-                <!-- Dropdown List -->
-                <div class="dropdown-list"
-                     *ngIf="investmentDropdownOpen">
-
-                  <div class="dropdown-item"
-                       *ngFor="let opt of options"
-                       (click)="selectOption(opt, $event)">
-
-                    {{ opt.typeText }}
-
-                  </div>
-
+                <div class="dropdown-list" *ngIf="activeDropdown === 'payout'">
+                  <div class="dropdown-item" (click)="selectPayoutType('Cumulative', $event)">Cumulative</div>
+                  <div class="dropdown-item" (click)="selectPayoutType('Monthly', $event)">Monthly</div>
+                  <div class="dropdown-item" (click)="selectPayoutType('Quarterly', $event)">Quarterly</div>
                 </div>
-
               </div>
             </div>
 
-            <div class="form-col">
-              <label>MHP(Minimum Holding Period):</label>
-              <select class="form-select"
-                      [(ngModel)]="payoutType"
-                      name="payoutType">
 
-                <option value="">--6 Months--</option>
-                <option value="cumulative">3 Months</option>
-                <option value="non-cumulative">12 Months</option>
-              </select>
+            <!-- Option Dropdown -->
+            <!-- Database Options Dropdown -->
+            <div class="form-col">
+              <label>Option:</label>
+              <div class="custom-dropdown" (click)="toggleDropdown('option', $event)">
+                <div class="dropdown-selected">
+                  {{ getSelectedText() || 'Select Option' }}
+                  <i class="bi bi-chevron-down"></i>
+                </div>
+                <div class="dropdown-list" *ngIf="activeDropdown === 'option'">
+                  <div class="dropdown-item" *ngFor="let opt of options" (click)="selectOption(opt, $event)">
+                    {{ opt.typeText }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--MHP-->
+
+            <div class="form-col">
+              <label>MHP (Minimum Holding Period):</label>
+              <div class="custom-dropdown" (click)="toggleMhpDropdown($event)">
+                <div class="dropdown-selected">
+                  {{ payoutType || '--Select MHP--' }}
+                  <i class="bi bi-chevron-down"></i>
+                </div>
+                <div class="dropdown-list" *ngIf="mhpDropdownOpen">
+                  <div class="dropdown-item" (click)="selectMhp('3 Months', $event)">3 Months</div>
+                  <div class="dropdown-item" (click)="selectMhp('6 Months', $event)">6 Months</div>
+                  <div class="dropdown-item" (click)="selectMhp('12 Months', $event)">12 Months</div>
+                </div>
+              </div>
             </div>
 
-
+            <!-- Amount -->
             <div class="form-col">
               <label>Amount:</label>
               <input type="number"
@@ -141,10 +137,9 @@
                      name="investmentAmount"
                      placeholder="Enter amount">
             </div>
+
           </div>
-
         </form>
-
       </div>
 
 
@@ -153,9 +148,10 @@
            class="mt-4 p-4 border rounded bg-white shadow-sm">
 
         <form>
-          <div class="form-row">
+          <div class="form-row" *ngIf="account">
             <div class="form-col">
               <label>IFSC Code:</label>
+              <span class="info-value">{{ account.ifscCode }}</span>
             </div>
 
             <div class="form-col">
@@ -164,11 +160,13 @@
 
             <div class="form-col">
               <label>Account Number:</label>
+              <span class="info-value">{{ account.accountNumber }}</span>
             </div>
 
 
             <div class="form-col">
               <label>Beneficiary Name</label>
+              <span class="info-value">{{ account.name }}</span>
             </div>
           </div>
 
@@ -176,62 +174,53 @@
 
         <form>
           <div class="form-row">
+            <!-- Payout Type -->
             <div class="form-col">
               <label>Payout Type:</label>
-              <select class="form-select"
-                      [(ngModel)]="payoutType"
-                      name="payoutType">
-
-                <option value="">-- cumulative --</option>
-                <option value="cumulative">Cumulative</option>
-                <option value="non-cumulative">Quarterly</option>
-              </select>
-            </div>
-
-            <div class="form-col">
-              <label>Option:</label>
-              <div class="custom-dropdown">
-
-                <!-- Selected Box -->
-                <div class="dropdown-selected"
-                     (click)="investmentDropdownOpen = !investmentDropdownOpen">
-
-                  <span>
-                    {{ getSelectedText() || 'Select Payment Mode' }}
-                  </span>
-
-                  <span class="arrow"
-                        [class.rotate]="investmentDropdownOpen">
-                    ⌄
-                  </span>
+              <div class="custom-dropdown" (click)="toggleDropdown('payout', $event)">
+                <div class="dropdown-selected">
+                  {{ payoutType || 'Select Payout Mode' }}
+                  <i class="bi bi-chevron-down"></i>
                 </div>
-
-                <!-- Dropdown List -->
-                <div class="dropdown-list"
-                     *ngIf="investmentDropdownOpen">
-
-                  <div class="dropdown-item"
-                       *ngFor="let opt of options"
-                       (click)="selectOption(opt, $event)">
-
-                    {{ opt.typeText }}
-
-                  </div>
-
+                <div class="dropdown-list" *ngIf="activeDropdown === 'payout'">
+                  <div class="dropdown-item" (click)="selectPayoutType('Cumulative', $event)">Cumulative</div>
+                  <div class="dropdown-item" (click)="selectPayoutType('Monthly', $event)">Monthly</div>
+                  <div class="dropdown-item" (click)="selectPayoutType('Quarterly', $event)">Quarterly</div>
                 </div>
-
               </div>
             </div>
-            <div class="form-col">
-              <label>MHP(Minimum Holding Period):</label>
-              <select class="form-select"
-                      [(ngModel)]="payoutType"
-                      name="payoutType">
 
-                <option value="">--6 Months--</option>
-                <option value="cumulative">3 Months</option>
-                <option value="non-cumulative">12 Months</option>
-              </select>
+
+            <!-- Database Options Dropdown -->
+            <div class="form-col">
+              <label>Option:</label>
+              <div class="custom-dropdown" (click)="toggleDropdown('option', $event)">
+                <div class="dropdown-selected">
+                  {{ getSelectedText() || 'Select Option' }}
+                  <i class="bi bi-chevron-down"></i>
+                </div>
+                <div class="dropdown-list" *ngIf="activeDropdown === 'option'">
+                  <div class="dropdown-item" *ngFor="let opt of options" (click)="selectOption(opt, $event)">
+                    {{ opt.typeText }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- MHP -->
+            <div class="form-col">
+              <label>MHP (Minimum Holding Period):</label>
+              <div class="custom-dropdown" (click)="toggleMhpDropdown($event)">
+                <div class="dropdown-selected">
+                  {{ payoutType || '--Select MHP--' }}
+                  <i class="bi bi-chevron-down"></i>
+                </div>
+                <div class="dropdown-list" *ngIf="mhpDropdownOpen">
+                  <div class="dropdown-item" (click)="selectMhp('3 Months', $event)">3 Months</div>
+                  <div class="dropdown-item" (click)="selectMhp('6 Months', $event)">6 Months</div>
+                  <div class="dropdown-item" (click)="selectMhp('12 Months', $event)">12 Months</div>
+                </div>
+              </div>
             </div>
 
             <div class="form-col">
@@ -245,34 +234,19 @@
         <form>
           <div class="form-row">
 
+            <!-- Payment Mode -->
             <div class="form-col">
               <label>Payment Mode:</label>
-              <div class="custom-dropdown" (click)="togglePaymentDropdown()">
-
+              <div class="custom-dropdown" (click)="togglePaymentModeDropdown($event)">
                 <div class="dropdown-selected">
-                  {{ payoutType ? payoutType.toUpperCase() : 'Select Payment Mode' }}
+                  {{ paymentMode || 'Select Payment Mode' }}
                   <i class="bi bi-chevron-down"></i>
                 </div>
-
-                <div class="dropdown-list" *ngIf="paymentDropdownOpen">
-
-                  <div class="dropdown-item"
-                       (click)="selectPaymentMode('neft', $event)">
-                    NEFT
-                  </div>
-
-                  <div class="dropdown-item"
-                       (click)="selectPaymentMode('rtgs', $event)">
-                    RTGS
-                  </div>
-
-                  <div class="dropdown-item"
-                       (click)="selectPaymentMode('imps', $event)">
-                    IMPS
-                  </div>
-
+                <div class="dropdown-list" *ngIf="paymentModeDropdownOpen">
+                  <div class="dropdown-item" (click)="selectPaymentMode('NEFT', $event)">NEFT</div>
+                  <div class="dropdown-item" (click)="selectPaymentMode('RTGS', $event)">RTGS</div>
+                  <div class="dropdown-item" (click)="selectPaymentMode('IMPS', $event)">IMPS</div>
                 </div>
-
               </div>
             </div>
 
@@ -289,14 +263,14 @@
                   <div *ngIf="!selectedFile" style="pointer-events:none; color:#6c757d; font-size:14px;">
                     <i class="bi bi-cloud-upload"></i> Choose file
                   </div>
-                  
-                    <div *ngIf="selectedFile" class="selected-file mt-2 p-2 border rounded d-flex justify-content-between align-items-center" style="background:#f8f9fa; cursor:pointer;">
-                      <span (click)="openFile()" style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:80%;">
-                        {{ selectedFile.name }}
-                      </span>
-                      <button type="button" class="btn btn-sm btn-outline-danger ms-2" (click)="removeFile()">×</button>
-                    </div>
-                  
+
+                  <div *ngIf="selectedFile" class="selected-file mt-2 p-2 border rounded d-flex justify-content-between align-items-center" style="background:#f8f9fa; cursor:pointer;">
+                    <span (click)="openFile()" style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:80%;">
+                      {{ selectedFile.name }}
+                    </span>
+                    <button type="button" class="btn btn-sm btn-outline-danger ms-2" (click)="removeFile()">×</button>
+                  </div>
+
                 </label>
               </div>
 

@@ -38,11 +38,21 @@
                 </div>
 
               </div>
+              <small class="text-danger"
+                     *ngIf="registrationForm.get('bankName')?.touched &&
+registrationForm.get('bankName')?.errors">
+                Please select  BANK NAME
+              </small>
             </div>
 
             <div class="form-col">
               <label>Account Number:</label>
               <input type="text" inputmode="numeric" formControlName="accountNumber">
+              <small class="text-danger"
+                     *ngIf="registrationForm.get('accountNumber')?.touched &&
+registrationForm.get('accountNumber')?.errors">
+                Please ENTER ACCOUNT NUMBER
+              </small>
             </div>
           </div>
 
@@ -69,6 +79,11 @@
                 </div>
 
               </div>
+              <small class="text-danger"
+                     *ngIf="registrationForm.get('branchName')?.touched &&
+registrationForm.get('branchName')?.errors">
+                Please select  BRANCH NAME
+              </small>
             </div>
 
             <div class="form-col">

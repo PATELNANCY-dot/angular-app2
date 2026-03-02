@@ -2,7 +2,7 @@
   <div class="container">
     <!-- LEFT SIDE -->
     <div class="box left">
-      <h2 class="left" style="text-align:center">Sign Up</h2>
+      <h2>Sign Up</h2>
       <br /><br /><br /><br /><br /><br /><br /><br />
       <button>Join Now</button>
     </div>
@@ -10,14 +10,27 @@
     <!-- RIGHT SIDE -->
     <div class="box right">
       <form>
-        <h2 style="text-align:center">Two Factor Auhentication</h2>
+        <h2 class="right">Two Factor Auhentication</h2>
 
         <!-- Bind email and password to component -->
-        <input class="textf" type="date" placeholder="[YYYY--MM--DD]"  name="dob" [(ngModel)]="dob" />
-        <input class="textf" type="text" placeholder="PAN"  name="pan" [(ngModel)]="pan"/>
+        <div class="date-wrapper">
+          <input type="text"
+                 [(ngModel)]="dob"
+                 #nomineeDobInput
+                 class="custom-date"
+                 placeholder="Select Date"
+                 (click)="toggleNomineeCalendar()" />
+
+          <span class="calendar-icon"
+                (click)="toggleNomineeCalendar()">
+            <i class="bi bi-calendar3"></i>
+          </span>
+        </div>
+
+        <input class="textf" type="text" placeholder="PAN" name="pan" [(ngModel)]="pan" />
 
 
- 
+
 
 
         <!-- Login button -->

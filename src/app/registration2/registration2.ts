@@ -33,21 +33,63 @@ export class Registration2 {
   ) {
 
     this.registrationForm = this.fb.group({
-      pan: ['', Validators.required],
+      pan: [
+        '',
+        [
+          Validators.required,
+        ]
+      ],
+
       dob: ['', Validators.required],
-      aadhar: ['', Validators.required],
+
+      aadhar: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^[0-9]{12}$/)
+        ]
+      ],
+
       nationality: ['', Validators.required],
-      placeOfBirth: ['', Validators.required],
+
+      placeOfBirth: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3)
+        ]
+      ],
 
       stateID: [null, Validators.required],
       cityID: [null, Validators.required],
       correspondingState: [null, Validators.required],
       correspondingCity: [null, Validators.required],
 
-      permanentAddress: ['', Validators.required],
-      correspondingAddress: ['', Validators.required],
-      pincode: ['', Validators.required],
-      gender: ['', Validators.required],
+      permanentAddress: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10)
+        ]
+      ],
+
+      correspondingAddress: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10)
+        ]
+      ],
+
+      pincode: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^[1-9][0-9]{5}$/)
+        ]
+      ],
+
+      gender: ['', Validators.required]
     });
 
     const savedData = JSON.parse(localStorage.getItem('clientRegistration') || '{}');
@@ -104,6 +146,11 @@ export class Registration2 {
   // Next Button
   // ===============================
   goNext() {
+    if (this.registrationForm.invalid) {
+      this.registrationForm.markAllAsTouched();
+      return;
+    }
+
     const existingData = JSON.parse(localStorage.getItem('clientRegistration') || '{}');
     const formValue = this.registrationForm.value;
 

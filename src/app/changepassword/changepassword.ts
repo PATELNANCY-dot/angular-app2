@@ -20,17 +20,19 @@ export class Changepassword {
   constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
     this.form = this.fb.group({
       currentPassword: ['', Validators.required],
-      newPassword: ['', [Validators.required, Validators.minLength(6)]],
+      newPassword: ['', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(25),
+        Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&]).{8,25}$/)
+      ]],
       confirmPassword: ['', Validators.required]
     });
   }
 
   submit() {
-    console.log('Form valid?', this.form.valid);
-    console.log('Form value:', this.form.value);
-
     if (this.form.invalid) {
-      this.message = 'Please fill all required fields';
+      this.message = 'Password must be 8–25 characters and include alphabet, number & special character';
       return;
     }
 
@@ -40,11 +42,18 @@ export class Changepassword {
     }
 
     const clientId = localStorage.getItem('userId');
-    console.log('clientId:', clientId);
+
     if (!clientId) {
       this.message = 'User not logged in';
       return;
     }
+
+    //  Password cannot be same as User ID
+    if (this.form.value.newPassword === clientId) {
+      this.message = 'Password cannot be same as User ID';
+      return;
+    }
+
 
     const payload = {
       clientId: parseInt(clientId),

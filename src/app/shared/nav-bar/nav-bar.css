@@ -6,20 +6,76 @@
   padding: 14px 30px;
 }
 
+  /* Nav links */
   .navbar .nav-link {
     font-weight: 500;
     margin-right: 18px;
-    transition: 0.3s;
+    transition: all 0.3s ease;
+    color: #ffffff !important;
   }
 
     .navbar .nav-link:hover {
-      color: #ff7a00 !important;
+      color: #ffb347 !important; /* softer than orange */
     }
-/* Optional: add smooth dropdown transition */
+/* ========================================
+   PREMIUM DARK DROPDOWN
+======================================== */
+
 .dropdown-menu {
-  transition: all 0.2s ease-in-out;
+  background: linear-gradient(145deg, #0f2f6b, #001f4d);
+  border: none;
+  border-radius: 14px;
+  padding: 10px 0;
+  margin-top: 12px;
+  min-width: 220px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: all 0.3s ease;
 }
 
+/* Show on hover */
 .navbar-nav .dropdown:hover > .dropdown-menu {
   display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Dropdown items */
+.dropdown-item {
+  color: #ffffff;
+  padding: 12px 20px;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+}
+
+  /* Hover effect */
+  .dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffcc70;
+    padding-left: 24px; /* smooth slide effect */
+  }
+
+
+.dropdown-menu {
+  background: rgba(0, 44, 140, 0.75);
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 10px 0;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+
+.dropdown-item i {
+  color: #f5c542; /* brighter gold */
+}
+
+
+.dropdown-toggle::after {
+  display: none !important;
 }

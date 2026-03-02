@@ -92,7 +92,13 @@ export class Registration3 {
   }
 
   goNext() {
-    if (this.registrationForm.invalid) return;
+
+
+    if (this.registrationForm.invalid) {
+      this.registrationForm.markAllAsTouched();
+      return;
+    }
+  
 
     const formData = this.registrationForm.getRawValue();
 

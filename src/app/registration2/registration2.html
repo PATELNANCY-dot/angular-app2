@@ -18,7 +18,17 @@
       <div class="form-row">
         <div class="form-col">
           <label>Pan Number:</label>
-          <input type="text" inputmode="numeric" formControlName="pan">
+          <input type="text" inputmode="numeric" formControlName="pan"  (input)="registrationForm.get('pan')?.setValue($any($event.target).value.toUpperCase(), { emitEvent: false })">
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('pan')?.touched &&
+         registrationForm.get('pan')?.errors?.['required']">
+            PAN is required
+          </small>
+
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('pan')?.errors?.['pattern']">
+            Enter valid PAN (ABCDE1234F)
+          </small>
         </div>
 
         <div class="form-col">
@@ -54,16 +64,30 @@
                    #dobInput
                    placeholder="Select Date of Birth"
                    (click)="toggleCalendar()" />
-
             <span class="calendar-icon" (click)="toggleCalendar()">
               <i class="bi bi-calendar3"></i>
             </span>
           </div>
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('dob')?.touched &&
+         registrationForm.get('dob')?.errors">
+            Date of Birth is required
+          </small>
         </div>
 
         <div class="form-col">
           <label>Aadhar Number:</label>
           <input type="text" inputmode="numeric" formControlName="aadhar">
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('aadhar')?.touched &&
+         registrationForm.get('aadhar')?.errors?.['required']">
+            Aadhaar is required
+          </small>
+
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('aadhar')?.errors?.['pattern']">
+            Aadhaar must be 12 digits
+          </small>
         </div>
       </div>
 
@@ -89,11 +113,26 @@
             </div>
 
           </div>
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('nationality')?.touched &&
+         registrationForm.get('nationality')?.errors">
+            Please select country
+          </small>
         </div>
 
         <div class="form-col">
           <label>Place of Birth:</label>
           <input type="text" formControlName="placeOfBirth">
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('placeOfBirth')?.touched &&
+         registrationForm.get('placeOfBirth')?.errors?.['required']">
+            Place of Birth is required
+          </small>
+
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('placeOfBirth')?.errors?.['pattern']">
+            Only alphabets allowed
+          </small>
         </div>
       </div>
 
@@ -120,6 +159,11 @@
             </div>
 
           </div>
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('stateID')?.touched &&
+         registrationForm.get('stateID')?.errors">
+            Please select State
+          </small>
         </div>
 
 
@@ -144,6 +188,11 @@
             </div>
 
           </div>
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('correspondingState')?.touched &&
+registrationForm.get('correspondingState')?.errors">
+            Please select Corressponding State
+          </small>
         </div>
       </div>
 
@@ -169,6 +218,11 @@
             </div>
 
           </div>
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('cityID')?.touched &&
+registrationForm.get('cityID')?.errors">
+            Please  select City
+          </small>
         </div>
 
 
@@ -192,6 +246,11 @@
             </div>
 
           </div>
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('correspondingCity')?.touched &&
+registrationForm.get('correspondingCity')?.errors">
+            Please select Corressponding  City
+          </small>
         </div>
       </div>
 
@@ -201,10 +260,29 @@
         <div class="form-col">
           <label>Permanent Address:</label>
           <textarea formControlName="permanentAddress"></textarea>
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('permanentAddress')?.errors?.['minlength']">
+            Address must be at least 10 characters
+          </small>
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('permanentAddress')?.touched &&
+registrationForm.get('permanentAddress')?.errors">
+            Please enter  Address
+          </small>
         </div>
+
         <div class="form-col">
           <label> Corressponding Address:</label>
           <textarea formControlName="correspondingAddress"></textarea>
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('correspondingAddress')?.errors?.['minlength']">
+            Address must be at least 10 characters
+          </small>
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('correspondingAddress')?.touched &&
+registrationForm.get('correspondingAddress')?.errors">
+            Please enter Corresponding Address
+          </small>
         </div>
       </div>
 
@@ -255,12 +333,27 @@
         <div class="form-col">
           <label>pin Code:</label>
           <input type="text" formControlName="pincode">
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('pincode')?.touched &&
+         registrationForm.get('pincode')?.errors?.['required']">
+            Pincode is required
+          </small>
+
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('pincode')?.errors?.['pattern']">
+            Enter valid 6 digit pincode
+          </small>
         </div>
 
 
         <div class="form-col">
           <label>Gender:</label>
           <input type="text" formControlName="gender">
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('gender')?.touched &&
+registrationForm.get('gender')?.errors">
+            Date of Birth is required
+          </small>
         </div>
 
 

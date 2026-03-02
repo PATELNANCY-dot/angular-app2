@@ -29,8 +29,27 @@ export class Registration4 {
     this.registrationForm.patchValue(savedData);
   }
 
+  private formatToISO(dateString: string | null): string | null {
+    if (!dateString) return null;
+
+    const parts = dateString.split('-'); // expecting dd-mm-yyyy
+
+    if (parts.length !== 3) return null;
+
+    const [day, month, year] = parts;
+
+    const isoDate = new Date(`${year}-${month}-${day}`);
+
+    return isNaN(isoDate.getTime())
+      ? null
+      : isoDate.toISOString();
+  }
   submit() {
-    if (this.registrationForm.invalid) return;
+
+    if (this.registrationForm.invalid) {
+      this.registrationForm.markAllAsTouched();
+      return;
+    }
 
     const existingData = JSON.parse(localStorage.getItem('clientRegistration') || '{}');
 
@@ -40,41 +59,45 @@ export class Registration4 {
       Mobile: existingData.mobile || null,
       Pan: existingData.pan || null,
       Aadhar: existingData.aadhar || null,
-      Dob: existingData.dob ? new Date(existingData.dob).toISOString() : null,
+
+      Dob: this.formatToISO(existingData.dob),
+
       Gender: existingData.gender || null,
       PlaceOfBirth: existingData.placeOfBirth || null,
       Nationality: existingData.nationality || null,
+
       StateID: existingData.stateID ? +existingData.stateID : null,
       CorrespondingState: existingData.correspondingState ? +existingData.correspondingState : null,
       CorrespondingCity: existingData.correspondingCity ? +existingData.correspondingCity : null,
       CityID: existingData.cityID ? +existingData.cityID : null,
+
       PermanentAddress: existingData.permanentAddress || null,
       Pincode: existingData.pincode || null,
       CorrespondingAddress: existingData.correspondingAddress || null,
+
       BankName: existingData.bankName || null,
       AccountNumber: existingData.accountNumber || null,
       BranchName: existingData.branchName || null,
       IfscCode: existingData.ifscCode || null,
       BranchAddress: existingData.branchAddress || null,
       MicrCode: existingData.micrCode || null,
+
       NomineeName: this.registrationForm.value.nomineeName || null,
       NomineeRelation: this.registrationForm.value.nomineeRelation || null,
-      NomineeDob: this.registrationForm.value.nomineeDob
-        ? new Date(this.registrationForm.value.nomineeDob).toISOString()
-        : null,
+      NomineeDob: this.formatToISO(this.registrationForm.value.nomineeDob),
       NomineePan: this.registrationForm.value.nomineePan || null,
+
       GuardianName: null,
       GuardianRelation: null,
       GuardianDob: null,
       GuardianPan: null
     };
 
-    //  FIRST call registration
     this.http.post<any>('http://localhost:5048/api/clientregistrations', finalData)
       .subscribe({
         next: (res) => {
 
-          const clientId = res.clientId;  // ✅ Now res exists
+          const clientId = res.clientId;
 
           const finalData1 = {
             Username: existingData.name,
@@ -82,7 +105,6 @@ export class Registration4 {
             ClientId: clientId
           };
 
-          //  THEN call login store
           this.http.post('http://localhost:5048/api/auth/store', finalData1)
             .subscribe({
               next: () => {

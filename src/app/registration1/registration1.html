@@ -16,22 +16,64 @@
       <!-- NAME -->
       <div class="form-row">
         <div class="form-col">
-          <label>Name:</label>
-          <input id="name" type="text" formControlName="name">
+          <label>Name</label>
+          <input type="text" formControlName="name" class="form-control">
+
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('name')?.touched &&
+                registrationForm.get('name')?.errors?.['required']">
+            Name is required
+          </small>
+
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('name')?.errors?.['minlength']">
+            Minimum 3 characters required
+          </small>
+
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('name')?.errors?.['pattern']">
+            Only letters allowed
+          </small>
         </div>
       </div>
 
       <!-- EMAIL + MOBILE -->
       <div class="form-row">
         <div class="form-col">
-          <label>Email:</label>
-          <input type="email" formControlName="email">
+          <label>Email</label>
+          <input type="email" formControlName="email" class="form-control">
+
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('email')?.touched &&
+                registrationForm.get('email')?.errors?.['required']">
+            Email is required
+          </small>
+
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('email')?.errors?.['email']">
+            Enter valid email address
+          </small>
         </div>
 
         <div class="form-col">
-          <label>Mobile:</label>
-          <input type="text" inputmode="numeric" placeholder="Enter your Mobile No" formControlName="mobile">
+          <label>Mobile Number</label>
+          <input type="text"
+                 formControlName="mobile"
+                 maxlength="10"
+                 class="form-control">
+
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('mobile')?.touched &&
+                registrationForm.get('mobile')?.errors?.['required']">
+            Mobile number is required
+          </small>
+
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('mobile')?.errors?.['pattern']">
+            Enter valid 10 digit mobile number
+          </small>
         </div>
+
       </div>
 
       <p class="note note-row" style="color:red">
@@ -65,15 +107,54 @@
       <!-- PASSWORD + CONFIRM PASSWORD -->
       <div class="form-row">
         <div class="form-col">
-          <label>Password:</label>
-          <input type="password" formControlName="Password_1">
+          <label>Password</label>
+          <input type="password"
+                 formControlName="Password_1"
+                 class="form-control">
+
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('Password_1')?.touched &&
+                registrationForm.get('Password_1')?.errors?.['required']">
+            Password is required
+          </small>
+
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('Password_1')?.errors?.['minlength']">
+            Minimum 8 characters required
+          </small>
+
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('Password_1')?.errors?.['maxlength']">
+            Maximum 25 characters allowed
+          </small>
+
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('Password_1')?.errors?.['pattern']">
+            Must include alphabet, number & special character
+          </small>
         </div>
 
         <div class="form-col">
-          <label>Confirm Password:</label>
-          <input type="password">
+          <label>Confirm Password</label>
+          <input type="password"
+                 formControlName="confirmPassword"
+                 class="form-control">
+
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('confirmPassword')?.touched &&
+                registrationForm.get('confirmPassword')?.errors?.['required']">
+            Confirm Password is required
+          </small>
+
+          <small class="text-danger"
+                 *ngIf="registrationForm.get('confirmPassword')?.errors?.['mismatch']">
+            Passwords do not match
+          </small>
         </div>
+
+
       </div>
+     
       <!--next button-->
       <div class="form-actions">
         <button type="button" (click)="goBack()" class="next-btn"><span><i class="bi bi-arrow-left"></i></span>Back</button>

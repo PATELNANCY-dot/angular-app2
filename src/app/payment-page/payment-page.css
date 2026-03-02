@@ -98,3 +98,53 @@ body {
     opacity: 1;
   }
 }
+
+
+.language-dropdown .dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.text-muted {
+  color: #6c757d;
+}
+
+
+/* Make button full width and aligned */
+.custom-dropdown .btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  font-weight: 500;
+}
+
+/* Cursor pointer for list items */
+.dropdown-item.cursor-pointer {
+  cursor: pointer;
+}
+
+/* Hover effect */
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
+/* Smooth dropdown box shadow */
+.dropdown-menu.show {
+  display: block !important;
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Space between dropdowns */
+.custom-dropdown + .custom-dropdown {
+  margin-top: 15px;
+}
+
+

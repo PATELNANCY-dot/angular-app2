@@ -512,3 +512,12 @@ select {
 }
 
 
+
+/* Value */
+.info-value {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: orangered;
+  line-height: 1.6;
+}
