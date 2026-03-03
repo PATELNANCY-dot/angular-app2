@@ -5,6 +5,8 @@ import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { OptionType } from '../services/option-type.service';
 import { HttpClient } from '@angular/common/http';
 import { AccountDetails } from '../models/account-details.model';
+import { ChangeDetectorRef } from '@angular/core';
+import { TransactionService } from '../services/transaction.service';
 
 @Component({
   selector: 'app-investment-page',
@@ -35,7 +37,7 @@ export class InvestmentPage implements OnInit {
   payoutType: string = '';       // Payout type dropdown (custom)
   paymentMode: string = '';      // Payment mode dropdown (custom)
   paymentStatus: 'success' | 'failed' | null = null;
-
+  utrNumber: string = '';
   // -----------------------------
   // Alert Handling
   // -----------------------------
@@ -54,19 +56,21 @@ export class InvestmentPage implements OnInit {
   // -----------------------------
   activeDropdown: string | null = null;       // Generic dropdown toggle
   mhpDropdownOpen = false;                    // Minimum Holding Period dropdown
-  paymentModeDropdownOpen = false;            // Payment mode dropdown
-
+  paymentModeDropdownOpen = false;
+  selectedMhp: string = '';
   // -----------------------------
   // File Upload Handling
   // -----------------------------
   selectedFile: File | null = null;
   filePreview: string | ArrayBuffer | null = null;
-    cdr: any;
+   
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private http: HttpClient
+    private http: HttpClient,
+    private cdr: ChangeDetectorRef,
+    private transactionService: TransactionService 
   ) { }
 
   ngOnInit(): void {
@@ -150,13 +154,97 @@ export class InvestmentPage implements OnInit {
   goTo() {
     this.router.navigate(['/investor-page']);
   }
-
   goPay() {
+
+    if (!this.selectedPayment) {
+      this.showCustomAlert('Please select payment type', 'error');
+      return;
+    }
+
+    if (!this.investmentAmount || this.investmentAmount <= 0) {
+      this.showCustomAlert('Please enter valid amount', 'error');
+      return;
+    }
+
+    if (!this.payoutType) {
+      this.showCustomAlert('Please select payout type', 'error');
+      return;
+    }
+
+    if (!this.selectedOptionId) {
+      this.showCustomAlert('Please select option', 'error');
+      return;
+    }
+
+    const storedClientId = localStorage.getItem('userId');
+    const clientId = storedClientId ? Number(storedClientId) : 0;
+
+    // ✅ GATEWAY
     if (this.selectedPayment === 'gateway') {
-      this.router.navigate(['/payment-page'], { queryParams: { amount: this.investmentAmount } });
-    } else {
-      this.showCustomAlert('Invest Request sent Successfully!', 'success');
-      setTimeout(() => this.router.navigate(['/dashboard']), 2000);
+
+      this.router.navigate(['/payment-page'], {
+        queryParams: {
+          amount: this.investmentAmount,
+          paymentType: 'Gateway',
+          payoutType: this.payoutType,
+          MHP: this.selectedMhp,
+          option1: this.selectedOptionId, 
+          optionId: this.selectedOptionId
+        }
+      });
+
+      return;
+    }
+
+    //NEFT / RTGS / IMPS
+    if (this.selectedPayment === 'neft') {
+
+      if (!this.paymentMode) {
+        this.showCustomAlert('Please select payment mode', 'error');
+        return;
+      }
+
+      if (!this.utrNumber) {
+        this.showCustomAlert('Please enter UTR number', 'error');
+        return;
+      }
+
+      if (!this.selectedFile) {
+        this.showCustomAlert('Please upload payment receipt', 'error');
+        return;
+      }
+      if (!this.selectedMhp) {
+        this.showCustomAlert('Please select Minimum Holding Period', 'error');
+        return;
+      }
+
+      const request = {
+        clientId: clientId,
+        transactionId: this.utrNumber,
+        amount: this.investmentAmount,
+        paymentMode: this.paymentMode,
+        paymentType: 'Bank Transfer',
+        payoutType: this.payoutType,
+        MHP: this.selectedMhp,           
+        option1: this.selectedOptionId,  
+        status: 'Pending'
+      };
+      console.log(request); 
+
+      this.transactionService.createTransaction(request).subscribe({
+        next: () => {
+          this.showCustomAlert('RTGS Request Submitted. Awaiting Verification.', 'success');
+          this.cdr.detectChanges();
+          setTimeout(() => {
+            this.router.navigate(['/dashboard']);
+          }, 2000);
+
+        },
+        error: () => {
+          this.showCustomAlert('Something went wrong', 'error');
+          this.cdr.detectChanges(); 
+        }
+      });
     }
   }
 
@@ -223,8 +311,8 @@ export class InvestmentPage implements OnInit {
 
   selectMhp(period: string, event: Event) {
     event.stopPropagation();
+    this.selectedMhp = period;
     this.mhpDropdownOpen = false;
-    this.payoutType = period; // or a separate variable for MHP
   }
 
   // -----------------------------

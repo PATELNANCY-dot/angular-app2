@@ -117,7 +117,7 @@
               <label>MHP (Minimum Holding Period):</label>
               <div class="custom-dropdown" (click)="toggleMhpDropdown($event)">
                 <div class="dropdown-selected">
-                  {{ payoutType || '--Select MHP--' }}
+                  {{selectedMhp || '--Select MHP--' }}
                   <i class="bi bi-chevron-down"></i>
                 </div>
                 <div class="dropdown-list" *ngIf="mhpDropdownOpen">
@@ -131,7 +131,8 @@
             <!-- Amount -->
             <div class="form-col">
               <label>Amount:</label>
-              <input type="number"
+              <input type="text"
+                     inputmode="numeric"
                      class="form-control"
                      [(ngModel)]="investmentAmount"
                      name="investmentAmount"
@@ -212,7 +213,7 @@
               <label>MHP (Minimum Holding Period):</label>
               <div class="custom-dropdown" (click)="toggleMhpDropdown($event)">
                 <div class="dropdown-selected">
-                  {{ payoutType || '--Select MHP--' }}
+                  {{selectedMhp || '--Select MHP--' }}
                   <i class="bi bi-chevron-down"></i>
                 </div>
                 <div class="dropdown-list" *ngIf="mhpDropdownOpen">
@@ -222,24 +223,24 @@
                 </div>
               </div>
             </div>
-
             <div class="form-col">
               <label>Amount:</label>
-              <input type="text" inputmode="numeric">
+             <input type="number"
+                     class="form-control"
+                     [(ngModel)]="investmentAmount"
+                       name="neftAmount">
             </div>
           </div>
-
         </form>
-
         <form>
           <div class="form-row">
-
             <!-- Payment Mode -->
             <div class="form-col">
               <label>Payment Mode:</label>
               <div class="custom-dropdown" (click)="togglePaymentModeDropdown($event)">
                 <div class="dropdown-selected">
-                  {{ paymentMode || 'Select Payment Mode' }}
+                  {{ paymentMode || 'Select Payment Mode'
+                  }}
                   <i class="bi bi-chevron-down"></i>
                 </div>
                 <div class="dropdown-list" *ngIf="paymentModeDropdownOpen">
@@ -277,10 +278,13 @@
             </div>
 
 
-
-            <div class="form-col">
-              <label>Transaction ID:</label>
-              <input type="text" inputmode="numeric">
+            <div class="form-col" *ngIf="selectedPayment === 'neft'">
+              <label>Transaction ID (UTR Number):</label>
+              <input type="text"
+                     class="form-control"
+                     placeholder="Enter UTR Number"
+                     [(ngModel)]="utrNumber"
+                     name="utrNumber">
             </div>
 
           </div>

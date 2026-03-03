@@ -38,7 +38,8 @@
     "jspdf": "^4.2.0",
     "jspdf-autotable": "^5.0.7",
     "rxjs": "~7.8.0",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@angular/build": "^21.1.3",

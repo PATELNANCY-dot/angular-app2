@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\investor-details-page",
-    "\\src\\app\\manage-account",
+    "\\src\\app\\models",
     "\\src\\app\\payment-page",
+    "\\src\\app\\registration4",
     "\\src\\app\\services",
-    "\\src\\app\\shared\\custom-dropdown",
+    "\\src\\app\\transaction-status",
     "\\src\\assets",
     "\\src\\assets\\i18n"
   ],
-  "SelectedNode": "\\src\\main.ts",
+  "SelectedNode": "\\src\\app\\payment-page\\payment-page.html",
   "PreviewInSolutionExplorer": false
 }

@@ -43,30 +43,16 @@ export class TransactionStatus {
 
   downloadPDF() {
     const doc = new jsPDF();
-
-    // HEADER
     doc.setFontSize(22);
     doc.setTextColor(37, 99, 235);
     doc.text('Transaction Receipt', 14, 25);
 
-    // STATUS CIRCLE WITH ICON
-    const circleX = 180;
-    const circleY = 25;
-    const radius = 8;
-
-    doc.setFont('helvetica', 'bold'); // safe font for symbols
-
-   
-
-    // SUBTITLE DATE
     doc.setFontSize(12);
     doc.setTextColor(50);
     doc.text(`Date: ${this.transactionTime}`, 14, 35);
 
-    // FORMAT AMOUNT (REMOVE EXTRA QUOTES)
     const formattedAmount = `RS.${this.amount.toLocaleString('en-IN', { maximumFractionDigits: 2 })}`;
 
-    // TABLE DATA
     const tableColumn = ['Field', 'Value'];
     const tableRows = [
       ['Transaction ID', this.transactionId],
@@ -85,7 +71,7 @@ export class TransactionStatus {
       styles: { cellPadding: 4 },
     });
 
-    // SAVE PDF
     doc.save(`transaction-${this.transactionId}.pdf`);
   }
+
 }

@@ -70,25 +70,40 @@ checkMinor(dob: string) {
   }
 
   this.isMinor = age < 18;
-}
+  }
+  private formatToISO(dateString: string | null): string | null {
+    if (!dateString) return null;
+
+    const parts = dateString.split('-'); // expecting dd-mm-yyyy
+
+    if (parts.length !== 3) return null;
+
+    const [day, month, year] = parts;
+
+    const isoDate = new Date(`${year}-${month}-${day}`);
+
+    return isNaN(isoDate.getTime())
+      ? null
+      : isoDate.toISOString();
+  }
   updateNominee() {
     if (this.nomineeForm.invalid) return;
 
     const formValue = { ...this.nomineeForm.value };
 
+    // Convert dd-mm-yyyy to ISO
+    const nomineeDobISO = formValue.nomineeDob ? this.formatToISO(formValue.nomineeDob) : null;
+    const guardianDobISO = this.isMinor && formValue.guardianDob ? this.formatToISO(formValue.guardianDob) : null;
+
     const payload = {
       nomineeName: formValue.nomineeName || null,
       nomineeRelation: formValue.nomineeRelation || null,
-      nomineeDob: formValue.nomineeDob
-        ? new Date(formValue.nomineeDob).toISOString()
-        : null,
+      nomineeDob: nomineeDobISO,
       nomineePan: formValue.nomineePan || null,
 
       guardianName: this.isMinor ? (formValue.guardianName || null) : null,
       guardianRelation: this.isMinor ? (formValue.guardianRelation || null) : null,
-      guardianDob: this.isMinor && formValue.guardianDob
-        ? new Date(formValue.guardianDob).toISOString()
-        : null,
+      guardianDob: guardianDobISO,
       guardianPan: this.isMinor ? (formValue.guardianPan || null) : null
     };
 
