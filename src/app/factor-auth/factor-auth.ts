@@ -22,15 +22,15 @@ export class FactorAuth implements AfterViewInit {
   submit() {
 
     if (!this.dob || !this.pan) {
+      console.log("DOB:", this.dob);
+      console.log("PAN:", this.pan);
       alert('Please fill both fields.');
       return;
     }
 
-    // Convert dd-mm-yyyy to ISO before sending
-    const isoDob = this.formatToISO(this.dob);
 
     this.http.post('http://localhost:5048/api/TwoFactorAuth',
-      { Dob: isoDob, Pan: this.pan })
+      { Dob: this.dob, Pan: this.pan })
       .subscribe({
         next: () => {
           alert('Verified Successfully');
@@ -42,20 +42,7 @@ export class FactorAuth implements AfterViewInit {
       });
   }
 
-  // ================= DATE FORMAT FIX =================
-  private formatToISO(dateString: string): string | null {
-    if (!dateString) return null;
 
-    const parts = dateString.split('-'); // dd-mm-yyyy
-    if (parts.length !== 3) return null;
-
-    const [day, month, year] = parts;
-    const dateObj = new Date(`${year}-${month}-${day}`);
-
-    return isNaN(dateObj.getTime())
-      ? null
-      : dateObj.toISOString();
-  }
 
   // ================= FLATPICKR =================
   @ViewChild('nomineeDobInput') nomineeDobInput!: ElementRef;
@@ -63,12 +50,19 @@ export class FactorAuth implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.fpInstance = flatpickr(this.nomineeDobInput.nativeElement, {
-      dateFormat: "d-m-Y",
+      dateFormat: "Y-m-d",
       maxDate: "today",
       disableMobile: true,
       allowInput: false,
       monthSelectorType: "dropdown",
       clickOpens: false,
+
+      // ⭐ THIS IS THE FIX
+      onChange: (selectedDates, dateStr) => {
+        this.dob = dateStr;
+        console.log("Selected DOB:", this.dob);
+      },
+
       onReady: (_, __, instance) => this.removeYearSpinner(instance),
       onMonthChange: (_, __, instance) => this.removeYearSpinner(instance),
       onYearChange: (_, __, instance) => this.removeYearSpinner(instance)

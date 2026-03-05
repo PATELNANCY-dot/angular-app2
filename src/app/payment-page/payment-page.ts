@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { TransactionService } from '../services/transaction.service';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 @Component({
   selector: 'app-payment-page',
@@ -72,27 +74,55 @@ export class PaymentPage {
   // -----------------------------
   continuePayment() {
     this.transactionId = this.generateTransactionId();
-
     const storedClientId = localStorage.getItem('userId');
     const clientId = storedClientId ? Number(storedClientId) : 0;
-
     const queryParams = this.route.snapshot.queryParams;
 
-    const request = {
-      clientId: clientId,
-      transactionId: this.transactionId,
-      amount: this.amount,
-      paymentMode: this.paymentModeFromInvestment || this.selectedPayment || 'Gateway',
-      paymentType: this.paymentType || 'Gateway',
-      payoutType: this.payoutType || queryParams['payoutType'] || '',
-      MHP: queryParams['MHP'] || '',
-      option1: queryParams['option1'] || '',
-      status: 'success'
-    };
+    // ---------------------
+    // Generate PDF BEFORE sending to backend
+    // ---------------------
+    const doc = new jsPDF();
+    doc.setFontSize(22);
+    doc.setTextColor(37, 99, 235);
+    doc.text('Transaction Receipt', 14, 25);
+    doc.setFontSize(12);
+    doc.setTextColor(50);
+    const transactionTime = new Date().toLocaleString();
+    doc.text(`Date: ${transactionTime}`, 14, 35);
 
-    this.transactionService.createTransaction(request).subscribe({
+    const formattedAmount = `RS.${this.amount.toLocaleString('en-IN', { maximumFractionDigits: 2 })}`;
+    const tableColumn = ['Field', 'Value'];
+    const tableRows = [
+      ['Transaction ID', this.transactionId],
+      ['Amount', formattedAmount],
+      ['Status', 'SUCCESS'],
+      ['Date & Time', transactionTime],
+    ];
+    autoTable(doc, { startY: 45, head: [tableColumn], body: tableRows, theme: 'grid' });
+
+    const pdfBlob = doc.output('blob');
+    const pdfFile = new File([pdfBlob], `transaction-${this.transactionId}.pdf`, { type: 'application/pdf' });
+
+    // ---------------------
+    // Send to backend
+    // ---------------------
+    const formData = new FormData();
+    formData.append('clientId', clientId.toString());
+    formData.append('transactionId', this.transactionId);
+    formData.append('amount', this.amount.toString());
+    formData.append('paymentMode', this.paymentModeFromInvestment || this.selectedPayment || 'Gateway');
+    formData.append('paymentType', this.paymentType || 'Gateway');
+    formData.append('payoutType', this.payoutType || queryParams['payoutType'] || '');
+    formData.append('MHP', queryParams['MHP'] || '');
+    formData.append('option1', queryParams['option1'] || '');
+    formData.append('status', 'success');
+
+    // Attach PDF as paymentDocFile
+    formData.append('PaymentDocPath', pdfFile);
+
+    this.transactionService.createTransaction(formData).subscribe({
       next: () => {
-        alert('Transaction Successful!'); // popup confirmation
+        alert('Transaction Successful!');
         this.router.navigate(['/transaction-status'], {
           queryParams: {
             status: 'success',
@@ -103,7 +133,7 @@ export class PaymentPage {
       },
       error: (err) => {
         console.error('Transaction Save Failed', err);
-        alert('Transaction Failed!'); // popup for failure
+        alert('Transaction Failed!');
         this.router.navigate(['/transaction-status'], {
           queryParams: {
             status: 'failed',
@@ -114,28 +144,50 @@ export class PaymentPage {
       }
     });
   }
-
   cancelPayment() {
     this.transactionId = this.generateTransactionId();
-
     const storedClientId = localStorage.getItem('userId');
     const clientId = storedClientId ? Number(storedClientId) : 0;
-
     const queryParams = this.route.snapshot.queryParams;
 
-    const request = {
-      clientId: clientId,
-      transactionId: this.transactionId,
-      amount: this.amount,
-      paymentMode: this.paymentModeFromInvestment || this.selectedPayment || 'Gateway',
-      paymentType: this.paymentType || 'Gateway',
-      payoutType: this.payoutType || queryParams['payoutType'] || '',
-      MHP: queryParams['MHP'] || '',
-      option1: queryParams['option1'] || '',
-      status: 'failed'
-    };
+    // Generate PDF for failed transaction
+    const doc = new jsPDF();
+    doc.setFontSize(22);
+    doc.setTextColor(255, 0, 0);
+    doc.text('Transaction Receipt', 14, 25);
+    doc.setFontSize(12);
+    doc.setTextColor(50);
+    const transactionTime = new Date().toLocaleString();
+    doc.text(`Date: ${transactionTime}`, 14, 35);
 
-    this.transactionService.createTransaction(request).subscribe(() => {
+    const formattedAmount = `RS.${this.amount.toLocaleString('en-IN', { maximumFractionDigits: 2 })}`;
+    const tableColumn = ['Field', 'Value'];
+    const tableRows = [
+      ['Transaction ID', this.transactionId],
+      ['Amount', formattedAmount],
+      ['Status', 'FAILED'],
+      ['Date & Time', transactionTime],
+    ];
+    autoTable(doc, { startY: 45, head: [tableColumn], body: tableRows, theme: 'grid' });
+
+    const pdfBlob = doc.output('blob');
+    const pdfFile = new File([pdfBlob], `transaction-${this.transactionId}.pdf`, { type: 'application/pdf' });
+
+    const formData = new FormData();
+    formData.append('clientId', clientId.toString());
+    formData.append('transactionId', this.transactionId);
+    formData.append('amount', this.amount.toString());
+    formData.append('paymentMode', this.paymentModeFromInvestment || this.selectedPayment || 'Gateway');
+    formData.append('paymentType', this.paymentType || 'Gateway');
+    formData.append('payoutType', this.payoutType || queryParams['payoutType'] || '');
+    formData.append('MHP', queryParams['MHP'] || '');
+    formData.append('option1', queryParams['option1'] || '');
+    formData.append('status', 'failed');
+
+    // Attach PDF as paymentDocFile
+    formData.append('PaymentDocPath', pdfFile);
+
+    this.transactionService.createTransaction(formData).subscribe(() => {
       alert('Transaction Cancelled!');
       this.router.navigate(['/transaction-status'], {
         queryParams: {
@@ -146,7 +198,6 @@ export class PaymentPage {
       });
     });
   }
-
   back() {
     this.router.navigate(['/investment-page']);
   }

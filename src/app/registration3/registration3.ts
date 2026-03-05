@@ -91,7 +91,7 @@ export class Registration3 {
 
   }
 
-  goNext() {
+  async goNext() {
 
 
     if (this.registrationForm.invalid) {
@@ -112,6 +112,7 @@ export class Registration3 {
       b => b.id == formData.branchName
     );
 
+
     const updatedData = {
       ...JSON.parse(localStorage.getItem('clientRegistration') || '{}'),
       ...formData,
@@ -119,9 +120,32 @@ export class Registration3 {
       branchName: selectedBranch ? selectedBranch.bankBranch : ''
     };
 
+    if (this.selectedBankStatementFile)
+      updatedData.bankStatementFile = await this.fileToBase64(this.selectedBankStatementFile);
+
+    if (this.selectedCancelChequeFile)
+      updatedData.cancelChequeFile = await this.fileToBase64(this.selectedCancelChequeFile);
+
     localStorage.setItem('clientRegistration', JSON.stringify(updatedData));
 
     this.router.navigate(['/registration4']);
+  }
+  fileToBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+
+      const reader = new FileReader();
+
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        resolve(reader.result as string);
+      };
+
+      reader.onerror = error => {
+        reject(error);
+      };
+
+    });
   }
 
   goBack() {

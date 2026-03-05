@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\models",
-    "\\src\\app\\payment-page",
-    "\\src\\app\\registration4",
-    "\\src\\app\\services",
-    "\\src\\app\\transaction-status",
-    "\\src\\assets",
-    "\\src\\assets\\i18n"
+    "\\src\\app\\factor-auth",
+    "\\src\\app\\investment-page",
+    "\\src\\app\\registration2",
+    "\\src\\app\\registration3",
+    "\\src\\app\\shared",
+    "\\src\\app\\shared\\nav-bar",
+    "\\src\\app\\transaction-status"
   ],
-  "SelectedNode": "\\src\\app\\payment-page\\payment-page.html",
+  "SelectedNode": "\\src\\app\\registration4\\registration4.ts",
   "PreviewInSolutionExplorer": false
 }

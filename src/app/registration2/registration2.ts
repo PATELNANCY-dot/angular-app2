@@ -145,7 +145,8 @@ export class Registration2 {
   // ===============================
   // Next Button
   // ===============================
-  goNext() {
+  async goNext() {
+
     if (this.registrationForm.invalid) {
       this.registrationForm.markAllAsTouched();
       return;
@@ -158,9 +159,8 @@ export class Registration2 {
       c => c.countryID == formValue.nationality
     );
 
-    const updatedData = {
+    const updatedData: any = {
       ...existingData,
-
       pan: formValue.pan,
       dob: formValue.dob,
       aadhar: formValue.aadhar,
@@ -177,10 +177,39 @@ export class Registration2 {
       permanentAddress: formValue.permanentAddress,
       correspondingAddress: formValue.correspondingAddress,
       pincode: formValue.pincode
+      
     };
 
+    if (this.selectedPanFile)
+      updatedData.panFile = await this.fileToBase64(this.selectedPanFile);
+
+    if (this.selectedAddressFile)
+      updatedData.addressFile = await this.fileToBase64(this.selectedAddressFile);
+
+    if (this.selectedCorrespondingAddressFile)
+      updatedData.correspondingFile = await this.fileToBase64(this.selectedCorrespondingAddressFile);
+
     localStorage.setItem('clientRegistration', JSON.stringify(updatedData));
+
     this.router.navigate(['/registration3']);
+
+  }
+  fileToBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+
+      const reader = new FileReader();
+
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        resolve(reader.result as string);
+      };
+
+      reader.onerror = error => {
+        reject(error);
+      };
+
+    });
   }
 
   goBack() {

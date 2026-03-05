@@ -44,6 +44,8 @@ export class Registration4 {
       ? null
       : isoDate.toISOString();
   }
+
+ 
   submit() {
 
     if (this.registrationForm.invalid) {
@@ -53,58 +55,69 @@ export class Registration4 {
 
     const existingData = JSON.parse(localStorage.getItem('clientRegistration') || '{}');
 
-    const finalData = {
-      Name: existingData.name || null,
-      Email: existingData.email || null,
-      Mobile: existingData.mobile || null,
-      Pan: existingData.pan || null,
-      Aadhar: existingData.aadhar || null,
+    const formData = new FormData();
 
-      Dob: this.formatToISO(existingData.dob),
+    /* ---------- TEXT DATA ---------- */
 
-      Gender: existingData.gender || null,
-      PlaceOfBirth: existingData.placeOfBirth || null,
-      Nationality: existingData.nationality || null,
+    formData.append("Name", existingData.name || '');
+    formData.append("Email", existingData.email || '');
+    formData.append("Mobile", existingData.mobile || '');
+    formData.append("Pan", existingData.pan || '');
+    formData.append("Aadhar", existingData.aadhar || '');
 
-      StateID: existingData.stateID ? +existingData.stateID : null,
-      CorrespondingState: existingData.correspondingState ? +existingData.correspondingState : null,
-      CorrespondingCity: existingData.correspondingCity ? +existingData.correspondingCity : null,
-      CityID: existingData.cityID ? +existingData.cityID : null,
+    const dob = this.formatToISO(existingData.dob);
+    if (dob) formData.append("Dob", dob);
 
-      PermanentAddress: existingData.permanentAddress || null,
-      Pincode: existingData.pincode || null,
-      CorrespondingAddress: existingData.correspondingAddress || null,
+    formData.append("Gender", existingData.gender || '');
+    formData.append("PlaceOfBirth", existingData.placeOfBirth || '');
+    formData.append("Nationality", existingData.nationality || '');
 
-      BankName: existingData.bankName || null,
-      AccountNumber: existingData.accountNumber || null,
-      BranchName: existingData.branchName || null,
-      IfscCode: existingData.ifscCode || null,
-      BranchAddress: existingData.branchAddress || null,
-      MicrCode: existingData.micrCode || null,
+    formData.append("PermanentAddress", existingData.permanentAddress || '');
+    formData.append("CorrespondingAddress", existingData.correspondingAddress || '');
+    formData.append("Pincode", existingData.pincode || '');
 
-      NomineeName: this.registrationForm.value.nomineeName || null,
-      NomineeRelation: this.registrationForm.value.nomineeRelation || null,
-      NomineeDob: this.formatToISO(this.registrationForm.value.nomineeDob),
-      NomineePan: this.registrationForm.value.nomineePan || null,
+    formData.append("BankName", existingData.bankName || '');
+    formData.append("AccountNumber", existingData.accountNumber || '');
+    formData.append("BranchName", existingData.branchName || '');
+    formData.append("IfscCode", existingData.ifscCode || '');
+    formData.append("BranchAddress", existingData.branchAddress || '');
+    formData.append("MicrCode", existingData.micrCode || '');
 
-      GuardianName: null,
-      GuardianRelation: null,
-      GuardianDob: null,
-      GuardianPan: null
-    };
+    formData.append("NomineeName", this.registrationForm.value.nomineeName);
+    formData.append("NomineeRelation", this.registrationForm.value.nomineeRelation);
 
-    this.http.post<any>('http://localhost:5048/api/clientregistrations', finalData)
+    const nomineeDob = this.formatToISO(this.registrationForm.value.nomineeDob);
+    if (nomineeDob) formData.append("NomineeDob", nomineeDob);
+    formData.append("NomineePan", this.registrationForm.value.nomineePan);
+
+    /* ---------- FILES ---------- */
+    if (existingData.panFile)
+      formData.append("PanCardFile", this.base64ToFile(existingData.panFile, "pan.pdf"));
+
+    if (existingData.addressFile)
+      formData.append("AddressFile", this.base64ToFile(existingData.addressFile, "address.pdf"));
+
+    if (existingData.correspondingFile)
+      formData.append("CorrespondingAddressFile", this.base64ToFile(existingData.correspondingFile, "corresponding.pdf"));
+
+    if (existingData.bankStatementFile)
+      formData.append("BankStatementFile", this.base64ToFile(existingData.bankStatementFile, "bank.pdf"));
+
+    if (existingData.cancelChequeFile)
+      formData.append("CancelChequeFile", this.base64ToFile(existingData.cancelChequeFile, "cheque.pdf"));
+
+
+    this.http.post<any>('http://localhost:5048/api/clientregistrations', formData)
       .subscribe({
-        next: (res) => {
-
+        next: res => {
           const clientId = res.clientId;
+
 
           const finalData1 = {
             Username: existingData.name,
             Password_1: existingData.Password_1,
             ClientId: clientId
           };
-
           this.http.post('http://localhost:5048/api/auth/store', finalData1)
             .subscribe({
               next: () => {
@@ -117,13 +130,30 @@ export class Registration4 {
                 alert('Login store failed.');
               }
             });
-
+          this.router.navigate(['/factor-auth']);
         },
         error: err => {
           console.error(err);
-          alert('Registration failed.');
+          alert("Registration Failed");
         }
       });
+
+  }
+  //file upload thing
+  base64ToFile(base64: string, filename: string): File {
+
+    const arr = base64.split(',');
+    const mime = arr[0].match(/:(.*?);/)![1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new File([u8arr], filename, { type: mime });
+
   }
 
   goBack() {

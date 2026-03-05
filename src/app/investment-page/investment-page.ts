@@ -188,7 +188,7 @@ export class InvestmentPage implements OnInit {
           paymentType: 'Gateway',
           payoutType: this.payoutType,
           MHP: this.selectedMhp,
-          option1: this.selectedOptionId, 
+          option1: this.selectedOptionId,
           optionId: this.selectedOptionId
         }
       });
@@ -197,6 +197,7 @@ export class InvestmentPage implements OnInit {
     }
 
     //NEFT / RTGS / IMPS
+    // In your InvestmentPage.ts, inside goPay()
     if (this.selectedPayment === 'neft') {
 
       if (!this.paymentMode) {
@@ -213,36 +214,39 @@ export class InvestmentPage implements OnInit {
         this.showCustomAlert('Please upload payment receipt', 'error');
         return;
       }
+
       if (!this.selectedMhp) {
         this.showCustomAlert('Please select Minimum Holding Period', 'error');
         return;
       }
 
-      const request = {
-        clientId: clientId,
-        transactionId: this.utrNumber,
-        amount: this.investmentAmount,
-        paymentMode: this.paymentMode,
-        paymentType: 'Bank Transfer',
-        payoutType: this.payoutType,
-        MHP: this.selectedMhp,           
-        option1: this.selectedOptionId,  
-        status: 'Pending'
-      };
-      console.log(request); 
+      const formData = new FormData();
+      formData.append('ClientId', clientId.toString());
+      formData.append('TransactionId', this.utrNumber); // Use UTR as transactionId
+      formData.append('Amount', this.investmentAmount.toString());
+      formData.append('PaymentMode', this.paymentMode);
+      formData.append('PaymentType', 'Bank Transfer');
+      formData.append('PayoutType', this.payoutType);
+      formData.append('MHP', this.selectedMhp);
+      formData.append('Option1', this.selectedOptionId?.toString() || '');
+      formData.append('Status', 'Pending');
 
-      this.transactionService.createTransaction(request).subscribe({
+      // ✅ Append the file properly (matches backend)
+      if (this.selectedFile) {
+        formData.append('PaymentDocPath', this.selectedFile, this.selectedFile.name);
+      }
+
+      this.transactionService.createTransaction(formData).subscribe({
         next: () => {
           this.showCustomAlert('RTGS Request Submitted. Awaiting Verification.', 'success');
           this.cdr.detectChanges();
           setTimeout(() => {
             this.router.navigate(['/dashboard']);
           }, 2000);
-
         },
         error: () => {
           this.showCustomAlert('Something went wrong', 'error');
-          this.cdr.detectChanges(); 
+          this.cdr.detectChanges();
         }
       });
     }
