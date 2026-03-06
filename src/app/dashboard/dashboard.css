@@ -171,3 +171,78 @@
   font-weight: 600;
   font-size: 1.05rem;
 }
+
+/* Full screen overlay */
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Circular loader box */
+.loader-box {
+  width: 100px;
+  height: 100px;
+  background: #ffffff;
+  border-radius: 50%; /* circular */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  padding: 10px;
+}
+
+/* Logo animation - float up and down */
+.loader-logo {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 8px;
+  animation: float 1.2s ease-in-out infinite;
+}
+
+/* Circular spinner around logo */
+.loader-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f0f0f0;
+  border-top: 4px solid #007bff; /* primary color */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  position: absolute;
+}
+
+/* Blur background */
+.blurred {
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+/* Animations */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+  /* smaller float */
+}

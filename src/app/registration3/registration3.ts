@@ -13,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class Registration3 {
   registrationForm: FormGroup;
-
+  step = 3;
   banks: any[] = [];
   bankBranches: any[] = [];
  

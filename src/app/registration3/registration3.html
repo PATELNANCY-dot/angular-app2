@@ -8,158 +8,181 @@
   <div class="page-wrapper">
     
 
-      <div class="container">
-        <form [formGroup]="registrationForm">
+    <div class="container">
+      <div class="progress-container">
 
-          <h1>
-            <span style="color:orangered">Individual-</span>
-            <span style="color:navy">Bank Details</span>
-          </h1>
+        <div class="step" [class.active]="step >= 1">
+          <div class="circle">1</div>
+          <p>Registration</p>
+        </div>
 
+        <div class="step" [class.active]="step >= 2">
+          <div class="circle">2</div>
+          <p>Personal</p>
+        </div>
 
-          <!-- Bank Name + Account Number -->
-          <div class="form-row">
-            <div class="form-col">
-              <label>Bank Name:</label>
-              <div class="custom-dropdown">
+        <div class="step" [class.active]="step >= 3">
+          <div class="circle">3</div>
+          <p>Bank</p>
+        </div>
 
-                <div class="dropdown-selected"
-                     (click)="toggleBank()">
-                  {{ getSelectedBankName() }}
-                  <i class="bi bi-chevron-down"></i>
-                </div>
+        <div class="step" [class.active]="step >= 4">
+          <div class="circle">4</div>
+          <p>Nominee</p>
+        </div>
 
-                <div class="dropdown-list" *ngIf="bankNameDropdown">
-                  <div class="dropdown-item"
-                       *ngFor="let bank of banks"
-                       (click)="selectBank(bank)">
-                    {{ bank.bankName }}
-                  </div>
-                </div>
-
-              </div>
-              <small class="text-danger"
-                     *ngIf="registrationForm.get('bankName')?.touched &&
-registrationForm.get('bankName')?.errors">
-                Please select  BANK NAME
-              </small>
-            </div>
-
-            <div class="form-col">
-              <label>Account Number:</label>
-              <input type="text" inputmode="numeric" formControlName="accountNumber">
-              <small class="text-danger"
-                     *ngIf="registrationForm.get('accountNumber')?.touched &&
-registrationForm.get('accountNumber')?.errors">
-                Please ENTER ACCOUNT NUMBER
-              </small>
-            </div>
-          </div>
-
-          <!-- Branch Name + IFSC Code -->
-          <div class="form-row">
-            <div class="form-col">
-              <label>Branch Name:</label>
-
-              <div class="custom-dropdown">
-
-                <div class="dropdown-selected"
-                     [class.disabled]="!registrationForm.get('bankName')?.value"
-                     (click)="registrationForm.get('bankName')?.value && toggleBranch()">
-                  {{ getSelectedBranchName() }}
-                  <i class="bi bi-chevron-down"></i>
-                </div>
-
-                <div class="dropdown-list" *ngIf="branchNameDropdown">
-                  <div class="dropdown-item"
-                       *ngFor="let branch of bankBranches"
-                       (click)="selectBranch(branch)">
-                    {{ branch.bankBranch }}
-                  </div>
-                </div>
-
-              </div>
-              <small class="text-danger"
-                     *ngIf="registrationForm.get('branchName')?.touched &&
-registrationForm.get('branchName')?.errors">
-                Please select  BRANCH NAME
-              </small>
-            </div>
-
-            <div class="form-col">
-              <label>IFSC Code:</label>
-              <input formControlName="ifscCode" readonly>
-            </div>
-          </div>
-
-          <!-- Branch Address + MICR Code -->
-          <div class="form-row">
-            <div class="form-col">
-              <label>Branch Address:</label>
-              <input formControlName="branchAddress" readonly>
-            </div>
-
-            <div class="form-col">
-              <label>MICR Code:</label>
-              <input formControlName="micrCode" readonly>
-            </div>
-          </div>
-
-
-          <!-- Bank Statement + Cancel Cheque -->
-          <!-- Bank Statement + Cancel Cheque -->
-          <div class="form-row">
-            <div class="form-col">
-              <label>Upload Bank Statement</label>
-
-              <div class="file-upload" style="position: relative;">
-                <input type="file" id="bankStatementUpload" class="form-control" (change)="onBankStatementSelected($event)">
-                <label for="bankStatementUpload" class="file-label">
-                  <div *ngIf="!selectedBankStatementFile" style="pointer-events:none; color:#6c757d; font-size:14px;">
-                    <i class="bi bi-cloud-upload"></i> Choose file
-                  </div>
-
-                  <div *ngIf="selectedBankStatementFile" class="selected-file mt-2 p-2 border rounded d-flex justify-content-between align-items-center" style="background:#f8f9fa; cursor:pointer;">
-                    <span (click)="openBankStatementFile()" style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:80%;">
-                      {{ selectedBankStatementFile.name }}
-                    </span>
-                    <button type="button" class="btn btn-sm btn-outline-danger ms-2" (click)="removeBankStatementFile()">×</button>
-                  </div>
-                </label>
-              </div>
-
-            </div>
-            <div class="form-col">
-              <label>Upload Cancel Cheque</label>
-
-              <div class="file-upload" style="position: relative;">
-                <input type="file" id="cancelChequeUpload" class="form-control" (change)="onCancelChequeSelected($event)">
-                <label for="cancelChequeUpload" class="file-label">
-                  <div *ngIf="!selectedCancelChequeFile" style="pointer-events:none; color:#6c757d; font-size:14px;">
-                    <i class="bi bi-cloud-upload"></i> Choose file
-                  </div>
-
-                  <div *ngIf="selectedCancelChequeFile" class="selected-file mt-2 p-2 border rounded d-flex justify-content-between align-items-center" style="background:#f8f9fa; cursor:pointer;">
-                    <span (click)="openCancelChequeFile()" style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:80%;">
-                      {{ selectedCancelChequeFile.name }}
-                    </span>
-                    <button type="button" class="btn btn-sm btn-outline-danger ms-2" (click)="removeCancelChequeFile()">×</button>
-                  </div>
-                </label>
-              </div>
-
-            </div>
-          </div>
-
-          <!--next button-->
-          <div class="form-actions">
-            <button type="button" (click)="goBack()" class="next-btn"><span><i class="bi bi-arrow-left"></i></span>Back</button>
-
-            <button type="button" (click)="goNext()" class="back-btn">Next<span><i class="bi bi-arrow-right"></i></span></button>
-          </div>
-
-        </form>
       </div>
+      <form [formGroup]="registrationForm">
+
+        <h1>
+          <span style="color:orangered">Individual-</span>
+          <span style="color:navy">Bank Details</span>
+        </h1>
+
+
+        <!-- Bank Name + Account Number -->
+        <div class="form-row">
+          <div class="form-col">
+            <label>Bank Name:</label>
+            <div class="custom-dropdown">
+
+              <div class="dropdown-selected"
+                   (click)="toggleBank()">
+                {{ getSelectedBankName() }}
+                <i class="bi bi-chevron-down"></i>
+              </div>
+
+              <div class="dropdown-list" *ngIf="bankNameDropdown">
+                <div class="dropdown-item"
+                     *ngFor="let bank of banks"
+                     (click)="selectBank(bank)">
+                  {{ bank.bankName }}
+                </div>
+              </div>
+
+            </div>
+            <small class="text-danger"
+                   *ngIf="registrationForm.get('bankName')?.touched &&
+registrationForm.get('bankName')?.errors">
+              Please select  BANK NAME
+            </small>
+          </div>
+
+          <div class="form-col">
+            <label>Account Number:</label>
+            <input type="text" inputmode="numeric" formControlName="accountNumber">
+            <small class="text-danger"
+                   *ngIf="registrationForm.get('accountNumber')?.touched &&
+registrationForm.get('accountNumber')?.errors">
+              Please ENTER ACCOUNT NUMBER
+            </small>
+          </div>
+        </div>
+
+        <!-- Branch Name + IFSC Code -->
+        <div class="form-row">
+          <div class="form-col">
+            <label>Branch Name:</label>
+
+            <div class="custom-dropdown">
+
+              <div class="dropdown-selected"
+                   [class.disabled]="!registrationForm.get('bankName')?.value"
+                   (click)="registrationForm.get('bankName')?.value && toggleBranch()">
+                {{ getSelectedBranchName() }}
+                <i class="bi bi-chevron-down"></i>
+              </div>
+
+              <div class="dropdown-list" *ngIf="branchNameDropdown">
+                <div class="dropdown-item"
+                     *ngFor="let branch of bankBranches"
+                     (click)="selectBranch(branch)">
+                  {{ branch.bankBranch }}
+                </div>
+              </div>
+
+            </div>
+            <small class="text-danger"
+                   *ngIf="registrationForm.get('branchName')?.touched &&
+registrationForm.get('branchName')?.errors">
+              Please select  BRANCH NAME
+            </small>
+          </div>
+
+          <div class="form-col">
+            <label>IFSC Code:</label>
+            <input formControlName="ifscCode" readonly>
+          </div>
+        </div>
+
+        <!-- Branch Address + MICR Code -->
+        <div class="form-row">
+          <div class="form-col">
+            <label>Branch Address:</label>
+            <input formControlName="branchAddress" readonly>
+          </div>
+
+          <div class="form-col">
+            <label>MICR Code:</label>
+            <input formControlName="micrCode" readonly>
+          </div>
+        </div>
+
+
+        <!-- Bank Statement + Cancel Cheque -->
+        <!-- Bank Statement + Cancel Cheque -->
+        <div class="form-row">
+          <div class="form-col">
+            <label>Upload Bank Statement</label>
+
+            <div class="file-upload" style="position: relative;">
+              <input type="file" id="bankStatementUpload" class="form-control" (change)="onBankStatementSelected($event)">
+              <label for="bankStatementUpload" class="file-label">
+                <div *ngIf="!selectedBankStatementFile" style="pointer-events:none; color:#6c757d; font-size:14px;">
+                  <i class="bi bi-cloud-upload"></i> Choose file
+                </div>
+
+                <div *ngIf="selectedBankStatementFile" class="selected-file mt-2 p-2 border rounded d-flex justify-content-between align-items-center" style="background:#f8f9fa; cursor:pointer;">
+                  <span (click)="openBankStatementFile()" style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:80%;">
+                    {{ selectedBankStatementFile.name }}
+                  </span>
+                  <button type="button" class="btn btn-sm btn-outline-danger ms-2" (click)="removeBankStatementFile()">×</button>
+                </div>
+              </label>
+            </div>
+
+          </div>
+          <div class="form-col">
+            <label>Upload Cancel Cheque</label>
+
+            <div class="file-upload" style="position: relative;">
+              <input type="file" id="cancelChequeUpload" class="form-control" (change)="onCancelChequeSelected($event)">
+              <label for="cancelChequeUpload" class="file-label">
+                <div *ngIf="!selectedCancelChequeFile" style="pointer-events:none; color:#6c757d; font-size:14px;">
+                  <i class="bi bi-cloud-upload"></i> Choose file
+                </div>
+
+                <div *ngIf="selectedCancelChequeFile" class="selected-file mt-2 p-2 border rounded d-flex justify-content-between align-items-center" style="background:#f8f9fa; cursor:pointer;">
+                  <span (click)="openCancelChequeFile()" style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:80%;">
+                    {{ selectedCancelChequeFile.name }}
+                  </span>
+                  <button type="button" class="btn btn-sm btn-outline-danger ms-2" (click)="removeCancelChequeFile()">×</button>
+                </div>
+              </label>
+            </div>
+
+          </div>
+        </div>
+
+        <!--next button-->
+        <div class="form-actions">
+          <button type="button" (click)="goBack()" class="next-btn"><span><i class="bi bi-arrow-left"></i></span>Back</button>
+
+          <button type="button" (click)="goNext()" class="back-btn">Next<span><i class="bi bi-arrow-right"></i></span></button>
+        </div>
+
+      </form>
+    </div>
 
     </div>
 

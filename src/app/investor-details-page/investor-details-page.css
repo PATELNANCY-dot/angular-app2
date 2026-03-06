@@ -53,10 +53,7 @@ form {
   transition: 0.3s ease;
 }
 
-  form:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 45px rgba(0,0,0,0.12);
-  }
+
 
 /* =========================
    LABEL STYLING

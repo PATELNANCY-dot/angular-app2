@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { forkJoin } from 'rxjs';
+import { forkJoin, from } from 'rxjs';
 import flatpickr from 'flatpickr';
 
 @Component({
@@ -15,7 +15,7 @@ import flatpickr from 'flatpickr';
 })
 export class Registration4 {
   registrationForm: FormGroup;
- 
+  step = 4;
   constructor(private fb: FormBuilder, private router: Router, private http: HttpClient) {
     this.registrationForm = this.fb.group({
       nomineeName: ['', Validators.required],
@@ -72,6 +72,26 @@ export class Registration4 {
     formData.append("PlaceOfBirth", existingData.placeOfBirth || '');
     formData.append("Nationality", existingData.nationality || '');
 
+    // State
+    if (existingData.stateID !== undefined && existingData.stateID !== null) {
+      formData.append("StateID", existingData.stateID.toString());
+    }
+
+    // City
+    if (existingData.cityID !== undefined && existingData.cityID !== null) {
+      formData.append("CityID", existingData.cityID.toString());
+    }
+
+    // Corresponding State
+    if (existingData.correspondingState !== undefined && existingData.correspondingState !== null) {
+      formData.append("CorrespondingState", existingData.correspondingState.toString());
+    }
+
+    // Corresponding City
+    if (existingData.correspondingCity !== undefined && existingData.correspondingCity !== null) {
+      formData.append("CorrespondingCity", existingData.correspondingCity.toString());
+    }
+
     formData.append("PermanentAddress", existingData.permanentAddress || '');
     formData.append("CorrespondingAddress", existingData.correspondingAddress || '');
     formData.append("Pincode", existingData.pincode || '');
@@ -118,6 +138,9 @@ export class Registration4 {
             Password_1: existingData.Password_1,
             ClientId: clientId
           };
+          for (let pair of formData.entries()) {
+            console.log(pair[0] + ":", pair[1]);
+          }
           this.http.post('http://localhost:5048/api/auth/store', finalData1)
             .subscribe({
               next: () => {

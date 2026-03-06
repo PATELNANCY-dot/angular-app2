@@ -167,3 +167,36 @@
 
 
 
+
+/* Links and button */
+.links {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+  .links a {
+    text-decoration: none;
+    color: #000080;
+  }
+
+    .links a:hover {
+      color: #ff7a18;
+    }
+
+.login-btn {
+  width: 50%;
+  padding: 12px;
+  background: #00BFFF;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+  .login-btn:hover {
+    background: #001f5b;
+  }
+
+

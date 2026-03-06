@@ -16,7 +16,7 @@ import flatpickr from 'flatpickr';
 export class Registration2 {
 
   registrationForm: FormGroup;
-
+  step = 2;
   countries: any[] = [];
   states: any[] = [];
   cities: any[] = [];

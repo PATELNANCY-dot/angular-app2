@@ -12,7 +12,6 @@ import { ForgotPassword2 } from './forgot-password2/forgot-password2'
 import { Changepassword2 } from './changepassword2/changepassword2'
 import { ManageAccount } from './manage-account/manage-account'
 import { ChangeNominee } from './change-nominee/change-nominee'
-import { NewInvesterPage } from './new-invester-page/new-invester-page'
 import { InvestorDetailsPage } from './investor-details-page/investor-details-page'
 import { InvestorPage } from './investor-page/investor-page'
 import { InvestmentPage } from './investment-page/investment-page'
@@ -50,7 +49,6 @@ export const routes: Routes = [
       { path: 'changepassword', component: Changepassword },
       { path: 'manage-account', component: ManageAccount },
       { path: 'change-nominee', component: ChangeNominee },
-      { path: 'new-invester-page', component: NewInvesterPage },
       { path: 'investor-details-page', component: InvestorDetailsPage },
       { path: 'investor-page', component: InvestorPage },
       { path: 'investment-page', component: InvestmentPage },

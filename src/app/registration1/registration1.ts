@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class Registration1 {
   registrationForm: FormGroup;
-   
+  step = 1;
   constructor(private router: Router, private fb: FormBuilder) {
      localStorage.removeItem('clientRegistration');
     this.registrationForm = this.fb.group(

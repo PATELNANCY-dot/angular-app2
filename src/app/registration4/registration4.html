@@ -6,6 +6,29 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
   <div class="container">
+    <div class="progress-container">
+
+      <div class="step" [class.active]="step >= 1">
+        <div class="circle">1</div>
+        <p>Registration</p>
+      </div>
+
+      <div class="step" [class.active]="step >= 2">
+        <div class="circle">2</div>
+        <p>Personal</p>
+      </div>
+
+      <div class="step" [class.active]="step >= 3">
+        <div class="circle">3</div>
+        <p>Bank</p>
+      </div>
+
+      <div class="step" [class.active]="step >= 4">
+        <div class="circle">4</div>
+        <p>Nominee</p>
+      </div>
+
+    </div>
     <form [formGroup]="registrationForm">
 
       <h1>
@@ -76,13 +99,13 @@ registrationForm.get('nomineeDob')?.errors?.['required']">
         <div class="form-col">
           <label>Pan Number:</label>
           <input type="text" inputmode="numeric" formControlName="nomineePan" />
-         
+
         </div>
       </div>
 
       <br />
       <br />
-     
+
 
       <!--next button-->
       <div class="form-actions">
